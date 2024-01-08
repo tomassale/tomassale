@@ -1,16 +1,14 @@
-import { NavLink } from "react-router-dom"
-
 const NavBar = () =>{
   const yo = '<TOMAS/>'
 
   return (
     <header className='navbar'>
-      <a className='logo' href='#About-Me'>{yo}</a>
+      <a className='logo' href='#aboutMe'>{yo}</a>
       <nav className='barra'>
-        <a src='#About-Me'>ABOUT ME</a>
-        <a src='/#Porfolio'>PORTFOLIO</a>
-        <a src='/Tools'>TOOLS</a>
-        <a src='/Contact-me'>CONTACT ME</a>
+        <a href='#aboutMe'>ABOUT ME</a>
+        <a href='#portfolio'>PORTFOLIO</a>
+        <a href='#knowledge'>TOOLS</a>
+        <a href='#contact'>CONTACT ME</a>
       </nav>
     </header>
   )

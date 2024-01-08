@@ -1,6 +1,6 @@
 const Presentation = () => {
   return (
-    <div className='presentation'>
+    <div className='presentation' id='aboutMe'>
       <div className='descripcion'>
         <h2>Tomás Javier Sale</h2>
         <h4>Desarrollador Web</h4>
@@ -11,7 +11,7 @@ const Presentation = () => {
         </p>
       </div>
       <div className='foto'>
-        <img alt='foto de perfil'/>
+        <img src='./img/FotoCV.jpeg' alt='foto de perfil'/>
       </div>
     </div>
   )

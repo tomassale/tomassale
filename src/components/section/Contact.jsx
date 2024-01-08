@@ -1,21 +1,21 @@
 const Contact = () => {
   return(
-    <div className='contact'>
-      <div className=''></div>
+    <div className='contact' id='contact'>
+      <h2 className='titleContact'>Contact Me</h2>
       <div className='form'>
-        <div class='form-container'>
-          <form class='form'>
-            <div class='form-group'>
-              <label for='email'>Email</label>
+        <div className='form-container'>
+          <form className='form'>
+            <div className='form-group'>
+              <label htmlFor='email'>Email</label>
               <input name='email' id='email' type='text' required/>
-              <label for='number'>Phone</label>
+              <label htmlFor='number'>Phone</label>
               <input name='number' id='phone' type='text' required/>
             </div>
-            <div class='form-group'>
-              <label for='textarea'>How Can I Help You?</label>
+            <div className='form-group'>
+              <label htmlFor='textarea'>How Can I Help You?</label>
               <textarea cols='50' rows='10' id='textarea' name='textarea' required/>
             </div>
-            <button type='submit' class='form-submit-btn'>Submit</button>
+            <button type='submit' className='form-submit-btn'>Submit</button>
           </form>
         </div>
       </div>
