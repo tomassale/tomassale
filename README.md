@@ -1,10 +1,10 @@
-### Hi there 👋
+![banner](https://github.com/tomassale/tomassale/blob/main/public/img/banner/Banner%20Linkedin.png)
 ---
-<div style='display: flex; justify-content: space-between'>
-  <img src='https://github-readme-stats.vercel.app/api?username=tomassale'/>
-  <img src='https://streak-stats.demolab.com/?user=tomassale'/>  
-<<<<<<< HEAD
-</div>
-=======
-</div>
->>>>>>> cad9ab8c1b6fdb7291e7df341b20d37dab161fdd
+
+### ⚙️ &nbsp;GitHub Analytics
+<p align="center">
+<a href="https://github.com/ArisGuimera">
+  <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api?username=tomassale&show_icons=true&theme=algolia&include_all_commits=true&count_private=true"/>
+  <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=tomassale&layout=compact&langs_count=8&theme=algolia"/>
+</a>
+</p>
