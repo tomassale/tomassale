@@ -11,7 +11,7 @@
   🤔 Interested in Cybersecurity & Automation
   </td>
   <td>
-  <h2 align='center'>🛠 Tech Stack<h2>
+  <h2 align='center'>🛠 Tech Stack</h2>
 
   <img src="https://img.shields.io/badge/-React-05122A?style=flat&logo=react"/>
   <img src="https://img.shields.io/badge/-Node-05122A?style=flat&logo=node.js"/>
@@ -28,7 +28,6 @@
   <img src="https://img.shields.io/badge/-CSS-05122A?style=flat&logo=CSS3"/>
   <img src="https://img.shields.io/badge/-Bootstrap-05122A?style=flat&logo=bootstrap"/>
   <img src="https://img.shields.io/badge/-Docker-05122A?style=flat&logo=docker"/>
-  <img src="https://img.shields.io/badge/-Postman-05122A?style=flat&logo=postman"/>
   <img src="https://img.shields.io/badge/-Git-05122A?style=flat&logo=git"/>
   <img src="https://img.shields.io/badge/-Github-05122A?style=flat&logo=github"/>
   <img src="https://img.shields.io/badge/-Visual%20Studio%20Code-05122A?style=flat&logo=visual-studio-code&logoColor=007ACC"/>
