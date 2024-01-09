@@ -5,9 +5,9 @@
   <td width='50%'>
   <h2 align='center'>☕​ About Me</h2>
 
-  🖥️ I'm a \<Web Developer/>
-  🌱 Learning about <strong>UX/UI</strong> 
-  📚 Studying <strong>Software Engineering</strong> at <a href='https://www.unlam.edu.ar/index.php'>UNLaM</a>
+  🖥️ I'm a \<Web Developer/> <br/>
+  🌱 Learning about <strong>UX/UI</strong>  <br/>
+  📚 Studying <strong>Software Engineering</strong> at <a href='https://www.unlam.edu.ar/index.php'>UNLaM</a> <br/>
   🤔 Interested in Cybersecurity & Automation
   </td>
   <td>
@@ -28,6 +28,7 @@
   <img src="https://img.shields.io/badge/-CSS-05122A?style=flat&logo=CSS3"/>
   <img src="https://img.shields.io/badge/-Bootstrap-05122A?style=flat&logo=bootstrap"/>
   <img src="https://img.shields.io/badge/-Docker-05122A?style=flat&logo=docker"/>
+  <img src="https://img.shields.io/badge/-Postman-05122A?style=flat&logo=postman"/>
   <img src="https://img.shields.io/badge/-Git-05122A?style=flat&logo=git"/>
   <img src="https://img.shields.io/badge/-Github-05122A?style=flat&logo=github"/>
   <img src="https://img.shields.io/badge/-Visual%20Studio%20Code-05122A?style=flat&logo=visual-studio-code&logoColor=007ACC"/>
