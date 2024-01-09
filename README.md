@@ -1,4 +1,4 @@
-![banner](https://github.com/tomassale/tomassale/blob/main/public/img/banner/Banner%20Linkedin.png)
+![banner](https://github.com/tomassale/tomassale/blob/main/public/img/banner/Banner.png?raw=true)
 ---
 
 ### ⚙️ &nbsp;GitHub Analytics
