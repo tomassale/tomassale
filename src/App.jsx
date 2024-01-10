@@ -7,9 +7,8 @@ import Footer from './components/footer/Footer'
 
 const App = () => {
   return (
-    <div className='body'>
+    <div className='container'>
       <NavBar />
-      <hr/>
       <Presentation />
       <hr/>
       <Knowledge />
@@ -17,7 +16,6 @@ const App = () => {
       <Project />
       <hr/>
       <Contact />
-      <hr/>
       <Footer />
     </div>
   )

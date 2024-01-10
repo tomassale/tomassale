@@ -5,19 +5,30 @@
 *{
   padding: 0;
   margin: 0;
-  scrollbar-gutter: stable;
+  list-style: none;
+  overflow: hidden;
+  scroll-behavior: smooth;
   a{
     text-decoration: none;
     cursor: pointer;
     color: inherit;
+    user-select: none;
   }
-  ::-webkit-scrollbar-thumb {
-    background-color: #3498db; /* color of the thumb */
-    border-radius: 6px; /* roundness of the thumb corners */
+  hr{
+    border-color: rgb(179, 179, 179);
   }
-  
-  ::-webkit-scrollbar-track {
-    background-color: #ecf0f1; /* color of the track */
+  .backgroundVideo{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 103%;
+    width: 100%;
+    z-index: -1;
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 }
 
@@ -35,13 +46,23 @@
   text-align: center;
   font-size: 50px;
   color: #e0e0e0;
+  margin-top: 7%;
+  margin-bottom: 2.5%;
 }
 
 @mixin grids($repeat, $space){
   display: grid;
   grid-template-columns: repeat($repeat, $space);
-  gap: 10px;
+  gap: 0.8%;
   justify-content: center;
+}
+
+@mixin divs{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  z-index: 1;
 }
 
 //Keyframes
@@ -51,266 +72,294 @@
   100% { background-position: 0% 50% }
 }
 
+
+
 //Styles
 body{
   background-color: #313131;
-  //-------------------------Encabezado-------------------------//
-  div{
-    margin-top: 20px;
-  }
-  .navbar{
-    color: whitesmoke;
-    background-color: rgba(29, 29, 29, 0.8);
-    display: flex;
-    position: fixed;
-    top: 0;
+  width: 100vw;
+  height: 100vh;
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+  .container{
     width: 100%;
-    backdrop-filter: blur(8px);
-    z-index: 2;
-    .logo{
-      font-family: 'Dancing Script', cursive;
-      font-size: 30px;
-      margin-left: 140px;
-      padding: 10px;
-    }
-    .barra{
+    height: 100%;
+    scroll-snap-type: y mandatory;
+    //-------------------------Encabezado-------------------------//
+    .navbar{
+      color: whitesmoke;
+      background-color: rgba(29, 29, 29, 0.8);
       display: flex;
-      align-items: center;
-      justify-content: center;
-      a{
-          list-style: none;
-          padding-left: 50px;
-          font-size: 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      backdrop-filter: blur(8px);
+      z-index: 2;
+      .logo{
+        font-family: 'Dancing Script', cursive;
+        font-size: 200%;
+        margin-left: 8%;
+        padding: 0.5%;
+      }
+      .barra{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 10%;
+        a{
+            padding: 10px 50px;
+            font-size: 20px;
+            scroll-behavior: smooth;
+        }
       }
     }
-  }
-  //-------------------------Sobre mi-------------------------//
-  .presentation{
-    display: flex;
-    height: 100vh;
-    .description{
+    //-------------------------Sobre mi-------------------------//
+    .presentation{
+      display: flex;
+      @include divs();
+      .description{
+        margin-top: 13%;
+        width: 60%;
+        h2{
+          @include titles()
+        }
+        h4{
+          color: #9b9b9b;
+        }
+        p{
+          color: whitesmoke;
+          width: 80%;
+          margin-left: 2%;
+        }
+      }
+      .photo{
+        margin-top: 5%;
+        padding: 3%;
+        img{
+          transform: rotate(1deg);
+          border-radius: 50%;
+          height: 50%;
+        }
+      }
+    }
+    //-------------------------Conocimiento-------------------------//
+    .knowledge{
+      position: relative;
+      @include divs();
       h2{
         @include titles()
       }
-    }
-    .foto{
-      img{
-        transform: rotate(1deg);
-        border-radius: 100%;
-        height: 300px;
-      }
-    }
-  }
-  //-------------------------Conocimiento-------------------------//
-  .knowledge{
-    height: 100vh;
-    h2{
-      @include titles()
-    }
-    .imagesKnowledge{
-      @include grids(7, 50px);
-      img{
-        height: 50px;
-        width: 50px;
-        padding: 20px;
-        margin: auto;
-      }
-    }
-  }
-  //-------------------------Proyecto-------------------------//
-  .project{
-    height: 100vh;
-    h2{
-      @include titles()
-    }
-    .gridCard{
-      @include grids(5, 250px);
-      .flip-card {
-        background-color: transparent;
-        width: 235px;
-        height: 250px;
-        perspective: 1000px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      }
-      .flip-card-inner {
+      .imagesKnowledge{
         position: relative;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        transition: transform 0.6s;
-        transform-style: preserve-3d;
+        width: max-content;
+        margin: auto;
+        margin-top: 4%;
+        z-index: 1;
+        background-color: rgba(43, 43, 43, 0.8);
+        @include grids(7, 50px);
+        img{
+          height: 50px;
+          width: 50px;
+          padding: 30%;
+        }
       }
-      .flip-card-front {
+    }
+    //-------------------------Proyecto-------------------------//
+    .project{
+      @include divs();
+      h2{
+        @include titles()
+      }
+      .gridCard{
+        @include grids(3, 250px);
+        .flip-card {
+          background-color: transparent;
+          width: 235px;
+          height: 250px;
+          perspective: 1000px;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .flip-card-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+        }
+        .flip-card-front {
+          @include border-gradient();
+          font-family: inherit;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          background-size: 200% 100%;
+        }
+        .flip-card-front, .flip-card-back {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          padding: 5px;
+          border-radius: 2em;
+          backface-visibility: hidden;
+        }
+        .profileVideo {
+          background-color: blue;
+          height: 120px;
+          width: 120%;
+        }
+        .pfp {
+          border-radius: 35em;
+          fill: #c143da;
+        }
+        .name {
+          margin-top: 15px;
+          font-size: 27px;
+          color: #c143da;
+          font-weight: bold;
+        }
+        .flip-card-back {
+          @include border-gradient();
+          transform: rotateY(180deg);
+          padding: 11px;
+        }
+        .description {
+          margin-top: 10px;
+          font-size: 14px;
+          letter-spacing: 1px;
+          color: white
+        }
+        .socialBar {
+          background-color: transparent;
+          border-radius: 3em;
+          width: 90%;
+          padding: 14px;
+          margin-top: 11px;
+          margin-left: 10px;
+          word-spacing: 24px;
+          color: white;
+          img {
+            transition: 0.4s;
+            width: 30px;
+            height: 30px;
+            color: #c143da
+          }
+          img:hover {
+            color: white;
+          }
+        }
+        
+        .flip-card:hover .flip-card-inner {
+          transform: rotateY(180deg);
+        }    
+      }
+    }
+    //-------------------------Contactp-------------------------//
+    .contact{
+      @include divs();
+      .titleContact{
+        @include titles();
+      }
+      .form-container {
+        width: 800px;
+        margin: auto;
         @include border-gradient();
+        padding: 32px 24px;
+        font-size: 16px;
         font-family: inherit;
+        color: white;
         display: flex;
         flex-direction: column;
         gap: 20px;
         background-size: 200% 100%;
-      }
-      .flip-card-front, .flip-card-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        padding: 5px;
-        border-radius: 2em;
-        backface-visibility: hidden;
-      }
-      .profileVideo {
-        background-color: blue;
-        height: 120px;
-      }
-      .pfp {
-        border-radius: 35em;
-        fill: #c143da;
-      }
-      .name {
-        margin-top: 15px;
-        font-size: 27px;
-        color: #c143da;
-        font-weight: bold;
-      }
-      .flip-card-back {
-        @include border-gradient();
-        transform: rotateY(180deg);
-        padding: 11px;
-      }
-      .description {
-        margin-top: 10px;
-        font-size: 14px;
-        letter-spacing: 1px;
-        color: white
-      }
-      .socialBar {
-        background-color: transparent;
-        border-radius: 3em;
-        width: 90%;
-        padding: 14px;
-        margin-top: 11px;
-        margin-left: 10px;
-        word-spacing: 24px;
-        color: white;
-        img {
-          transition: 0.4s;
-          width: 30px;
-          height: 30px;
-          color: #c143da
+        button:active {
+          scale: 0.95;
         }
-        img:hover {
-          color: white;
+        .form {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
         }
-      }
-      
-      .flip-card:hover .flip-card-inner {
-        transform: rotateY(180deg);
-      }    
-    }
-  }
-  //-------------------------Contactp-------------------------//
-  .contact{
-    height: 100vh;
-    padding-top: 50px;
-    .titleContact{
-      @include titles()
-    }
-    .form-container {
-      width: 800px;
-      margin: auto;
-      @include border-gradient();
-      padding: 32px 24px;
-      font-size: 16px;
-      font-family: inherit;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      background-size: 200% 100%;
-      button:active {
-        scale: 0.95;
-      }
-      .form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-      .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        label {
-          display: block;
-          margin-bottom: 5px;
+        .form-group {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          label {
+            display: block;
+            margin-bottom: 5px;
+            color: #717171;
+            font-weight: 600;
+            font-size: 18px;
+          }
+          input {
+            width: 95%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+            background-color: transparent;
+            border: 1px solid #414141;
+          }
+          textarea {
+            width: 95%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            resize: none;
+            color: #fff;
+            height: 96px;
+            border: 1px solid #414141;
+            background-color: transparent;
+            font-family: inherit;
+          }
+          input::placeholder {
+            opacity: 0.5;
+          }
+          input:focus {
+            outline: none;
+            border-color: #e81cff;
+          }
+          textarea:focus {
+            outline: none;
+            border-color: #e81cff;
+          }
+        }
+        .form-submit-btn {
+          display: flex;
+          justify-content: center;
+          align-self: flex-end;
+          font-family: inherit;
           color: #717171;
           font-weight: 600;
-          font-size: 18px;
-        }
-        input {
-          width: 95%;
-          padding: 12px 16px;
-          border-radius: 8px;
-          color: #fff;
-          font-family: inherit;
-          background-color: transparent;
+          width: 40%;
+          background: #313131;
           border: 1px solid #414141;
-        }
-        textarea {
-          width: 95%;
           padding: 12px 16px;
-          border-radius: 8px;
-          resize: none;
-          color: #fff;
-          height: 96px;
-          border: 1px solid #414141;
-          background-color: transparent;
-          font-family: inherit;
+          font-size: inherit;
+          gap: 8px;
+          margin-top: 8px;
+          cursor: pointer;
+          border-radius: 6px;
         }
-        input::placeholder {
-          opacity: 0.5;
-        }
-        input:focus {
-          outline: none;
-          border-color: #e81cff;
-        }
-        textarea:focus {
-          outline: none;
-          border-color: #e81cff;
+        .form-submit-btn:hover {
+          background-color: #474747;
+          border-color: #942fa1;
         }
       }
-      .form-submit-btn {
-        display: flex;
-        justify-content: center;
-        align-self: flex-end;
-        font-family: inherit;
-        color: #717171;
-        font-weight: 600;
-        width: 40%;
-        background: #313131;
-        border: 1px solid #414141;
-        padding: 12px 16px;
-        font-size: inherit;
-        gap: 8px;
-        margin-top: 8px;
-        cursor: pointer;
-        border-radius: 6px;
-      }
-      .form-submit-btn:hover {
-        background-color: #474747;
-        border-color: #942fa1;
+    }
+    //-------------------------Pie de pagina-------------------------//
+    .footer{
+      background-color: rgba(20, 20, 20, 0.8);
+      color: whitesmoke;
+      height: 70px;
+      h5{
+        text-align: center;
+        font-size: 27px;
+        padding-top: 20px;
+        a{
+          color: rgb(179, 179, 179);
+        }
       }
     }
   }
-  //-------------------------Pie de pagina-------------------------//
-  .footer{
-    background-color: #000000;
-    color: whitesmoke;
-    height: 70px;
-    h5{
-      text-align: center;
-      font-size: 27px;
-      padding-top: 20px;
-      a{
-        color: rgb(179, 179, 179);
-      }
-    }
-  }
+
 }

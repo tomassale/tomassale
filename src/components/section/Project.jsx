@@ -35,30 +35,6 @@ const Project = () => {
       description: 'P',
       github: 'https://github.com/tomassale/Nasa',
       class: 'flip-card-soon'
-    },
-    { 
-      title: 'Nasa',
-      description: 'P',
-      github: 'https://github.com/tomassale/Nasa',
-      class: 'flip-card-soon'
-    },
-    { 
-      title: 'Nasa',
-      description: 'P',
-      github: 'https://github.com/tomassale/Nasa',
-      class: 'flip-card-soon'
-    },
-    { 
-      title: 'Nasa',
-      description: 'P',
-      github: 'https://github.com/tomassale/Nasa',
-      class: 'flip-card-soon'
-    },
-        { 
-      title: 'Nasa',
-      description: 'P',
-      github: 'https://github.com/tomassale/Nasa',
-      class: 'flip-card-soon'
     }
   ]
 

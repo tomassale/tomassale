@@ -19,6 +19,9 @@ const Contact = () => {
           </form>
         </div>
       </div>
+      <div className='backgroundVideo'>
+        <video src="./video/backgroundContact.mp4" autoPlay muted loop disablePictureInPicture/>
+      </div>
     </div>
   )
 }

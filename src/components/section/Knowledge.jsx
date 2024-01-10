@@ -20,6 +20,9 @@ const Knowledge = () => {
           <img key={index} src={imagen.src} alt={imagen.alt} />
         ))}
       </div>
+      <div className='backgroundVideo'>
+        <video src="./video/backgroundKnowledge.mp4" autoPlay muted loop disablePictureInPicture/>
+      </div>
     </div>
   );
 }
