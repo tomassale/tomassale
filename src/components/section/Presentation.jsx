@@ -15,7 +15,10 @@ const Presentation = () => {
         </p>
       </div>
       <div className='photo'>
-        <img src='./img/FotoCV.jpeg' alt='foto de perfil'/>
+        <img src='./img/personal/FotoCV.png' alt='foto de perfil'/>
+      </div>
+      <div className='backgroundVideo'>
+        <video src="./video/background/backgroundAboutMe.mp4" autoPlay muted loop disablePictureInPicture/>
       </div>
     </div>
   )

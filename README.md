@@ -19,7 +19,7 @@
   <img src="https://img.shields.io/badge/-MongoDb-05122A?style=flat&logo=mongodb"/>
   <img src="https://img.shields.io/badge/-MySql-05122A?style=flat&logo=mysql"/>
   <img src="https://img.shields.io/badge/-JavaScript-05122A?style=flat&logo=javascript"/>
-  <img src="https://img.shields.io/badge/-TyoeScript-05122A?style=flat&logo=typescript"/>
+  <img src="https://img.shields.io/badge/-TypeScript-05122A?style=flat&logo=typescript"/>
   <img src="https://img.shields.io/badge/-Python-05122A?style=flat&logo=python"/>
   <img src="https://img.shields.io/badge/-JQuery-05122A?style=flat&logo=jquery"/>
   <img src="https://img.shields.io/badge/-Figma-05122A?style=flat&logo=figma"/>
