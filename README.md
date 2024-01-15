@@ -35,16 +35,19 @@
   </td>
 </table>
 
-<!--
-<h2 align='center'>Working on</h2> 
+<h2 align='center'>🎧Working on</h2> 
 <table>
   <tr>
   <td width="50%">
     <br/>
     <h3 align="center">West Drip</h3>
     <div align="center">
-      <a href="https://github.com/tomassale/West-Drip" target="_blank"><img src="https://github.com/tomassale/West-Drip/blob/main/client/public/img/logo/iconBlack.png" width="400" alt="WestDrip"></a>
-      <p>West Drip es un <strong>Ecommerce</strong> con amplias funcionalidades</p>
+      <a href="https://github.com/tomassale/West-Drip" target="_blank"><img src="https://github.com/tomassale/tomassale/blob/main/public/img/logo/iconBlack.png" width="400" alt="WestDrip"></a>
+      <p>
+        Ecommerce made with <strong>mern</strong> stack<br/>
+        Complete service with <strong>front, back and database</strong><br/>
+        Detailed analysis, efficient design and development<br/>
+      </p>
     </div>
   </td>
 
@@ -52,15 +55,15 @@
     <br>
     <h3 align="center">Portfolio</h3>
     <div align="center">                                       
-      <a href="https://github.com/tomassale/tomassale" target="_blank"><img src="https://github.com/tomassale/tomassale/blob/main/public/img/logo/favicon.ico" width="400" alt="Personal Page"></a>
+      <a href="https://github.com/tomassale/tomassale" target="_blank"><img src="https://github.com/tomassale/tomassale/blob/main/public/img/logo/icon.jpg" width="400" alt="Personal Page"></a>
       <br/>
       <p>
-        Personal page made with <strong>React js</strong> <br/>Navbar, About me, Knowledge, Projects, Contact and Footer
+        Personal page made with <strong>React js</strong><br/>
+        Navbar, About me, Knowledge, Projects, Contact and Footer
       </p>
     </div>
   </td>
 </table>
--->
 
 <h2 align='center'>⚙️GitHub Analytics</h2>
 <p>

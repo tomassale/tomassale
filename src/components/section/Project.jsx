@@ -2,9 +2,10 @@ const Project = () => {
   const projects = [
     {
       title: 'West Drip',
+      video: './video/projects/',
       description: 'Proyecto realizado con React \n-Python\n-React Js\n-MongoDB\n-SQL',
       github: 'https://github.com/tomassale/West-Drip',
-      class: 'flip-card-active',
+      class: 'flip-card',
       icons: {
         github: './img/icon/d.github.png'
       }
@@ -12,32 +13,34 @@ const Project = () => {
     {
       title: 'Nasa',
       description: 'P',
+      video: './video/projects/',
       github: 'https://github.com/tomassale/Nasa',
-      class: 'flip-card-soon'
+      class: 'flip-card'
     },
     { 
-      title: 'Nasa',
-      description: 'P',
+      title: 'Portfolio',
+      description: '',
+      video: './video/projects/',
       github: 'https://github.com/tomassale/Nasa',
-      class: 'flip-card-soon'
+      class: 'flip-card'
     },    
     { 
-      title: 'Nasa',
+      title: 'Casona Wine',
       description: 'P',
       github: 'https://github.com/tomassale/Nasa',
-      class: 'flip-card-soon'
+      class: 'soon'
     },    
     { 
-      title: 'Nasa',
+      title: 'Instagram clone',
       description: 'P',
       github: 'https://github.com/tomassale/Nasa',
-      class: 'flip-card-soon'
+      class: 'soon'
     },
     { 
-      title: 'Nasa',
+      title: 'Discord clone',
       description: 'P',
       github: 'https://github.com/tomassale/Nasa',
-      class: 'flip-card-soon'
+      class: 'soon'
     }
   ]
 
@@ -57,26 +60,30 @@ const Project = () => {
                 </div>
                 <div className='tech'>
                   <img src="" alt="Icono" />
-{/*                   {project.icons.map((element, index) => (
+                  {/*{project.icons.map((element, index) => (
                     <img key={index} src={element.value} alt={element.key}/>
                   ))} */}
                 </div>
               </div>
-              <div className='flip-card-back'>
-                <div className='Description'>
-                  <p className='description'>
-                    {project.description}
-                  </p>
-                  <div className='socialBar'>
-                    <a id='github' href={project.github}>
-                      <img src='./img/icon/d.github.png' alt="" />
-                    </a>
-                    <a id='link' href='https://github.com/tomassale'>
-                      <img src='./img/icon/d.github.png' alt='Website'/>
-                    </a>
+              {project.class === 'soon' ? (
+                null
+              ) : (
+                <div className='flip-card-back'>
+                  <div className='Description'>
+                    <p className='description'>
+                      {project.description}
+                    </p>
+                    <div className='socialBar'>
+                      <a id='github' href={project.github}>
+                        <img src='./img/icon/d.github.png' alt="" />
+                      </a>
+                      <a id='link' href='https://github.com/tomassale'>
+                        <img src='./img/icon/d.github.png' alt='Website'/>
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         ))}
