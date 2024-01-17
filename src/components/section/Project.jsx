@@ -2,7 +2,7 @@ const Project = () => {
   const projects = [
     {
       title: 'West Drip',
-      description: 'Proyecto realizado con React \n-Python\n-React Js\n-MongoDB\n-SQL',
+      description: 'Proyecto realizado con React-Python-MongoDB-SQL',
       github: 'https://github.com/tomassale/West-Drip',
       class: 'flip-card',
       icons: {
@@ -19,31 +19,27 @@ const Project = () => {
     { 
       title: 'Portfolio',
       description: '',
-      video: './video/projects/',
-      github: 'https://github.com/tomassale/Nasa',
+      github: 'https://github.com/tomassale/Portfolio',
       class: 'flip-card'
     },    
     { 
       title: 'Casona Wine',
-      description: 'P',
       video: './video/project/soon.mp4',
-      github: 'https://github.com/tomassale/Nasa',
+      github: 'https://github.com/tomassale/Casona-Wine',
       class: 'soon'
     },    
     { 
-      title: 'Instagram clone',
-      description: 'P',
-      video: './video/project/soon5.mp4',
-      github: 'https://github.com/tomassale/Nasa',
+      title: 'Discord clone',
+      video: './video/project/soon2.mp4',
+      github: 'https://github.com/tomassale/Discord-Clone',
       class: 'soon'
     },
     { 
-      title: 'Discord clone',
-      description: 'P',
+      title: 'Instagram clone',
       video: './video/project/soon3.mp4',
-      github: 'https://github.com/tomassale/Nasa',
+      github: 'https://github.com/tomassale/Instagram-Clone',
       class: 'soon'
-    }
+    },
   ]
 
   return (
