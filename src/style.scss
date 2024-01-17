@@ -91,6 +91,7 @@ body{
   background-color: #313131;
   width: 100vw;
   height: 100vh;
+  scroll-snap-type: y mandatory;
   overflow-y: initial;
   ::-webkit-scrollbar {
     width: 16px;
@@ -107,7 +108,6 @@ body{
   }
   #root{
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
     //-------------------------Encabezado-------------------------//
     .navbar{
       color: whitesmoke;
@@ -260,6 +260,11 @@ body{
                 border-radius: 4%;
                 height: 170px;
                 width: 100%;
+                video {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
               }
               .name {
                 font-size: 27px;
@@ -300,16 +305,16 @@ body{
             }
           }
         }
-        .pfp {
-          border-radius: 35em;
-          fill: #c143da;
-        }
-        
         .flip-card:hover  {
           .flip-card-inner {
             transform: rotateY(180deg);
           }
-        }    
+        }
+        .flip-card:not(:has(.flip-card-back)) {
+          .flip-card-inner {
+            transform: none;
+          }
+        }
       }
     }
     //-------------------------Contacto-------------------------//

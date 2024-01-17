@@ -2,7 +2,6 @@ const Project = () => {
   const projects = [
     {
       title: 'West Drip',
-      video: './video/projects/',
       description: 'Proyecto realizado con React \n-Python\n-React Js\n-MongoDB\n-SQL',
       github: 'https://github.com/tomassale/West-Drip',
       class: 'flip-card',
@@ -13,7 +12,7 @@ const Project = () => {
     {
       title: 'Nasa',
       description: 'P',
-      video: './video/projects/',
+      video: './video/projects/soon.mp4',
       github: 'https://github.com/tomassale/Nasa',
       class: 'flip-card'
     },
@@ -27,18 +26,21 @@ const Project = () => {
     { 
       title: 'Casona Wine',
       description: 'P',
+      video: './video/project/soon.mp4',
       github: 'https://github.com/tomassale/Nasa',
       class: 'soon'
     },    
     { 
       title: 'Instagram clone',
       description: 'P',
+      video: './video/project/soon5.mp4',
       github: 'https://github.com/tomassale/Nasa',
       class: 'soon'
     },
     { 
       title: 'Discord clone',
       description: 'P',
+      video: './video/project/soon3.mp4',
       github: 'https://github.com/tomassale/Nasa',
       class: 'soon'
     }
@@ -53,7 +55,7 @@ const Project = () => {
             <div className='flip-card-inner'>
               <div className='flip-card-front'>
                 <div className='profileVideo'>
-                  <video/>
+                  <video src={project.video} autoPlay muted loop disablePictureInPicture/>
                 </div>
                 <div className='name'>
                   {project.title}
