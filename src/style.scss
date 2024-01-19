@@ -59,11 +59,11 @@
 }
 
 @mixin divs{
+  scroll-snap-align: start;
   position: relative;
   width: 100vw;
   height: 100vh;
   z-index: 1;
-  scroll-snap-align: start;
 }
 
 //Keyframes
@@ -91,7 +91,6 @@ body{
   background-color: #313131;
   width: 100vw;
   height: 100vh;
-  scroll-snap-type: y mandatory;
   overflow-y: initial;
   ::-webkit-scrollbar {
     width: 16px;
@@ -107,7 +106,7 @@ body{
     background-color: #313131;
   }
   #root{
-    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
     //-------------------------Encabezado-------------------------//
     .navbar{
       color: whitesmoke;

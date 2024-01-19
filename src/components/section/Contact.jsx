@@ -20,7 +20,7 @@ const Contact = () => {
         </div>
       </div>
       <div className='backgroundVideo'>
-        <video src="./video/background/backgroundContact.mp4" autoPlay muted loop disablePictureInPicture/>
+        <video src="./video/background/backgroundContact.mp4" preload='metadata' autoPlay muted loop disablePictureInPicture/>
       </div>
     </div>
   )

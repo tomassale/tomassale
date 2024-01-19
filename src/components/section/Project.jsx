@@ -6,7 +6,7 @@ const Project = () => {
       github: 'https://github.com/tomassale/West-Drip',
       class: 'flip-card',
       icons: {
-        github: './img/icon/d.github.png'
+        github: './img/icon/github.png'
       }
     },
     {
@@ -51,13 +51,15 @@ const Project = () => {
             <div className='flip-card-inner'>
               <div className='flip-card-front'>
                 <div className='profileVideo'>
-                  <video src={project.video} autoPlay muted loop disablePictureInPicture/>
+                  <video preload='metadata' autoPlay muted loop disablePictureInPicture>
+                    <source  src={project.video} type='video/mp4'/>
+                  </video>
                 </div>
                 <div className='name'>
                   {project.title}
                 </div>
                 <div className='tech'>
-                  <img src="" alt="Icono" />
+                  <img src='' alt='Icono' />
                   {/*{project.icons.map((element, index) => (
                     <img key={index} src={element.value} alt={element.key}/>
                   ))} */}
@@ -73,7 +75,7 @@ const Project = () => {
                     </p>
                     <div className='socialBar'>
                       <a id='github' href={project.github}>
-                        <img src='./img/icon/d.github.png' alt="" />
+                        <img src='./img/icon/d.github.png' alt='' />
                       </a>
                       <a id='link' href='https://github.com/tomassale'>
                         <img src='./img/icon/d.github.png' alt='Website'/>
@@ -87,10 +89,12 @@ const Project = () => {
         ))}
       </div>
       <div className='backgroundVideo'>
-        <video src="./video/background/backgroundProject.mp4" autoPlay muted loop disablePictureInPicture/>
+        <video preload='metadata' autoPlay muted loop disablePictureInPicture>
+          <source src='./video/background/backgroundProject.mp4' type='video/mp4'/>
+        </video>
       </div>
     </div>
-  );
+  )
 }
 
-export default Project;
+export default Project

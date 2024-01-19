@@ -1,3 +1,4 @@
+
 import React from 'react'
 
 const Knowledge = () => {
@@ -21,7 +22,7 @@ const Knowledge = () => {
         ))}
       </div>
       <div className='backgroundVideo'>
-        <video src="./video/background/backgroundKnowledge.mp4" autoPlay muted loop disablePictureInPicture/>
+        <video src="./video/background/backgroundKnowledge.mp4" preload='metadata' autoPlay muted loop disablePictureInPicture/>
       </div>
     </div>
   )
