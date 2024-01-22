@@ -1,3 +1,5 @@
+import BackgroundVideo from "./background/backgroundVideo"
+
 const Contact = () => {
   return(
     <div className='contact' id='contact'>
@@ -19,9 +21,7 @@ const Contact = () => {
           </form>
         </div>
       </div>
-      <div className='backgroundVideo'>
-        <video src="./video/background/backgroundContact.mp4" preload='metadata' autoPlay muted loop disablePictureInPicture/>
-      </div>
+      <BackgroundVideo video='backgroundContact.mp4'/>
     </div>
   )
 }

@@ -59,7 +59,6 @@
 }
 
 @mixin divs{
-  scroll-snap-align: start;
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -150,38 +149,40 @@ body{
       }
     }
     //-------------------------Sobre mi-------------------------//
-    .presentation{
-      display: flex;
+    .aboutMe{      
       @include divs();
-      .description{
-        margin-top: 8%;
-        width: 60%;
-        h2{
-          @include titles()
+      .presentation{
+        display: flex;
+        .description{
+          margin-top: 8%;
+          width: 60%;
+          h2{
+            @include titles()
+          }
+          h4{
+            color: #bebebe;
+            margin-left: 10%;
+            font-size: 40px;
+          }
+          p{
+            color: rgb(255, 255, 255);
+            font-size: 20px;
+            text-shadow: 0 0 2px #ffffff, 0 0 4px #ffffff, 0 0 6px #000000, 0 0 8px #000000;
+            width: 80%;
+            margin: 4% 0 0 10%;
+          }
         }
-        h4{
-          color: #bebebe;
-          margin-left: 10%;
-          font-size: 40px;
-        }
-        p{
-          color: rgb(255, 255, 255);
-          font-size: 20px;
-          text-shadow: 0 0 2px #ffffff, 0 0 4px #ffffff, 0 0 6px #000000, 0 0 8px #000000;
-          width: 80%;
-          margin: 4% 0 0 10%;
-        }
-      }
-      .photo{
-        padding: 3%;
-        img{
-          margin-top: 40%;
-          background-color: rgba(29, 29, 29, 0.2);
-          transform: rotate(1deg);
-          border-radius: 50%;
-          height: 45%;
-          backdrop-filter: blur(0px);
-          box-shadow: 0 0 10px #b425d1, 0 0 20px #c58bd1, 0 0 30px #bf1edf;
+        .photo{
+          padding: 3%;
+          img{
+            margin-top: 40%;
+            background-color: rgba(29, 29, 29, 0.2);
+            transform: rotate(1deg);
+            border-radius: 50%;
+            height: 45%;
+            backdrop-filter: blur(0px);
+            box-shadow: 0 0 10px #b425d1, 0 0 20px #c58bd1, 0 0 30px #bf1edf;
+          }
         }
       }
     }
@@ -252,7 +253,6 @@ body{
               font-family: inherit;
               display: flex;
               flex-direction: column;
-              gap: 20px;
               background-size: 200% 100%;
               .profileVideo {
                 background-color: rgb(51, 51, 56);
@@ -269,49 +269,71 @@ body{
                 font-size: 27px;
                 color: #c143da;
                 font-weight: bold;
+                padding: 15px 0 15px 0;
+              }
+              .tech{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 4px 15px 10px 4px;
+                img{
+                  width: 35px;
+                  height: 35px;
+                  margin: 0px 0px 0px 6px;
+                }
               }
             }
             .flip-card-back {
               @include border-gradient();
               transform: rotateY(180deg);
               padding: 11px;
-              .Description{
-                .description {
+              .description {
+                .text {
                   margin-top: 10px;
                   font-size: 14px;
                   letter-spacing: 1px;
                   color: white
                 }
-                .socialBar {
-                  background-color: transparent;
-                  border-radius: 3em;
-                  width: 90%;
-                  padding: 14px;
-                  margin: 11px 0px 0px 10px;
-                  word-spacing: 24px;
+                .page {
+                  padding: 11px;
                   color: white;
-                  img {
-                    transition: 0.4s;
-                    width: 30px;
-                    height: 30px;
-                    color: #c143da
+                  position: fixed;
+                  bottom: 0;
+                  left: 0;
+                  right: 0;
+                  justify-content: center;
+                  align-items: center;
+                  #github{
+                    img{
+                      transition: 0.3s;
+                      width: 35px;
+                      height: 35px;
+                      margin-bottom: 5px;
+                    }
+                  }
+                  #link {
+                    img{
+                      transition: 0.3s;
+                      width: 45px;
+                      height: 45px;
+                    }
                   }
                   img:hover {
-                    color: white;
+                    transform: scale(1.2);
                   }
                 }
               }
             }
           }
-        }
-        .flip-card:hover  {
-          .flip-card-inner {
-            transform: rotateY(180deg);
+          &:hover  {
+            .flip-card-inner {
+              transform: rotateY(180deg);
+            }
           }
-        }
-        .flip-card:not(:has(.flip-card-back)) {
-          .flip-card-inner {
-            transform: none;
+          &:not(:has(.flip-card-back)) {
+            .flip-card-inner {
+              transform: none;
+            }
           }
         }
       }
@@ -401,10 +423,10 @@ body{
           margin-top: 8px;
           cursor: pointer;
           border-radius: 6px;
-        }
-        .form-submit-btn:hover {
-          background-color: #474747;
-          border-color: #942fa1;
+          &:hover {
+            background-color: #474747;
+            border-color: #942fa1;
+          }
         }
       }
     }

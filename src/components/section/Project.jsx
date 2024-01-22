@@ -1,26 +1,44 @@
+import BackgroundVideo from "./background/backgroundVideo"
+
 const Project = () => {
   const projects = [
     {
       title: 'West Drip',
-      description: 'Proyecto realizado con React-Python-MongoDB-SQL',
+      description: 'Proyecto realizado con ',
       github: 'https://github.com/tomassale/West-Drip',
+      link: 'https://github.com/tomassale/West-Drip',
       class: 'flip-card',
       icons: {
-        github: './img/icon/github.png'
+        img1: 'mongodb.svg',
+        img2: 'j.expressjs_dark.svg',
+        img3: 'h.react.svg',
+        img4: 'i.nodejs.svg',
+        img5: 'n.mysql.png',
+        img6: 'f.python.png'
       }
     },
     {
       title: 'Nasa',
-      description: 'P',
+      description: 'Adipisicing elit. Repellat voluptatem, voluptatibus cum nesciunt iditate dolor perferendis incidunt officia quos atque beatae! Consectetur vero quia vel repellendus asperiores! Voluptatum.',
       video: './video/projects/soon.mp4',
       github: 'https://github.com/tomassale/Nasa',
-      class: 'flip-card'
+      class: 'flip-card',
+      icons: {
+        img1: 'h.react.svg',
+      }
     },
     { 
       title: 'Portfolio',
-      description: '',
-      github: 'https://github.com/tomassale/Portfolio',
-      class: 'flip-card'
+      description: 'Adipisicing elit. Repellat voluptatem, voluptatibus cum nesciunt iditate dolor perferendis incidunt officia quos atque beatae! Consectetur vero quia vel repellendus asperiores! Voluptatum.',
+      github: 'https://github.com/tomassale/Photographer-portfolio',
+      url: 'https://github.com/tomassale/Portfolio',
+      class: 'flip-card',
+      icons: {
+        img1: 'h.react.svg',
+        img2: 'j.expressjs_dark.svg',
+        img3: 'i.nodejs.svg',
+        img4: 'n.mysql.png'
+      }
     },    
     { 
       title: 'Casona Wine',
@@ -59,27 +77,30 @@ const Project = () => {
                   {project.title}
                 </div>
                 <div className='tech'>
-                  <img src='' alt='Icono' />
-                  {/*{project.icons.map((element, index) => (
-                    <img key={index} src={element.value} alt={element.key}/>
-                  ))} */}
+                  {project.icons && Object.keys(project.icons).map((iconKey) => (
+                    <img key={iconKey} src={`./img/knowledge/${project.icons[iconKey]}`} alt='technologies' />
+                  ))}
                 </div>
               </div>
               {project.class === 'soon' ? (
                 null
               ) : (
                 <div className='flip-card-back'>
-                  <div className='Description'>
-                    <p className='description'>
+                  <div className='description'>
+                    <p className='text'>
                       {project.description}
                     </p>
-                    <div className='socialBar'>
-                      <a id='github' href={project.github}>
-                        <img src='./img/icon/d.github.png' alt='' />
+                    <div className='page'>
+                      <a id='github' href={project.github} rel='noreferrer' target='_blank'>
+                        <img src='./img/icon/github.png' alt='Github'/>
                       </a>
-                      <a id='link' href='https://github.com/tomassale'>
-                        <img src='./img/icon/d.github.png' alt='Website'/>
-                      </a>
+                      {!project.link ? (
+                        null
+                      ) : (
+                        <a id='link' href={project.link} rel='noreferrer' target='_blank'>
+                          <img src='./img/icon/url.png' alt='Website'/>
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -88,11 +109,7 @@ const Project = () => {
           </div>
         ))}
       </div>
-      <div className='backgroundVideo'>
-        <video preload='metadata' autoPlay muted loop disablePictureInPicture>
-          <source src='./video/background/backgroundProject.mp4' type='video/mp4'/>
-        </video>
-      </div>
+      <BackgroundVideo video='backgroundProject.mp4'/>
     </div>
   )
 }
