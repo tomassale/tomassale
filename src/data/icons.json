@@ -1,0 +1,16 @@
+[
+  {"id":1, "src": "react.svg",           "alt":"react"},
+  {"id":2, "src": "expressjs_dark.svg",  "alt":"express"},
+  {"id":3, "src": "FotoCV.png",          "alt":"profile"},
+  {"id":4, "src": "nodejs.svg",          "alt":"node"},
+  {"id":5, "src": "mongodb.svg",         "alt":"mongoDb"},
+  {"id":6, "src": "mysql.png",           "alt":"mysql"},
+  {"id":7, "src": "python.png",          "alt":"python"},
+  {"id":8, "src": "typescript.svg",      "alt":"typescript"},
+  {"id":9, "src": "docker.svg",         "alt":"docker"},
+  {"id":10, "src": "github.png",          "alt":"github"},
+  {"id":11, "src": "openai_dark.png",    "alt":"open ia"},
+  {"id":12, "src": "postman.svg",        "alt":"postman"},
+  {"id":13, "src": "figma.svg",          "alt":"figma"},
+  {"id":14, "src": "photoshop.svg",      "alt":"photoshop"}
+]

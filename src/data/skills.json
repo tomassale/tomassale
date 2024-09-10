@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "title":"Front-End",
+    "image":"./img/skill/front.jpg",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
+  },
+  {
+    "id": "2",
+    "title":"Back-End",
+    "image":"./img/skill/back.jpg",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
+  },
+  {
+    "id": "3",
+    "title":"UX/UI",
+    "image":"./img/skill/uxui.jpg",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
+  },
+  {
+    "id": "4",
+    "title":"Database",
+    "image":"./img/skill/database.jpg",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
+  },
+  {
+    "id": "5",
+    "title":"Design & Edition",
+    "image":"./img/skill/desedi.jpg",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
+  }
+]

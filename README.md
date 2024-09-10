@@ -17,6 +17,7 @@
   <img src="https://img.shields.io/badge/-Express-05122A?style=flat&logo=express"/>
   <img src="https://img.shields.io/badge/-MongoDb-05122A?style=flat&logo=mongodb"/>
   <img src="https://img.shields.io/badge/-MySql-05122A?style=flat&logo=mysql"/>
+  <img src="https://img.shields.io/badge/-C-05122A?style=flat&logo=c&logoColor=5284FF"/>
   <img src="https://img.shields.io/badge/-JavaScript-05122A?style=flat&logo=javascript"/>
   <img src="https://img.shields.io/badge/-TypeScript-05122A?style=flat&logo=typescript"/>
   <img src="https://img.shields.io/badge/-Python-05122A?style=flat&logo=python"/>
@@ -29,7 +30,7 @@
   <img src="https://img.shields.io/badge/-Docker-05122A?style=flat&logo=docker"/>
   <img src="https://img.shields.io/badge/-Git-05122A?style=flat&logo=git"/>
   <img src="https://img.shields.io/badge/-Github-05122A?style=flat&logo=github"/>
-  <img src="https://img.shields.io/badge/-Visual%20Studio%20Code-05122A?style=flat&logo=visual-studio-code&logoColor=007ACC"/>
+  <img src="https://img.shields.io/badge/-VS%20Code-05122A?style=flat&logo=visual-studioz&logoColor=007ACC"/>
 
   </td>
 </table>

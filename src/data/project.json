@@ -1,0 +1,58 @@
+[
+  {
+    "title": "West Drip",
+    "description": "E-commerce realizado con stack MERN y automatización de backup con python/MySQL para multiples funcionalidades de compra y generacion de correo de confirmacion",
+    "github": "https://github.com/tomassale/West-Drip",
+    "link": "https://github.com/tomassale/West-Drip",
+    "class": "flip-card",
+    "icons": {
+      "img1": "mongodb.svg",
+      "img2": "expressjs_dark.svg",
+      "img3": "react.svg",
+      "img4": "nodejs.svg",
+      "img5": "mysql.png",
+      "img6": "python.png"
+    }
+  },
+  {
+    "title": "Nasa",
+    "description": "Adipisicing elit. Repellat voluptatem, voluptatibus cum nesciunt iditate dolor perferendis incidunt officia quos atque beatae! Consectetur vero quia vel repellendus asperiores! Voluptatum.",
+    "video": "./video/projects/soon.mp4",
+    "github": "https://github.com/tomassale/Nasa",
+    "class": "flip-card",
+    "icons": {
+      "img1": "react.svg"
+    }
+  },
+  { 
+    "title": "Photographer",
+    "description": "Adipisicing elit. Repellat voluptatem, voluptatibus cum nesciunt iditate dolor perferendis incidunt officia quos atque beatae! Consectetur vero quia vel repellendus asperiores! Voluptatum.",
+    "github": "https://github.com/tomassale/Photographer-portfolio",
+    "url": "https://github.com/tomassale/Portfolio",
+    "class": "flip-card",
+    "icons": {
+      "img1": "react.svg",
+      "img2": "expressjs_dark.svg",
+      "img3": "nodejs.svg",
+      "img4": "mysql.png"
+    }
+  },    
+  { 
+    "title": "Casona Wine",
+    "video": "./video/project/soon.mp4",
+    "github": "https://github.com/tomassale/Casona-Wine",
+    "class": "soon"
+  },    
+  { 
+    "title": "Spotify clone",
+    "video": "./video/project/soon2.mp4",
+    "github": "https://github.com/tomassale/Spotify-Clone",
+    "class": "soon"
+  },
+  { 
+    "title": "Instagram clone",
+    "video": "./video/project/soon3.mp4",
+    "github": "https://github.com/tomassale/Instagram-Clone",
+    "class": "soon"
+  }
+]

@@ -1,4 +1,5 @@
 import BackgroundVideo from "./background/backgroundVideo"
+import Images from '../../data/icons.json'
 
 const Presentation = () => {
   return (
@@ -8,11 +9,13 @@ const Presentation = () => {
           <h2>Tomás Javier Sale</h2>
           <h4>Web Developer</h4>
           <p>
-            +3 years experience
+            +3 años de experiencia programando software de calidad implementando tecnologias 
           </p>
         </div>
         <div className='photo'>
-          <img src='./img/personal/FotoCV.png' alt='Profile'/>
+          {Images.map((obj) => {
+            return <img key={obj.id} src={`./img/personal/icons/${obj.src}`} alt={obj.alt}/>
+          })}
         </div>
       </div>
       <div>
