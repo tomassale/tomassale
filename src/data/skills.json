@@ -1,32 +1,32 @@
 [
   {
-    "id": "1",
+    "id": 1,
     "title":"Front-End",
-    "image":"./img/skill/front.jpg",
+    "image":"./img/skills/front.jpg",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
   },
   {
-    "id": "2",
+    "id": 2,
     "title":"Back-End",
-    "image":"./img/skill/back.jpg",
+    "image":"./img/skills/back.jpeg",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
   },
   {
-    "id": "3",
+    "id": 3,
     "title":"UX/UI",
-    "image":"./img/skill/uxui.jpg",
+    "image":"./img/skills/uxui.png",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
   },
   {
-    "id": "4",
-    "title":"Database",
-    "image":"./img/skill/database.jpg",
+    "id": 4,
+    "title":"DataBase",
+    "image":"./img/skills/database.jpeg",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
   },
   {
-    "id": "5",
+    "id": 5,
     "title":"Design & Edition",
-    "image":"./img/skill/desedi.jpg",
+    "image":"./img/skills/desedi.jpg",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
   }
 ]

@@ -245,35 +245,47 @@ body{
       }
     }
     //-------------------------Conocimiento-------------------------//
-    .knowledge{
+    .skill{
       @include divs();
       h2{
-        @include titles()
+        @include titles();
+        margin-bottom: 3%;
       }
-      .imagesKnowledge{
-        width: max-content;
-        margin: auto;
-        margin-top: 6%;
-        @include grids(7, 110px);
-        img{
-          height: 70px;
-          width: 70px;
-          margin: 20%;
-          view-timeline-name: --image;
-          view-timeline-axis: block;
-        
-          animation-timeline: --image;
-          animation-name: show;
-        
-          animation-range: entry 25% cover 30%;
-          animation-fill-mode: both;
+      .cards{
+        @include grids(3, 255px);
+        gap: 5%;
+        .card{
+          background-color: rgb(8, 8, 8);
+          display: block;
+          color: whitesmoke;
+          @include border-gradient();
+          border: 4px solid transparent;
+          .imageTitle{
+            img{
+              height: 150px;
+              width: 250px;
+            }
+            h3{
+              position: relative;
+              background-color: rgba(8,8,8,0.8);
+              border-radius: 9px 9px 0 0;
+              width: max-content;
+              padding: 5px 15px 0 15px;
+              margin: auto;
+              margin-top: -21px;
+            }
+          }
+          .description{
+            padding: 4% 6% 11% 6%;
+            text-align: center;
+          }
         }
-        img:nth-child(7),
-        img:nth-child(15) {
-          background-color: rgba(0, 0, 0, 0.25);
-          border-radius: 50%;
-          backdrop-filter: blur(0.3px)
-        }
+      }
+      &:nth-last-child(2) {
+        display: grid;
+        grid-template-columns: repeat(2, 255px);
+        gap: 20px;
+        justify-content: center;
       }
     }
     //-------------------------Proyecto-------------------------//

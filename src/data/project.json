@@ -45,13 +45,13 @@
   },    
   { 
     "title": "Spotify clone",
-    "video": "./video/project/soon2.mp4",
+    "video": "./video/project/soon.mp4",
     "github": "https://github.com/tomassale/Spotify-Clone",
     "class": "soon"
   },
   { 
     "title": "Instagram clone",
-    "video": "./video/project/soon3.mp4",
+    "video": "./video/project/soon.mp4",
     "github": "https://github.com/tomassale/Instagram-Clone",
     "class": "soon"
   }
