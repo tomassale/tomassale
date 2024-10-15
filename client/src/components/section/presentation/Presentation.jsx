@@ -1,5 +1,5 @@
-import BackgroundVideo from "./background/backgroundVideo"
-import Images from '../../data/icons.json'
+import BackgroundVideo from "../background/backgroundVideo"
+import Images from '../../../data/icons.json'
 
 const Presentation = () => {
   return (

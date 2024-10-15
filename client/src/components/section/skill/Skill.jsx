@@ -1,7 +1,6 @@
-
 import React from 'react'
-import BackgroundVideo from './background/backgroundVideo'
-import Cards from '../../data/skills.json'
+import BackgroundVideo from '../background/backgroundVideo'
+import Cards from '../../../data/skills.json'
 
 const Skill = () => {
 
@@ -9,9 +8,10 @@ const Skill = () => {
     <div className='skill' id='skill'>
       <h2>Skills</h2>
       <div className='cards'>
-        {Cards.map((obj)=>{
+        {Cards.map((obj, index)=>{
+          const isLastTwo = index >= Cards.length - 2;
           return(
-            <div className='card' key={obj.id}>
+            <div className={'card'} key={obj.id}>
               <div className='imageTitle'>
                 <img src={obj.image} alt={obj.title}/>
                 <h3>{obj.title}</h3>

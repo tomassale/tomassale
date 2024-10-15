@@ -1,5 +1,5 @@
-import BackgroundVideo from './background/backgroundVideo'
-import Info from '../../data/project.json'
+import BackgroundVideo from '../background/backgroundVideo'
+import Info from '../../../data/project.json'
 
 const Project = () => {
 

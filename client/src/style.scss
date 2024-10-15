@@ -247,6 +247,7 @@ body{
     //-------------------------Conocimiento-------------------------//
     .skill{
       @include divs();
+      
       h2{
         @include titles();
         margin-bottom: 3%;
@@ -256,9 +257,9 @@ body{
         gap: 5%;
         .card{
           background-color: rgb(8, 8, 8);
+          @include border-gradient();
           display: block;
           color: whitesmoke;
-          @include border-gradient();
           border: 4px solid transparent;
           .imageTitle{
             img{
@@ -280,14 +281,13 @@ body{
             text-align: center;
           }
         }
-      }
-      &:nth-last-child(2) {
-        display: grid;
-        grid-template-columns: repeat(2, 255px);
-        gap: 20px;
-        justify-content: center;
+        .lastCard{
+          @include grids(2, 255px);
+          gap: 5%;
+        }
       }
     }
+    
     //-------------------------Proyecto-------------------------//
     .project{
       @include divs();

@@ -1,0 +1,7 @@
+error: Error getting all documents {"timestamp":"2024-10-15T12:34:54.001Z"}
+error: Error getting all documents {"timestamp":"2024-10-15T12:37:40.987Z"}
+error: Error saving form {"timestamp":"2024-10-15T12:52:25.421Z"}
+error: Error deleting everything {"timestamp":"2024-10-15T13:10:19.222Z"}
+error: Error deleting everything {"timestamp":"2024-10-15T13:10:33.002Z"}
+error: Error sending email Invalid login: 535 5.7.139 Authentication unsuccessful, basic authentication is disabled. [SCYPR80CA0016.lamprd80.prod.outlook.com 2024-10-15T18:05:21.163Z 08DCECD67AC621FC] {"timestamp":"2024-10-15T18:05:21.212Z"}
+error: Error sending email Invalid login: 535 5.7.139 Authentication unsuccessful, basic authentication is disabled. [SCZP215CA0024.LAMP215.PROD.OUTLOOK.COM 2024-10-15T18:40:58.013Z 08DCECA1CDF28961] {"timestamp":"2024-10-15T18:40:58.070Z"}
