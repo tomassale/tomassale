@@ -6,5 +6,5 @@ const FormSchema = new Schema({
   message: {type: String, require: true}
 })
 
-const FormModel = model('Form', FormSchema)
+const FormModel = model('Forms', FormSchema, 'Form')
 module.exports = FormModel

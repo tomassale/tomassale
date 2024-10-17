@@ -255,6 +255,9 @@ body{
       .cards{
         @include grids(3, 255px);
         gap: 5%;
+        > :nth-child(-n+3){
+          @include grids(2, 255px)
+        }
         .card{
           background-color: rgb(8, 8, 8);
           @include border-gradient();
@@ -280,10 +283,6 @@ body{
             padding: 4% 6% 11% 6%;
             text-align: center;
           }
-        }
-        .lastCard{
-          @include grids(2, 255px);
-          gap: 5%;
         }
       }
     }
