@@ -21,6 +21,7 @@ const Presentation = () => {
       <div>
       </div>
       <BackgroundVideo video='backgroundAboutMe.mp4'/>
+      <hr/>
     </div>
   )
 }

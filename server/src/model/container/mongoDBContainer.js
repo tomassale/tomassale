@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose")
+import { mongoose } from "mongoose"
 
 class MongoDbContainer {
   constructor(url, model) {
@@ -78,4 +78,4 @@ class MongoDbContainer {
   }
 }
 
-module.exports = MongoDbContainer
+export default MongoDbContainer

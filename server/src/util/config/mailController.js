@@ -1,5 +1,5 @@
-const { createTransport } = require('nodemailer')
-const logger = require('./loggerConfig')
+import { createTransport } from 'nodemailer'
+import logger from './loggerConfig.js'
 
 const transporter = createTransport({
   service: 'hotmail',
@@ -32,4 +32,4 @@ const sendEmailToAdmin = async (user) => {
   }
 }
 
-module.exports = sendEmailToAdmin
+export default sendEmailToAdmin

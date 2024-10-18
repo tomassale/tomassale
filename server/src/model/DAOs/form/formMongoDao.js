@@ -1,5 +1,5 @@
-const MongoDbContainer = require('../../container/mongoDBContainer')
-const FormModel = require('../../formModel')
+import MongoDbContainer from '../../container/mongoDBContainer.js'
+import FormModel from '../../formModel.js'
 
 class FormMongoDAO extends MongoDbContainer{
   constructor(url){
@@ -26,4 +26,4 @@ class FormMongoDAO extends MongoDbContainer{
   }
 }
 
-module.exports = FormMongoDAO
+export default FormMongoDAO

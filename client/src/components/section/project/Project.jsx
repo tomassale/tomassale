@@ -53,6 +53,7 @@ const Project = () => {
         ))}
       </div>
       <BackgroundVideo video='backgroundProject.mp4'/>
+      <hr/>
     </div>
   )
 }

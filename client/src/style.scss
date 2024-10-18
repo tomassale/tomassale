@@ -139,7 +139,7 @@ body{
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 13%;
+        margin-left: 15%;
         a{
             margin-left: 25px;
             padding: 14px 30px;
@@ -147,7 +147,7 @@ body{
         }
       }
       .icons{
-        margin: 0.5% 0 0 10%;
+        margin: 0.5% 0 0 15%;
         width: 9%;
         a{
           img{
@@ -255,9 +255,6 @@ body{
       .cards{
         @include grids(3, 255px);
         gap: 5%;
-        > :nth-child(-n+3){
-          @include grids(2, 255px)
-        }
         .card{
           background-color: rgb(8, 8, 8);
           @include border-gradient();

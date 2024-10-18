@@ -1,11 +1,21 @@
-const FormFactory = require('../model/DAOs/form/daoFactoryForm')
-const Service = require('./base/service')
+import FormFactory from '../model/DAOs/form/daoFactoryForm.js'
+import Service from './base/service.js'
+import sendEmailToAdmin from '../util/config/mailController.js'
 
 class FormService extends Service{
   constructor(){
     const formDao = FormFactory(process.env.STORE)
     super(formDao)
   }
+
+  async sendEmailToAdmin(data){
+    try{
+      await sendEmailToAdmin(data)
+    }catch(error){
+      throw new Error('Error sending email to admin')
+    }
+  }
+
 }
 
-module.exports = FormService
+export default FormService

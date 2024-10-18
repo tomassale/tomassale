@@ -10,11 +10,8 @@ const App = () => {
     <>
       <NavBar />
       <Presentation />
-      <hr/>
       <Skill />
-      <hr/>
       <Project />
-      <hr/>
       <Contact />
       <Footer />
     </>

@@ -1,4 +1,4 @@
-const FormMongoDAO = require('./formMongoDao')
+import FormMongoDAO from './formMongoDao.js'
 
 const FormFactory = (type = process.env.STORE) => {
   if(type === 'MONGO') {
@@ -6,4 +6,4 @@ const FormFactory = (type = process.env.STORE) => {
   }
 }
 
-module.exports = FormFactory
+export default FormFactory

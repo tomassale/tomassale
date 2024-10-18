@@ -9,7 +9,6 @@ const Skill = () => {
       <h2>Skills</h2>
       <div className='cards'>
         {Cards.map((obj, index)=>{
-          const isLastTwo = index >= Cards.length - 2;
           return(
             <div className={'card'} key={obj.id}>
               <div className='imageTitle'>
@@ -24,6 +23,7 @@ const Skill = () => {
         })}
       </div>
       <BackgroundVideo video='backgroundKnowledge.mp4'/>
+      <hr/>
     </div>
   )
 }
