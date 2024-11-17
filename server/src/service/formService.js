@@ -12,7 +12,8 @@ class FormService extends Service{
     try{
       await sendEmailToAdmin(data)
     }catch(error){
-      throw new Error('Error sending email to admin')
+      logger.log('error', 'Error sending email on service')
+      throw new Error('Error sending email to admin' + error.message)
     }
   }
 

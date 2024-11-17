@@ -1,4 +1,4 @@
-import DataMongoDAO from './dataMongoDao'
+import DataMongoDAO from './dataMongoDao.js'
 
 const DataFactory = (type = process.env.STORE) => {
   if(type === 'MONGO') {

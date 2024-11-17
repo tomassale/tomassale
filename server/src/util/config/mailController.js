@@ -1,13 +1,19 @@
 import { createTransport } from 'nodemailer'
 import logger from './loggerConfig.js'
+import  { google } from 'googleapis'
+process.loadEnvFile()
 
 const transporter = createTransport({
   service: 'hotmail',
   auth: {
-    user: "tomassale@hotmail.com",
-    pass: "zeuscoco00"
-  }
-})
+    type: 'OAuth2',
+    user: process.env.NODEMAILER_EMAIL,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    refreshToken: process.env.REFRESH_TOKEN,
+    //accessToken: accesToken
+  },
+});
 
 transporter.verify((error, success) => {
   if (error) {
@@ -29,6 +35,7 @@ const sendEmailToAdmin = async (user) => {
     logger.log('info', 'Email sent successfully')
   }catch(error){
     logger.log('error', 'Error sending email ' + error.message)
+    throw new Error('Error sending email')
   }
 }
 

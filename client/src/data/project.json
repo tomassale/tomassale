@@ -1,7 +1,8 @@
 [
   {
+    "_id": 1,
     "title": "West Drip",
-    "description": "E-commerce realizado con stack MERN y automatización de backup con python/MySQL para multiples funcionalidades de compra y generacion de correo de confirmacion",
+    "description": "Este proyecto de e-commerce de ropa permite a los usuarios explorar una variedad de prendas, crear cuentas, agregar productos al carrito y realizar pagos seguros en línea.",
     "github": "https://github.com/tomassale/West-Drip",
     "link": "https://github.com/tomassale/West-Drip",
     "class": "flip-card",
@@ -15,9 +16,9 @@
     }
   },
   {
+    "_id": 2,
     "title": "Nasa",
-    "description": "Adipisicing elit. Repellat voluptatem, voluptatibus cum nesciunt iditate dolor perferendis incidunt officia quos atque beatae! Consectetur vero quia vel repellendus asperiores! Voluptatum.",
-    "video": "./video/projects/soon.mp4",
+    "description": "Este proyecto básico de React Native utiliza la API de la NASA para mostrar fotos actuales del espacio, permitiendo a los usuarios explorar imágenes impresionantes y aprender sobre el universo.",
     "github": "https://github.com/tomassale/Nasa",
     "class": "flip-card",
     "icons": {
@@ -25,8 +26,9 @@
     }
   },
   { 
+    "_id": 3,
     "title": "Photographer",
-    "description": "Adipisicing elit. Repellat voluptatem, voluptatibus cum nesciunt iditate dolor perferendis incidunt officia quos atque beatae! Consectetur vero quia vel repellendus asperiores! Voluptatum.",
+    "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
     "github": "https://github.com/tomassale/Photographer-portfolio",
     "url": "https://github.com/tomassale/Portfolio",
     "class": "flip-card",
@@ -38,19 +40,25 @@
     }
   },    
   { 
+    "_id": 4,
     "title": "Casona Wine",
+    "description": "Este proyecto de vinoteca permite a los usuarios explorar una amplia variedad de vinos, realizar solicitudes de productos y recibir recomendaciones personalizadas para mejorar su experiencia de compra.",
     "video": "./video/project/soon.mp4",
     "github": "https://github.com/tomassale/Casona-Wine",
     "class": "soon"
   },    
   { 
+    "_id": 5,
     "title": "Spotify clone",
+    "description": "Este clon de Spotify permite autenticación, reproducción de música, creación de playlists, favoritos, seguimiento de artistas, recomendaciones y streaming en tiempo real.",
     "video": "./video/project/soon.mp4",
     "github": "https://github.com/tomassale/Spotify-Clone",
     "class": "soon"
   },
   { 
+    "_id": 6,
     "title": "Instagram clone",
+    "description": "Un clon de Instagram usando el stack MERN que permite autenticación, subir fotos, interacciones sociales (likes, comentarios), y seguimiento de usuarios en tiempo real.",
     "video": "./video/project/soon.mp4",
     "github": "https://github.com/tomassale/Instagram-Clone",
     "class": "soon"

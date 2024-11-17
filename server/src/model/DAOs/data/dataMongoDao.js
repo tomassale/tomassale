@@ -1,9 +1,14 @@
-import MongoDbContainer from "../../container/mongoDBContainer";
-import DataModel from '../../dataModel'
+import MongoDbContainer from '../../container/mongoDBContainer.js'
+import {getModel} from '../../dataModel.js'
 
 class DataMongoDAO extends MongoDbContainer{
   constructor(url){
-    super(url, DataModel)
+    super(url, getModel)
+  }
+  
+  async getCollection(collection){
+    const model = getModel(collection)
+    return model.find({})
   }
 
   async getAll(){

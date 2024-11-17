@@ -9,8 +9,9 @@ const Skill = () => {
       <h2>Skills</h2>
       <div className='cards'>
         {Cards.map((obj, index)=>{
+          const exced = index >= Cards.length - 2
           return(
-            <div className={'card'} key={obj.id}>
+            <div className={`card`} key={obj.id}>
               <div className='imageTitle'>
                 <img src={obj.image} alt={obj.title}/>
                 <h3>{obj.title}</h3>
@@ -23,7 +24,6 @@ const Skill = () => {
         })}
       </div>
       <BackgroundVideo video='backgroundKnowledge.mp4'/>
-      <hr/>
     </div>
   )
 }

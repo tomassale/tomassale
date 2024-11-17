@@ -1,30 +1,30 @@
 [
   {
-    "id": 1,
+    "_id": 1,
     "title":"Front-End",
     "image":"./img/skills/front.jpg",
     "description":"Desarrollo de interfaces intuitivas y funcionales, centradas en mejorar la experiencia del usuario. Soluciones escalables que garantizan rendimiento óptimo y compatibilidad."
   },
   {
-    "id": 2,
+    "_id": 2,
     "title":"Back-End",
     "image":"./img/skills/back.jpeg",
     "description":"Gestión eficiente de datos y optimización de procesos para garantizar seguridad, escalabilidad y alto rendimiento. Soluciones enfocadas en optimizar la funcionalidad."
   },
   {
-    "id": 3,
+    "_id": 3,
     "title":"UX/UI",
     "image":"./img/skills/uxui.png",
     "description":"Diseño de experiencias e interfaces centradas en mejorar la usabilidad y estética. Creaciones creativas que optimizan la interacción y garantizan una navegación intuitiva y placentera."
   },
   {
-    "id": 4,
+    "_id": 4,
     "title":"DataBase",
     "image":"./img/skills/database.jpeg",
     "description":"Manejo eficiente de bases de datos, garantizando integridad y rendimiento. Escalabilidad que optimiza el almacenamiento y la recuperación de información de manera segura."
   },
   {
-    "id": 5,
+    "_id": 5,
     "title":"Design & Edition",
     "image":"./img/skills/desedi.jpg",
     "description":"Creación y edición de contenido visual atractivo, enfocado en la coherencia estética y funcional. Ediciones efectivas que comunican eficazmente el mensaje deseado al usuario."

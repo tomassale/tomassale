@@ -1,4 +1,4 @@
-![banner](https://github.com/tomassale/tomassale/blob/main/public/img/banner/Banner.png?raw=true)
+![banner](https://github.com/tomassale/tomassale/blob/main/client/public/img/banner/Banner.png?raw=true)
 
 <table>
   <td width='50%'>

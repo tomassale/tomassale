@@ -5,6 +5,8 @@ class MongoDbContainer {
     this.url = url
     this.model = model
     mongoose.connect(this.url)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch((error) => console.error('Error connecting to MongoDB:', error));
   }
 
   async getDocument(filter) {
