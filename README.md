@@ -5,7 +5,7 @@
   <h2 align='center'>☕​ About Me</h2>
 
   🖥️ I'm a \<<strong>Web Developer</strong>/> <br/>
-  🌱 Learning about <strong>UX/UI</strong>  <br/>
+  🌱 Learning about <strong>Angular & .NET</strong>  <br/>
   📚 Studying <strong>Software Engineering</strong> at <a href='https://www.unlam.edu.ar/index.php'>UNLaM</a> <br/>
   🤔 Interested in <strong>Cybersecurity</strong> & <strong>Automation</strong>
   </td>
