@@ -1,15 +1,26 @@
-import React from 'react'
 import BackgroundVideo from '../background/backgroundVideo'
-import Cards from '../../../data/skills.json'
 
 const Skill = () => {
+  return(
+    <div className='skill' id='skill'>
+      <h2>Skills</h2>
+      <div className='skills'>
+        {}
+      </div>
+      <BackgroundVideo video='backgroundKnowledge.mp4'/>
+    </div>
+  )
+}
 
+export default Skill
+
+/*
+const Skill = () => {
   return (
     <div className='skill' id='skill'>
       <h2>Skills</h2>
       <div className='cards'>
         {Cards.map((obj, index)=>{
-          const exced = index >= Cards.length - 2
           return(
             <div className={`card`} key={obj.id}>
               <div className='imageTitle'>
@@ -27,5 +38,4 @@ const Skill = () => {
     </div>
   )
 }
-
-export default Skill
+*/

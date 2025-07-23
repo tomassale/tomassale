@@ -1,16 +1,22 @@
-[
-  {"_id":1, "src": "react.svg",           "alt":"react"},
-  {"_id":2, "src": "expressjs_dark.svg",  "alt":"express"},
-  {"_id":3, "src": "FotoCV.png",          "alt":"profile"},
-  {"_id":4, "src": "nodejs.svg",          "alt":"node"},
-  {"_id":5, "src": "mongodb.svg",         "alt":"mongoDb"},
-  {"_id":6, "src": "mysql.png",           "alt":"mysql"},
-  {"_id":7, "src": "python.png",          "alt":"python"},
-  {"_id":8, "src": "typescript.svg",      "alt":"typescript"},
-  {"_id":9, "src": "docker.svg",         "alt":"docker"},
-  {"_id":10, "src": "github.png",          "alt":"github"},
-  {"_id":11, "src": "openai_dark.png",    "alt":"open ia"},
-  {"_id":12, "src": "postman.svg",        "alt":"postman"},
-  {"_id":13, "src": "figma.svg",          "alt":"figma"},
-  {"_id":14, "src": "photoshop.svg",      "alt":"photoshop"}
-]
+{
+  "front":[
+    {"_id":1, "src": "react.svg",           "stack":"front",            "alt":"react"},
+    {"_id":2, "src": "angular.svg",         "stack":"front",            "alt":"angular"}
+  ],
+  "back":[
+    {"_id":3, "src": "expressjs_dark.svg",  "stack":"back",             "alt":"express"},
+    {"_id":4, "src": "nodejs.svg",          "stack":"back",             "alt":"node"},
+    {"_id":5, "src": "mongodb.svg",         "stack":"back",             "alt":"mongoDb"},
+    {"_id":6, "src": "mysql.png",           "stack":"back",             "alt":"mysql"}
+  ],
+  "lenguaje":[
+    {"_id":7, "src": "C#.svg",              "stack":"lenguaje",         "alt":"c#"},
+    {"_id":8, "src": "python.png",          "stack":"lenguaje",         "alt":"python"},
+    {"_id":9, "src": "typescript.svg",      "stack":"lenguaje",         "alt":"typescript"}
+  ],
+  "herramientas":[
+    {"_id":10, "src": "github.png",         "stack":"herramientas",     "alt":"github"},
+    {"_id":11, "src": "figma.svg",          "stack":"herramientas",     "alt":"figma"},
+    {"_id":12, "src": "photoshop.svg",      "stack":"herramientas",     "alt":"photoshop"}
+  ]
+}

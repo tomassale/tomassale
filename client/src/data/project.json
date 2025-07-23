@@ -38,29 +38,5 @@
       "img3": "nodejs.svg",
       "img4": "mysql.png"
     }
-  },    
-  { 
-    "_id": 4,
-    "title": "Casona Wine",
-    "description": "Este proyecto de vinoteca permite a los usuarios explorar una amplia variedad de vinos, realizar solicitudes de productos y recibir recomendaciones personalizadas para mejorar su experiencia de compra.",
-    "video": "./video/project/soon.mp4",
-    "github": "https://github.com/tomassale/Casona-Wine",
-    "class": "soon"
-  },    
-  { 
-    "_id": 5,
-    "title": "Spotify clone",
-    "description": "Este clon de Spotify permite autenticación, reproducción de música, creación de playlists, favoritos, seguimiento de artistas, recomendaciones y streaming en tiempo real.",
-    "video": "./video/project/soon.mp4",
-    "github": "https://github.com/tomassale/Spotify-Clone",
-    "class": "soon"
-  },
-  { 
-    "_id": 6,
-    "title": "Instagram clone",
-    "description": "Un clon de Instagram usando el stack MERN que permite autenticación, subir fotos, interacciones sociales (likes, comentarios), y seguimiento de usuarios en tiempo real.",
-    "video": "./video/project/soon.mp4",
-    "github": "https://github.com/tomassale/Instagram-Clone",
-    "class": "soon"
   }
 ]

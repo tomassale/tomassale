@@ -1,10 +1,9 @@
 const NavBar = () => {
-  const yo = '<TOMAS/>'
 
   return (
     <header className='navbar'>
       <a className='logo' href='#aboutMe'>
-        {yo}
+        {'<TOMAS/>'}
       </a>
       <nav className='barra'>
         <a href='#aboutMe'>ABOUT ME</a>
