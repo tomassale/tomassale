@@ -7,30 +7,25 @@
   🖥️ I'm a \<<strong>Web Developer</strong>/> <br/>
   🌱 Learning about <strong>UX/UI</strong>  <br/>
   📚 Studying <strong>Software Engineering</strong> at <a href='https://www.unlam.edu.ar/index.php'>UNLaM</a> <br/>
-  🤔 Interested in <strong>Cybersecurity</strong> & <strong>Automation</strong>
+  🤔 Interested in <strong>Mobile</strong> & <strong>IA</strong>
   </td>
   <td>
   <h2 align='center'>🛠 Tech Stack</h2>
 
-  <img src="https://img.shields.io/badge/-React-05122A?style=flat&logo=react"/>
+  <img src="https://img.shields.io/badge/-Next-05122A?style=flat&logo=Next.js"/>
+  <img src="https://img.shields.io/badge/-Angular-05122A?style=flat&logo=angular"/>
   <img src="https://img.shields.io/badge/-Node-05122A?style=flat&logo=node.js"/>
   <img src="https://img.shields.io/badge/-Express-05122A?style=flat&logo=express"/>
   <img src="https://img.shields.io/badge/-MongoDb-05122A?style=flat&logo=mongodb"/>
   <img src="https://img.shields.io/badge/-MySql-05122A?style=flat&logo=mysql"/>
   <img src="https://img.shields.io/badge/-C-05122A?style=flat&logo=c&logoColor=5284FF"/>
-  <img src="https://img.shields.io/badge/-JavaScript-05122A?style=flat&logo=javascript"/>
   <img src="https://img.shields.io/badge/-TypeScript-05122A?style=flat&logo=typescript"/>
   <img src="https://img.shields.io/badge/-Python-05122A?style=flat&logo=python"/>
-  <img src="https://img.shields.io/badge/-JQuery-05122A?style=flat&logo=jquery"/>
   <img src="https://img.shields.io/badge/-Figma-05122A?style=flat&logo=figma"/>
   <img src="https://img.shields.io/badge/-Photoshop-05122A?style=flat&logo=adobe-photoshop"/>
-  <img src="https://img.shields.io/badge/-HTML-05122A?style=flat&logo=HTML5"/>
-  <img src="https://img.shields.io/badge/-CSS-05122A?style=flat&logo=CSS3"/>
-  <img src="https://img.shields.io/badge/-Bootstrap-05122A?style=flat&logo=bootstrap"/>
   <img src="https://img.shields.io/badge/-Docker-05122A?style=flat&logo=docker"/>
   <img src="https://img.shields.io/badge/-Git-05122A?style=flat&logo=git"/>
   <img src="https://img.shields.io/badge/-Github-05122A?style=flat&logo=github"/>
-  <img src="https://img.shields.io/badge/-VS%20Code-05122A?style=flat&logo=visual-studioz&logoColor=007ACC"/>
 
   </td>
 </table>
