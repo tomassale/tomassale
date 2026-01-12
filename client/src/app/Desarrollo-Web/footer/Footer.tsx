@@ -1,8 +1,10 @@
+import Link from "next/link"
+
 export default function Footer () {
   return(
     <footer className='footer'>
       <hr/>
-      <h5>Powered by <a href='https://github.com/tomassale' target='blank'>Tomás Sale</a></h5>
+      <h5>Powered by <Link href='https://github.com/tomassale' target='blank'>Tomás Sale</Link></h5>
     </footer>
   )
 }

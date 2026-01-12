@@ -6,8 +6,6 @@
   padding: 0;
   margin: 0;
   list-style: none;
-  overflow: hidden;
-  scroll-snap-type: y mandatory;
   a{
     text-decoration: none;
     cursor: pointer;
@@ -15,18 +13,17 @@
     user-select: none;
     -webkit-user-drag: none;            
   }
-  .backgroundVideo{
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 103%;
-    width: 100%;
-    z-index: -1;
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+  h2{
+    text-align: center;
+    font-size: 3rem;
+    color: #e0e0e0;
+    padding-top: 7%;
+    margin-bottom: 5%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+  ::-moz-selection, ::selection{
+    background: #8c00ff;
+    color: whitesmoke;
   }
 }
 
@@ -40,40 +37,12 @@
   animation: gradient 5s ease infinite;
 }
 
-@mixin titles{
-  text-align: center;
-  font-size: 70px;
-  color: #e0e0e0;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-@mixin grids($repeat, $space){
-  display: grid;
-  grid-template-columns: repeat($repeat, $space);
-  gap: 0.8%;
-  justify-content: center;
-}
-
 @mixin divs{
   position: relative;
   height: 100vh;
   width: 100%;
-  z-index: 1;
-  scroll-snap-align: start;
-}
-
-@mixin circleImg{
-  background-color: rgba(29, 29, 29, 0.2);
-  border-radius: 50%;
-  backdrop-filter: blur(0px);
-  box-shadow: 0 0 10px #b425d1, 0 0 20px #c58bd1, 0 0 30px #bf1edf;
-}
-
-@mixin imgProfile($w, $trX, $trY){
-  width: $w;
-  transform: translate($trX, $trY);
+  scroll-snap-align: center;
+  scroll-snap-stop: normal;
 }
 
 //Keyframes
@@ -83,21 +52,9 @@
   100% { background-position: 0% 50% }
 }
 
-@keyframes show {
-  from{
-    opacity: 0;
-    scale: 25%;
-  }
-  to{
-    opacity: 1;
-    scale: 100%
-  }
-}
-
 
 //Styles
-html,
-body{
+html{
   background-color: #0a0a0a;
   background-image: 
     linear-gradient(#1f1f1f 1px, transparent 1px),
@@ -105,12 +62,13 @@ body{
   background-size: 40px 40px;
   width: 100vw;
   height: 100vh;
-  overflow-y: auto;
+  
   ::-webkit-scrollbar {
     width: 0;
   }
   .webDev{
-    scroll-snap-type: y mandatory;
+    height: 100vh;
+    width: 100%;
     //-------------------------Encabezado-------------------------//
     .navbar{
       color: whitesmoke;
@@ -157,39 +115,27 @@ body{
     //-------------------------Sobre mi-------------------------//
     .aboutMe{      
       @include divs();
-      .presentation{
-        .description{
-          margin-top: 10%;
-          width: 69%;
-          h2{
-            @include titles()
-          }
-          h4{
-            color: #bebebe;
-            text-shadow: 0 0 2px #b8b8b8, 0 0 4px #b8b8b8, 0 0 6px #000000, 0 0 8px #000000;
-            margin-left: 10%;
-            font-size: 40px;
-          }
-          p{
-            color: rgb(255, 255, 255);
-            font-size: 20px;
-            text-shadow: 0 0 2px #ffffff, 0 0 4px #ffffff, 0 0 6px #000000, 0 0 8px #000000;
-            width: 80%;
-            margin: 4% 0 0 10%;
-          }
-        }
+      text-align: center;
+      .description{
+        color: rgb(255, 255, 255);
+        font-size: 27px;
+        text-shadow: 0 0 2px #ffffff, 0 0 4px #ffffff, 0 0 6px #000000, 0 0 8px #000000;
+        margin: auto;
+        width: 60%;
+        text-align: justify;
+        padding: 5rem;
+      }
+      h4{
+        color: #fab6fa;
+        text-shadow: 0 0 2px #b8b8b8, 0 0 4px #b8b8b8, 0 0 6px #000000, 0 0 8px #000000;
+        font-size: 40px;
+        margin-top: -40;
       }
     }
     //-------------------------Conocimiento-------------------------//
     .skill{
       @include divs();
-      
-      h2{
-        @include titles();
-        margin-bottom: 3%;
-      }
       .skills{
-        @include grids(3, 255px);
         gap: 5%;
         .card{
           background-color: rgb(8, 8, 8);
@@ -221,66 +167,71 @@ body{
     }
     
     //-------------------------Proyecto-------------------------//
-    .project{
+    .project {
       @include divs();
-      h2{
-        @include titles()
-      }
-      .gridCard{
-        @include grids(3, 280px);
+      .gridCard {
+        width: 'auto';
+        padding-bottom: 50px;
+
+        .swiper-slide {
+          width: 320px; 
+          height: 500px; 
+          opacity: 0.4; 
+          transition: all 0.3s ease;
+          
+          &.swiper-slide-active {
+            opacity: 1;
+            z-index: 10;
+          }
+        }
         .flip-card {
           background-color: transparent;
-          width: 235px;
-          height: 260px;
           perspective: 1000px;
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          
           .flip-card-inner {
             width: 100%;
-            height: 98%;
+            height: 100%;
             text-align: center;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-            overflow: initial;
+            
             .flip-card-front {
-              position: absolute;
               width: 100%;
               height: 100%;
-              padding: 5px;
-              border-radius: 2em;
-              backface-visibility: hidden;
-            }
-            .flip-card-front {
               @include border-gradient();
-              font-family: inherit;
+              background-color: rgb(20, 20, 20);
+              
               display: flex;
               flex-direction: column;
-              background-size: 200% 100%;
+              overflow: hidden;
+
               .profileMedia {
-                background-color: rgb(51, 51, 56);
-                border-radius: 4%;
-                height: 170px;
+                position: relative;
                 width: 100%;
-                video {
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
-                }
+                height: 70%; 
+                background-color: rgb(51, 51, 56);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
               }
+
               .name {
-                font-size: 27px;
-                color: #c143da;
+                font-size: 26px;
+                color: #e81cff; 
                 font-weight: bold;
-                padding: 15px 0 15px 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 15%;
               }
-              .tech{
+
+              .tech {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 4px 15px 10px 4px;
-                img{
-                  width: 35px;
-                  height: 35px;
-                  margin: 0px 0px 0px 6px;
+                height: 15%;
+                gap: 12px;
+                padding-bottom: 5px;
+
+                img {
+                  object-fit: contain;
+                  filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
                 }
               }
             }
@@ -291,9 +242,6 @@ body{
     //-------------------------Contacto-------------------------//
     .contact{
       @include divs();
-      .titleContact{
-        @include titles();
-      }
       .form-container {
         width: 800px;
         margin: auto;
@@ -306,7 +254,6 @@ body{
         flex-direction: column;
         gap: 20px;
         background-size: 200% 100%;
-        back
         button:active {
           scale: 0.95;
         }

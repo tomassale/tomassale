@@ -5,20 +5,22 @@
     "description": "Este proyecto de e-commerce de ropa permite a los usuarios explorar una variedad de prendas, crear cuentas, agregar productos al carrito y realizar pagos seguros en línea.",
     "github": "https://github.com/tomassale/West-Drip",
     "link": "https://github.com/tomassale/West-Drip",
+    "img": "/img/projects/Photographer.jpg",
     "class": "flip-card",
     "icons": {
-      "img1": "mongodb.svg",
+      "img1": "react.svg",
       "img2": "expressjs_dark.svg",
-      "img3": "react.svg",
+      "img3": "mongodb.svg",
       "img4": "nodejs.svg"
     }
   },
   { 
     "_id": 2,
-    "title": "Photographer",
+    "title": "Odontology",
     "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
     "github": "https://github.com/tomassale/Photographer-portfolio",
     "url": "https://github.com/tomassale/Photographer-portfolio",
+    "img": "/img/projects/coming-soon.jpeg",
     "class": "flip-card",
     "icons": {
       "img1": "react.svg",
@@ -29,10 +31,11 @@
   },
   { 
     "_id": 3,
-    "title": "Photographer",
+    "title": "Venta Repuestos",
     "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
     "github": "https://github.com/tomassale/Photographer-portfolio",
     "url": "https://github.com/tomassale/Photographer-portfolio",
+    "img": "/img/projects/coming-soon.jpeg",
     "class": "flip-card",
     "icons": {
       "img1": "react.svg",
@@ -43,10 +46,11 @@
   },
   { 
     "_id": 4,
-    "title": "Photographer",
+    "title": "Malvinas Argentinas",
     "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
     "github": "https://github.com/tomassale/Photographer-portfolio",
     "url": "https://github.com/tomassale/Photographer-portfolio",
+    "img": "/img/projects/coming-soon.jpeg",
     "class": "flip-card",
     "icons": {
       "img1": "react.svg",
