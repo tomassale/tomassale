@@ -136,31 +136,16 @@ html{
     .skill{
       @include divs();
       .skills{
-        gap: 5%;
-        .card{
-          background-color: rgb(8, 8, 8);
-          @include border-gradient();
-          display: block;
-          color: whitesmoke;
-          border: 4px solid transparent;
-          .imageTitle{
-            img{
-              height: 150px;
-              width: 250px;
-            }
+        .skillsContainer{
+          .categorySection{
             h3{
-              position: relative;
-              background-color: rgba(8,8,8,0.8);
-              border-radius: 9px 9px 0 0;
-              width: max-content;
-              padding: 5px 15px 0 15px;
-              margin: auto;
-              margin-top: -21px;
+
             }
-          }
-          .description{
-            padding: 4% 6% 11% 6%;
-            text-align: center;
+            .imageContainer{
+              img{
+
+              }
+            }
           }
         }
       }

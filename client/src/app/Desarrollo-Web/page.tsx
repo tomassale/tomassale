@@ -1,4 +1,5 @@
 import Header from './header/Header'
+//import Gif from './Gif/Gif'
 import AboutMe from './aboutMe/AboutMe'
 import Skill from './skill/Skill'
 import Project from './project/Project'

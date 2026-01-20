@@ -14,7 +14,7 @@ export default function Header() {
   const icons = [
     {id: 0, ref: 'https://www.linkedin.com/in/tomás-sale-147077226/', src: '/img/icons/linkedin.png', alt: 'linkedin'},
     {id: 1, ref: 'https://github.com/tomassale', src: '/img/icons/github.png', alt: 'github'},
-    {id: 2, ref: './img/personal/Tomás Javier Sale.pdf', src: '/img/icons/cv.png', alt: 'curriculum', load: 'Tomás Sale.pdf'}
+    {id: 2, ref: pdfPath || '#', src: '/img/icons/cv.png', alt: 'curriculum', load: pdfFilename}
   ]
 
   return (
