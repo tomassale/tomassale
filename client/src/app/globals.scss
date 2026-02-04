@@ -1,0 +1,340 @@
+//Imports
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lato:wght@100&display=swap');
+
+//General Styles
+*{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  a{
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+    user-select: none;
+    -webkit-user-drag: none;            
+  }
+  h2{
+    text-align: center;
+    font-size: 3rem;
+    color: #e0e0e0;
+    padding-top: 7%;
+    margin-bottom: 5%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+  ::-moz-selection, ::selection{
+    background: #8c00ff;
+    color: whitesmoke;
+  }
+}
+
+//Mixins
+@mixin border-gradient{
+  background: linear-gradient(#212121, #212121) padding-box,
+  linear-gradient(145deg, transparent 35%,#e81cff, #40c9ff) border-box;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  box-sizing: border-box;
+  animation: gradient 5s ease infinite;
+}
+
+@mixin divs{
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: center;
+  scroll-snap-stop: normal;
+}
+
+//Keyframes
+@keyframes gradient {
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}
+
+
+//Styles
+html{
+  background-color: #0a0a0a;
+  background-image: 
+    linear-gradient(#1f1f1f 1px, transparent 1px),
+    linear-gradient(90deg, #1f1f1f 1px, transparent 1px);
+  background-size: 40px 40px;
+  width: 100vw;
+  height: 100vh;
+  
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+  .webDev{
+    height: 100vh;
+    width: 100%;
+    //-------------------------Encabezado-------------------------//
+    .navbar{
+      color: whitesmoke;
+      background-color: rgba(29, 29, 29, 0.8);
+      display: flex;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 5%;
+      backdrop-filter: blur(8px);
+      z-index: 2;
+      .logo{
+        font-family: 'Dancing Script', cursive;
+        font-size: 200%;
+        margin-left: 8%;
+        padding: 0%;
+      }
+      .barra{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 15%;
+        a{
+            margin-left: 25px;
+            padding: 14px 30px;
+            font-size: 20px;
+        }
+      }
+      .icons{
+        margin: 0.5% 0 0 15%;
+        width: 9%;
+        a{
+          img{
+            width: 20%;
+            height: 70%;
+            margin-left: 13%;
+          }
+          img:nth-child(1){
+            height: 75%;
+          }
+        }
+      }
+    }
+    //-------------------------Sobre mi-------------------------//
+    .aboutMe{      
+      @include divs();
+      text-align: center;
+      .description{
+        color: rgb(255, 255, 255);
+        font-size: 27px;
+        text-shadow: 0 0 2px #ffffff, 0 0 4px #ffffff, 0 0 6px #000000, 0 0 8px #000000;
+        margin: auto;
+        width: 60%;
+        text-align: justify;
+        padding: 5rem;
+      }
+      h4{
+        color: #fab6fa;
+        text-shadow: 0 0 2px #b8b8b8, 0 0 4px #b8b8b8, 0 0 6px #000000, 0 0 8px #000000;
+        font-size: 40px;
+        margin-top: -40;
+      }
+    }
+    //-------------------------Conocimiento-------------------------//
+    .skill{
+      @include divs();
+      .skills{
+        .skillsContainer{
+          .categorySection{
+            h3{
+
+            }
+            .imageContainer{
+              img{
+
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    //-------------------------Proyecto-------------------------//
+    .project {
+      @include divs();
+      .gridCard {
+        width: 'auto';
+        padding-bottom: 50px;
+
+        .swiper-slide {
+          width: 320px; 
+          height: 500px; 
+          opacity: 0.4; 
+          transition: all 0.3s ease;
+          
+          &.swiper-slide-active {
+            opacity: 1;
+            z-index: 10;
+          }
+        }
+        .flip-card {
+          background-color: transparent;
+          perspective: 1000px;
+          
+          .flip-card-inner {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            
+            .flip-card-front {
+              width: 100%;
+              height: 100%;
+              @include border-gradient();
+              background-color: rgb(20, 20, 20);
+              
+              display: flex;
+              flex-direction: column;
+              overflow: hidden;
+
+              .profileMedia {
+                position: relative;
+                width: 100%;
+                height: 70%; 
+                background-color: rgb(51, 51, 56);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+              }
+
+              .name {
+                font-size: 26px;
+                color: #e81cff; 
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 15%;
+              }
+
+              .tech {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 15%;
+                gap: 12px;
+                padding-bottom: 5px;
+
+                img {
+                  object-fit: contain;
+                  filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    //-------------------------Contacto-------------------------//
+    .contact{
+      @include divs();
+      .form-container {
+        width: 800px;
+        margin: auto;
+        @include border-gradient();
+        padding: 32px 24px;
+        font-size: 16px;
+        font-family: inherit;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-size: 200% 100%;
+        button:active {
+          scale: 0.95;
+        }
+        .form {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+        .form-group {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          label {
+            display: block;
+            margin: 7px 0 7px 10px;
+            color: #717171;
+            font-weight: 600;
+            font-size: 18px;
+          }
+          input {
+            width: 95%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+            background-color: transparent;
+            font-size: 17px;
+            border: 1px solid #414141;
+          }
+          textarea {
+            width: 95%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            resize: none;
+            color: #fff;
+            height: 96px;
+            border: 1px solid #414141;
+            background-color: transparent;
+            font-family: inherit;
+            font-size: 17px;
+          }
+          input::placeholder {
+            opacity: 0.5;
+          }
+          input:focus {
+            outline: none;
+            border-color: #e81cff;
+          }
+          textarea:focus {
+            outline: none;
+            border-color: #e81cff;
+          }
+        }
+        .form-submit-btn {
+          display: flex;
+          justify-content: center;
+          align-self: flex-end;
+          font-family: inherit;
+          color: #717171;
+          font-weight: 600;
+          width: 40%;
+          background: #313131;
+          border: 1px solid #414141;
+          padding: 12px 16px;
+          font-size: inherit;
+          gap: 8px;
+          margin-top: 8px;
+          cursor: pointer;
+          border-radius: 6px;
+          &:hover {
+            background-color: #474747;
+            border-color: #942fa1;
+          }
+        }
+      }
+    }
+    //-------------------------Pie de pagina-------------------------//
+    .footer{
+      background-color: rgba(20, 20, 20, 0.8);
+      color: whitesmoke;
+      height: 70px;
+      h5{
+        text-align: center;
+        font-size: 27px;
+        padding-top: 20px;
+        a{
+          color: rgb(179, 179, 179);
+          transition: color 0.6s ease, filter 0.6s ease;
+          &:hover{
+            color: rgba(255,255,255,0.9)
+          }
+        }
+      }
+    }
+  }
+  .dataAnalyst{
+    
+  }
+}
