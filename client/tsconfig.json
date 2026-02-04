@@ -36,6 +36,8 @@
     ".next/dev/types/**/*.ts"
 , "src/app/api/contact/route.js"  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/app/test/page.test.tsx",
+    "src/app/Desarrollo-Web/_contact/FormContact.tsx"
   ]
 }

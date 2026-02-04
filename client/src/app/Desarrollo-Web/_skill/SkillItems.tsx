@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Text from 'next/text'
 
 interface Items{
   id: number;
@@ -23,7 +22,7 @@ export default function SkillItems({items}: HeaderProps){
             width={50}
             height={50}
           />
-          <Text>{skill.tech}</Text>
+          <p>{skill.tech}</p>
         </div>
       ))}
     </>

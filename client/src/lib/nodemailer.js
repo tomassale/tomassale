@@ -1,5 +1,5 @@
 import { createTransport } from 'nodemailer';
-import logger from './logger';
+import { logger } from './logger';
 
 const transporter = createTransport({
   service: 'gmail',
@@ -8,17 +8,6 @@ const transporter = createTransport({
     pass: process.env.NODEMAILER_PASSWORD,
   },
 });
-
-const verifyTransporter = async () => {
-  try {
-    await transporter.verify();
-    console.log('Server ready to send email');
-    return true;
-  } catch (error) {
-    logger.error('Error trying to verify SMTP');
-    return false;
-  }
-};
 
 export const sendEmail = async (user) => {
   try {
@@ -32,6 +21,6 @@ export const sendEmail = async (user) => {
     logger.info('Email sent successfully');
   } catch (error) {
     logger.error(`Error sending email: ${error.message}`);
-    throw new Error('Error sending email');
+    throw new Error('Error sending email: ', error.message);
   }
 };

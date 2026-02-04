@@ -1,10 +1,10 @@
-import logger from './logger';
+import { logger } from './logger';
 
 const regexEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const regexPhone = /^\+?[\d\s-]{10,20}$/;
-const regexSafe = /^[^'"\\;]*$/;
+const regexSafe = /^[^\\;]*$/;
 
-export const validateContactForm = (data) => {
+export default function validateContactForm(data){
   const { email, number, message } = data;
 
   if (!email || !number || !message) {

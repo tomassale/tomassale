@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/nodemailer';
-import { validateContactForm } from '@/lib/validation';
-import logger from '@/lib/logger';
+import  validateContactForm from '@/lib/validation';
+import { logger } from '@/lib/logger';
 
 export async function POST(request) {
   try {

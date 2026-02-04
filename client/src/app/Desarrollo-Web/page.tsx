@@ -1,10 +1,10 @@
-import Header from './header/Header'
+import Header from './_header/Header'
 //import Gif from './Gif/Gif'
-import AboutMe from './aboutMe/AboutMe'
-import Skill from './skill/Skill'
-import Project from './project/Project'
-import Contact from './contact/Contact'
-import Footer from './footer/Footer'
+import AboutMe from './_aboutMe/AboutMe'
+import Skill from './_skill/Skill'
+import Project from './_project/Project'
+import Contact from './_contact/Contact'
+import Footer from './_footer/Footer'
 
 export default function WebDev() {
   return (
