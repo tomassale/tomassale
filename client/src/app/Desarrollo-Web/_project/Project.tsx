@@ -2,12 +2,10 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react';
-// Quitamos 'Pagination' de los imports
 import { EffectCoverflow } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
-// Quitamos el CSS de pagination
 
 export default function Project() {
 
@@ -66,7 +64,7 @@ export default function Project() {
                   {project.icons && Object.keys(project.icons).map((iconKey) => (
                     <Image 
                       key={iconKey} 
-                      src={`/img/personal/icons/${project.icons[iconKey]}`} 
+                      src={`/img/skills/${project.icons[iconKey]}`} 
                       width={35} 
                       height={35} 
                       alt='tech' 

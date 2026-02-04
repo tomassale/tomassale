@@ -1,10 +1,10 @@
 {
   "Front-End": [
-    { "id": 0, "tech": "Next", "src": "/img/skills/front/nextjs.svg", "alt": "Next Logo" },
+    { "id": 0, "tech": "Next", "src": "/img/skills/front/next.svg", "alt": "Next Logo" },
     { "id": 1, "tech": "Angular", "src": "/img/skills/front/angular.svg", "alt": "Angular Logo" }
   ],
   "Back-End": [
-    { "id": 2, "tech": "Node.js", "src": "/img/skills/back/nodejs.svg", "alt": "NodeJS Logo" },
+    { "id": 2, "tech": "Node.js", "src": "/img/skills/back/node.svg", "alt": "NodeJS Logo" },
     { "id": 3, "tech": "Express", "src": "/img/skills/back/express.svg", "alt": "Express Logo" }
   ],
   "Design": [

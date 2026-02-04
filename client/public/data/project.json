@@ -8,10 +8,10 @@
     "img": "/img/projects/Photographer.jpg",
     "class": "flip-card",
     "icons": {
-      "img1": "react.svg",
-      "img2": "expressjs_dark.svg",
-      "img3": "mongodb.svg",
-      "img4": "nodejs.svg"
+      "img1": "front/next.svg",
+      "img2": "back/express.svg",
+      "img3": "database/mongodb.svg",
+      "img4": "back/node.svg"
     }
   },
   { 
@@ -23,10 +23,10 @@
     "img": "/img/projects/coming-soon.jpeg",
     "class": "flip-card",
     "icons": {
-      "img1": "react.svg",
-      "img2": "expressjs_dark.svg",
-      "img3": "nodejs.svg",
-      "img4": "mysql.png"
+      "img1": "front/next.svg",
+      "img2": "back/express.svg",
+      "img3": "back/node.svg",
+      "img4": "database/sql.svg"
     }
   },
   { 
@@ -38,10 +38,10 @@
     "img": "/img/projects/coming-soon.jpeg",
     "class": "flip-card",
     "icons": {
-      "img1": "react.svg",
-      "img2": "expressjs_dark.svg",
-      "img3": "nodejs.svg",
-      "img4": "mysql.png"
+      "img1": "front/angular.svg",
+      "img2": "back/express.svg",
+      "img3": "back/node.svg",
+      "img4": "database/sql.svg"
     }
   },
   { 
@@ -53,10 +53,10 @@
     "img": "/img/projects/coming-soon.jpeg",
     "class": "flip-card",
     "icons": {
-      "img1": "react.svg",
-      "img2": "expressjs_dark.svg",
-      "img3": "nodejs.svg",
-      "img4": "mysql.png"
+      "img1": "front/angular.svg",
+      "img2": "back/express.svg",
+      "img3": "back/node.svg",
+      "img4": "database/sql.svg"
     }
   }
 ]
