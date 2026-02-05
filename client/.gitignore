@@ -23,7 +23,6 @@ bun.lock
 /build
 src/app/test
 src/app/Analista-Datos
-src/app/Engineer
 
 # misc
 .DS_Store
