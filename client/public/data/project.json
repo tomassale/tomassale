@@ -1,6 +1,6 @@
 [
   {
-    "_id": 1,
+    "_id": 0,
     "title": "West Drip",
     "description": "Este proyecto de e-commerce de ropa permite a los usuarios explorar una variedad de prendas, crear cuentas, agregar productos al carrito y realizar pagos seguros en línea.",
     "github": "https://github.com/tomassale/West-Drip",
@@ -15,7 +15,7 @@
     }
   },
   { 
-    "_id": 2,
+    "_id": 1,
     "title": "Odontology",
     "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
     "github": "https://github.com/tomassale/Photographer-portfolio",
@@ -30,7 +30,7 @@
     }
   },
   { 
-    "_id": 3,
+    "_id": 2,
     "title": "Venta Repuestos",
     "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
     "github": "https://github.com/tomassale/Photographer-portfolio",
@@ -45,7 +45,7 @@
     }
   },
   { 
-    "_id": 4,
+    "_id": 3,
     "title": "Malvinas Argentinas",
     "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
     "github": "https://github.com/tomassale/Photographer-portfolio",
@@ -57,6 +57,19 @@
       "img2": "back/express.svg",
       "img3": "back/node.svg",
       "img4": "database/sql.svg"
+    }
+  },
+  { 
+    "_id": 4,
+    "title": "Bytek Technology",
+    "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
+    "github": "https://github.com/tomassale/Photographer-portfolio",
+    "url": "https://github.com/tomassale/Photographer-portfolio",
+    "img": "/img/projects/coming-soon.jpeg",
+    "class": "flip-card",
+    "icons": {
+      "img1": "front/angular.svg",
+      "img2": "back/express.svg"
     }
   }
 ]

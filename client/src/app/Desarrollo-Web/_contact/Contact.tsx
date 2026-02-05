@@ -76,7 +76,7 @@ export default function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                placeholder="tu@email.com"
+                placeholder="your@email.com"
               />
               <label htmlFor="phone">Phone</label>
               <input
@@ -86,11 +86,11 @@ export default function Contact() {
                 value={formData.number}
                 onChange={handleChange}
                 required
-                placeholder="+54 11..."
+                placeholder="+54 11 1234-5678"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="message">How Can I Help You?</label>
+              <label htmlFor="message">How can i help you?</label>
               <textarea
                 cols={50}
                 rows={10}
@@ -99,7 +99,7 @@ export default function Contact() {
                 value={formData.message}
                 onChange={handleChange}
                 required
-                placeholder="Escribe tu mensaje aquí..."
+                placeholder="Write your message here..."
               />
             </div>
             

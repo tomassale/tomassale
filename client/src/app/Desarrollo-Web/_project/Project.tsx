@@ -7,9 +7,16 @@ import { EffectCoverflow } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 
+interface ProjectData {
+  _id: string;
+  img: string;
+  title: string;
+  icons: { [key: string]: string };
+}
+
 export default function Project() {
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<ProjectData[]>([]);
 
   useEffect(() => {
     fetch('/data/project.json')
@@ -22,61 +29,65 @@ export default function Project() {
     <div className='project' id='portfolio'>
       <h2>Portfolio</h2>
       
-      <Swiper
-        className="gridCard"
-        effect={'coverflow'}
-        loop={true}
-        loopAdditionalSlides={3}
-        centeredSlides={true}
-        slidesPerView={'auto'}
-        initialSlide={2}
-        coverflowEffect={{
-          rotate: 20,
-          stretch: 150,
-          depth: 250,
-          modifier: 1,
-          slideShadows: true,
-        }}
+      {data.length > 0 ? (
+        <Swiper
+          className="gridCard"
+          effect={'coverflow'}
+          loop={true}
+          loopAdditionalSlides={3}
+          centeredSlides={true}
+          slidesPerView={'auto'}
+          initialSlide={2}
+          coverflowEffect={{
+            rotate: 20,
+            stretch: 150,
+            depth: 250,
+            modifier: 1,
+            slideShadows: true,
+          }}
+          modules={[EffectCoverflow]}
+        >
+          {data.map((project) => (
+            <SwiperSlide key={project._id} className='flip-card'>
+              <div className='flip-card-inner'>
+                <div className='flip-card-front'>
+                  
+                  <div className='profileMedia'>
+                    {project.img && (
+                      <Image 
+                        src={project.img} 
+                        alt={project.title} 
+                        fill 
+                        sizes="(max-width: 768px) 100vw, 350px"
+                      />
+                    )}
+                  </div>
 
-        modules={[EffectCoverflow]}
-      >
-        {data.map((project: { _id: string, img: string, title: string, icons: { [key: string]: string } }) => (
-          <SwiperSlide key={project._id} className='flip-card'>
-            <div className='flip-card-inner'>
-              <div className='flip-card-front'>
-                
-                <div className='profileMedia'>
-                  {project.img && (
-                    <Image 
-                      src={project.img} 
-                      alt={project.title} 
-                      fill 
-                      sizes="(max-width: 768px) 100vw, 350px"
-                    />
-                  )}
+                  <div className='name'>
+                    {project.title}
+                  </div>
+
+                  <div className='tech'>
+                    {project.icons && Object.keys(project.icons).map((iconKey) => (
+                      <Image 
+                        key={iconKey} 
+                        src={`/img/skills/${project.icons[iconKey]}`} 
+                        width={35} 
+                        height={35} 
+                        alt='tech' 
+                      />
+                    ))}
+                  </div>
+
                 </div>
-
-                <div className='name'>
-                  {project.title}
-                </div>
-
-                <div className='tech'>
-                  {project.icons && Object.keys(project.icons).map((iconKey) => (
-                    <Image 
-                      key={iconKey} 
-                      src={`/img/skills/${project.icons[iconKey]}`} 
-                      width={35} 
-                      height={35} 
-                      alt='tech' 
-                    />
-                  ))}
-                </div>
-
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      ) : (
+        // Opcional: Puedes poner un loader aquí mientras carga
+        <div style={{ textAlign: 'center', padding: '20px' }}>Cargando proyectos...</div>
+      )}
     </div>
   )
 }
