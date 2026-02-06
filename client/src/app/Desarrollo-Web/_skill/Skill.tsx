@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useEffect } from "react"
 import SkillList from "./SkillList"
 
@@ -14,7 +13,7 @@ export default function Skill() {
   }, [])
 
   return (
-    <div className='skill' id='skill'>
+    <div className='skill'>
       <h2>Skills</h2>
       <SkillList itemList={data}/>
     </div>

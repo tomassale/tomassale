@@ -8,7 +8,7 @@ interface LinkItem {
 }
 
 interface HeaderItemProps {
-  links: LinkItem[];
+  readonly links: LinkItem[];
 }
 
 export default function HeaderLinks({ links }: HeaderItemProps) {

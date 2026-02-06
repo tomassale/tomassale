@@ -1,32 +1,28 @@
 [
   {
     "_id": 0,
-    "title": "West Drip",
+    "title": "Electro Tecnico",
     "description": "Este proyecto de e-commerce de ropa permite a los usuarios explorar una variedad de prendas, crear cuentas, agregar productos al carrito y realizar pagos seguros en línea.",
-    "github": "https://github.com/tomassale/West-Drip",
-    "link": "https://github.com/tomassale/West-Drip",
-    "img": "/img/projects/Photographer.jpg",
+    "github": "https://github.com/tomassale/Electricista",
+    "link": "https://github.com/tomassale/Electricista",
+    "img": "/img/projects/coming-soon.jpeg",
     "class": "flip-card",
     "icons": {
       "img1": "front/next.svg",
-      "img2": "back/express.svg",
-      "img3": "database/mongodb.svg",
-      "img4": "back/node.svg"
+      "img2": "back/express.svg"
     }
   },
   { 
     "_id": 1,
     "title": "Odontology",
     "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
-    "github": "https://github.com/tomassale/Photographer-portfolio",
-    "url": "https://github.com/tomassale/Photographer-portfolio",
+    "github": "https://github.com/tomassale/Odontologia",
+    "url": "https://github.com/tomassale/Odontologia",
     "img": "/img/projects/coming-soon.jpeg",
     "class": "flip-card",
     "icons": {
       "img1": "front/next.svg",
-      "img2": "back/express.svg",
-      "img3": "back/node.svg",
-      "img4": "database/sql.svg"
+      "img2": "back/express.svg"
     }
   },
   { 
@@ -63,13 +59,25 @@
     "_id": 4,
     "title": "Bytek Technology",
     "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
-    "github": "https://github.com/tomassale/Photographer-portfolio",
-    "url": "https://github.com/tomassale/Photographer-portfolio",
+    "github": "https://github.com/tomassale/Bytek",
+    "url": "https://github.com/tomassale/Bytek",
     "img": "/img/projects/coming-soon.jpeg",
     "class": "flip-card",
     "icons": {
       "img1": "front/angular.svg",
       "img2": "back/express.svg"
+    }
+  },
+  {
+    "_id": 5,
+    "title": "SuperYa",
+    "description": ".",
+    "github": "https://github.com/tomassale/SuperYa",
+    "url": "https://github.com/tomassale/SuperYa",
+    "img": "/img/projects/coming-soon.jpeg",
+    "class": "flip-card",
+    "icons": {
+      "img1": "front/react.svg"
     }
   }
 ]

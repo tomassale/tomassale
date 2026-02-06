@@ -11,7 +11,7 @@ interface Icons{
 }
 
 interface HeaderIcons{
-  icons: Icons[]
+  readonly icons: Icons[]
 }
 
 export default function HeaderIcons({icons}: HeaderIcons){

@@ -8,7 +8,7 @@ interface Items{
 }
 
 interface HeaderProps{
-  items: Items[];
+  readonly items: Items[];
 }
 
 export default function SkillItems({items}: HeaderProps){

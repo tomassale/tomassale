@@ -15,7 +15,6 @@ $desktop: 'min-width: 1920px';
   color: blue;
 }
 
-
 //Mixins
 @mixin border-gradient{
   background: linear-gradient(#212121, #212121) padding-box,
@@ -53,6 +52,11 @@ $desktop: 'min-width: 1920px';
     color: inherit;
     user-select: none;
     -webkit-user-drag: none;            
+  }
+  button{
+    text-decoration: none;
+    color: inherit;
+    user-select: none;
   }
   h2{
     text-align: center;
@@ -100,7 +104,7 @@ html{
         font-family: 'Dancing Script', cursive;
         font-size: 200%;
         margin-left: 8%;
-        padding: 0%;
+        padding: 0.35%;
       }
       .barra{
         display: flex;
@@ -151,16 +155,18 @@ html{
     //-------------------------Conocimiento-------------------------//
     .skill{
       @include divs();
+      justify-items: center;
+      align-items: center;
       .skills{
         .skillsContainer{
           .categorySection{
-            h3{
-
-            }
             .imageContainer{
-              img{
-
-              }
+              display: block;
+            }
+          }
+          .skillsSelector{
+            button{
+              margin: 15%
             }
           }
         }
@@ -171,18 +177,19 @@ html{
     .project {
       @include divs();
       .gridCard {
-        width: 'auto';
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
         padding-bottom: 50px;
 
         .swiper-slide {
-          width: 320px; 
+          width: 350px; 
           height: 500px; 
           opacity: 0.4; 
           transition: all 0.3s ease;
           
           &.swiper-slide-active {
             opacity: 1;
-            z-index: 10;
           }
         }
         .flip-card {
@@ -350,30 +357,4 @@ html{
       }
     }
   }
-  .dataAnalyst{
-    
-  }
 }
-
-//VARIABLES
-
-
-//MIXINS
-
-//KEYFRAMES
-
-//STYLES (Mobile First)
-*{
-  margin: 0;
-  padding: 0;
-  a, button{
-    text-decoration: none;
-    color: inherit;
-    user-select: none;
-  }
-  h1{
-    @include titles();
-  }
-}
-
-body{}
