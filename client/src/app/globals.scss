@@ -115,6 +115,10 @@ html{
             margin-left: 25px;
             padding: 14px 30px;
             font-size: 20px;
+            transition: color 0.4s ease, transform 0.3s ease;
+            &:hover{
+              color: #e81cff;
+            }
         }
       }
       .icons{
