@@ -1,20 +1,28 @@
-import { useEffect, useState } from 'react'
+// SkillsSelector.tsx
+interface SkillsSelectorProps {
+  categories: string[];
+  selectedCategory: string;
+  onSelect: (category: string) => void;
+}
 
-export default function SkillsSelector() {
-
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    fetch('/data/skills.json')
-      .then(res => res.json())
-      .then(res => setData(res))
-      .catch(err => console.error(err));
-  }, [])
-
+export default function SkillsSelector({ categories, selectedCategory, onSelect }: Readonly<SkillsSelectorProps>) {
   return (
     <div className='skillsSelector'>
-      {Object.keys(data).map((category)=>(
-        <button key={category}>{category}</button>
+      <button 
+        onClick={() => onSelect('All')}
+        className={selectedCategory === 'All' ? 'active' : ''}
+      >
+        Todos
+      </button>
+
+      {categories.map((category) => (
+        <button 
+          key={category} 
+          onClick={() => onSelect(category)}
+          className={selectedCategory === category ? 'active' : ''}
+        >
+          {category}
+        </button>
       ))}
     </div>
   )

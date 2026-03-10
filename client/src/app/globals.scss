@@ -161,16 +161,18 @@ html{
       @include divs();
       justify-items: center;
       align-items: center;
+      button{}
       .skills{
         .skillsContainer{
           .categorySection{
             .imageContainer{
-              display: block;
+              display: flex;
             }
           }
           .skillsSelector{
             button{
-              margin: 15%
+              background-color: blue;
+              margin: 15%;
             }
           }
         }
