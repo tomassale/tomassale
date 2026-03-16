@@ -5,7 +5,7 @@
     "description": "Este proyecto de e-commerce de ropa permite a los usuarios explorar una variedad de prendas, crear cuentas, agregar productos al carrito y realizar pagos seguros en línea.",
     "github": "https://github.com/tomassale/Electricista",
     "link": "https://github.com/tomassale/Electricista",
-    "img": "/img/projects/coming-soon.jpeg",
+    "img": "/img/projects/Electricista.webp",
     "class": "flip-card",
     "icons": {
       "img1": "front/next.svg",
@@ -18,7 +18,7 @@
     "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
     "github": "https://github.com/tomassale/Odontologia",
     "url": "https://github.com/tomassale/Odontologia",
-    "img": "/img/projects/coming-soon.jpeg",
+    "img": "/img/projects/Odontologia.webp",
     "class": "flip-card",
     "icons": {
       "img1": "front/next.svg",
@@ -31,7 +31,7 @@
     "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
     "github": "https://github.com/tomassale/Photographer-portfolio",
     "url": "https://github.com/tomassale/Photographer-portfolio",
-    "img": "/img/projects/coming-soon.jpeg",
+    "img": "/img/projects/coming-soon.webp",
     "class": "flip-card",
     "icons": {
       "img1": "front/angular.svg",
@@ -46,7 +46,7 @@
     "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
     "github": "https://github.com/tomassale/Photographer-portfolio",
     "url": "https://github.com/tomassale/Photographer-portfolio",
-    "img": "/img/projects/coming-soon.jpeg",
+    "img": "/img/projects/coming-soon.webp",
     "class": "flip-card",
     "icons": {
       "img1": "front/angular.svg",
@@ -61,7 +61,7 @@
     "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
     "github": "https://github.com/tomassale/Bytek",
     "url": "https://github.com/tomassale/Bytek",
-    "img": "/img/projects/coming-soon.jpeg",
+    "img": "/img/projects/Bytek.webp",
     "class": "flip-card",
     "icons": {
       "img1": "front/angular.svg",
@@ -74,7 +74,7 @@
     "description": ".",
     "github": "https://github.com/tomassale/SuperYa",
     "url": "https://github.com/tomassale/SuperYa",
-    "img": "/img/projects/coming-soon.jpeg",
+    "img": "/img/projects/SuperYa.webp",
     "class": "flip-card",
     "icons": {
       "img1": "front/react.svg"

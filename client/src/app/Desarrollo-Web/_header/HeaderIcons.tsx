@@ -26,7 +26,7 @@ export default function HeaderIcons({icons}: HeaderIcons){
           draggable='false'
           {...(icon.load ? { download: icon.load } : {})}
         >
-            <Image src={icon.src} width={200} height={200} alt={icon.alt}/>
+          <Image src={icon.src} width={200} height={200} alt={icon.alt}/>
         </Link>
       ))}
     </div>

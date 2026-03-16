@@ -9,13 +9,13 @@
     { "id": 1, "tech": "Express", "src": "/img/skills/back/express.svg", "alt": "Express Logo" },
     { "id": 2, "tech": "Docker", "src": "/img/skills/back/docker.svg", "alt": "Docker Logo" }
   ],
-  "Design": [
-    { "id": 0, "tech": "Figma", "src": "/img/skills/design/figma.svg", "alt": "Figma Logo" },
-    { "id": 1, "tech": "Photoshop", "src": "/img/skills/design/photoshop.svg", "alt": "Photoshop Logo" }
-  ],
   "DataBase": [
     { "id": 0, "tech": "MongoDB", "src": "/img/skills/database/mongodb.svg", "alt": "MongoDB Logo" },
     { "id": 1, "tech": "SQL", "src": "/img/skills/database/sql.svg", "alt": "SQL Logo" }
+  ],
+  "Design": [
+    { "id": 0, "tech": "Figma", "src": "/img/skills/design/figma.svg", "alt": "Figma Logo" },
+    { "id": 1, "tech": "Photoshop", "src": "/img/skills/design/photoshop.svg", "alt": "Photoshop Logo" }
   ],
   "Tools": [
     { "id": 0, "tech": "GitHub", "src": "/img/skills/tools/github.svg", "alt": "GitHub Logo" }

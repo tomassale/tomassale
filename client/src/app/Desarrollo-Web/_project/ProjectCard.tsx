@@ -16,7 +16,7 @@ export default function ProjectCard({ project }: Readonly<{ project: ProjectData
             <Image 
               src={project.img} 
               alt={project.title} 
-              fill 
+              fill
               sizes="(max-width: 768px) 100vw, 350px"
             />
           )}

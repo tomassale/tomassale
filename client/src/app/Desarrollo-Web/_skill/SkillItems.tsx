@@ -14,8 +14,8 @@ interface HeaderProps{
 export default function SkillItems({items}: HeaderProps){
   return(
     <>
-      {items.map((skill:Items) => (
-        <div className='imageContainer' key={skill.id}>
+      {items.map((skill:Items, index: number) => (
+        <div className='imageContainer' key={`${skill.tech}-${index}`}>
           <Image 
             src={skill.src}
             alt={skill.alt}
