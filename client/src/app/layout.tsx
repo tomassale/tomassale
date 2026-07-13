@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { SettingsProvider } from './_components/_settings/SettingsProvider'
 import './globals.scss'
 
 export const metadata: Metadata = {
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
-        {children}
+        <SettingsProvider>
+          {children}
+        </SettingsProvider>
       </body>
       <SpeedInsights />
     </html>

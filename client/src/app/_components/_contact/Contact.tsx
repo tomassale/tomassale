@@ -1,5 +1,6 @@
 "use client"
 import { useState, ChangeEvent, FormEvent } from "react"
+import { useSettings } from "../_settings/SettingsProvider"
 
 interface FormData {
   number: string
@@ -8,6 +9,7 @@ interface FormData {
 }
 
 export default function Contact() {
+  const { t } = useSettings()
   const [formData, setFormData] = useState<FormData>({
     number: "",
     email: "",
@@ -20,7 +22,7 @@ export default function Contact() {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -40,7 +42,7 @@ export default function Contact() {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || 'Hubo un error al enviar el mensaje.')
+        throw new Error(data.error || t('sendError'))
       }
 
       setSuccess(true)
@@ -51,9 +53,9 @@ export default function Contact() {
       })
     } catch (error) {
       if(error instanceof Error) {
-        setErrorMessage(error.message || 'Error de conexión')
+        setErrorMessage(error.message || t('connectionError'))
       } else {
-        setErrorMessage('Ocurrio un error inesperado')
+        setErrorMessage(t('unexpectedError'))
       }
 
     } finally {
@@ -63,12 +65,12 @@ export default function Contact() {
 
   return (
     <div className="contact" id="contact">
-      <h2 className="titleContact">Contact Me</h2>
+      <h2 className="titleContact">{t('contactMe')}</h2>
       <div className="formContainer">
         <div className="form-container">
           <form className="form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">{t('emailLabel')}</label>
               <input
                 name="email"
                 id="email"
@@ -76,31 +78,46 @@ export default function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                placeholder="your@email.com"
+                placeholder={t('emailPlaceholder')}
               />
-              <label htmlFor="phone">Phone</label>
+              <label htmlFor="phone">{t('phoneLabel')}</label>
               <input
-                name="number" 
+                name="number"
                 id="phone"
                 type="tel"
                 value={formData.number}
                 onChange={handleChange}
                 required
-                placeholder="+54 11 1234-5678"
+                placeholder={t('phonePlaceholder')}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="message">How can i help you?</label>
-              <textarea
-                cols={50}
-                rows={10}
-                id="textarea"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                placeholder="Write your message here..."
-              />
+              <label htmlFor="message">{t('messageLabel')}</label>
+              <div style={{ position: "relative" }}>
+                <textarea
+                  cols={50}
+                  rows={10}
+                  id="textarea"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  maxLength={500}
+                  placeholder={t('messagePlaceholder')}
+                />
+                <span
+                  style={{
+                    position: "absolute",
+                    bottom: "8px",
+                    right: "12px",
+                    fontSize: "12px",
+                    color: formData.message.length >= 500 ? "#e53e3e" : "#888",
+                    pointerEvents: "none",
+                  }}
+                >
+                  {formData.message.length}/500
+                </span>
+              </div>
             </div>
             
             <button 
@@ -109,18 +126,18 @@ export default function Contact() {
               disabled={loading}
               style={{ opacity: loading ? 0.7 : 1 }}
             >
-              {loading ? "Enviando..." : "Submit"}
+              {loading ? t('sending') : t('submit')}
             </button>
 
             {success && (
               <p style={{ color: "green", marginTop: "10px", fontWeight: "bold" }}>
-                ¡Mensaje enviado exitosamente!
+                {t('success')}
               </p>
             )}
-            
+
             {errorMessage && (
               <p style={{ color: "red", marginTop: "10px", fontWeight: "bold" }}>
-                Error: {errorMessage}
+                {t('errorLabel')}: {errorMessage}
               </p>
             )}
 

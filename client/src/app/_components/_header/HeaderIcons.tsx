@@ -1,6 +1,7 @@
 "use client"
 import Image from 'next/image'
 import Link from 'next/link';
+import { safeHref } from '@/lib/url';
 
 interface Icons{
   id: number;
@@ -20,13 +21,13 @@ export default function HeaderIcons({icons}: HeaderIcons){
       {icons.map((icon) => (
         <Link
           key={icon.id}
-          href={icon.ref} 
-          target='_blank' 
-          rel='noopener noreferrer' 
+          href={safeHref(icon.ref) ?? '#'}
+          target='_blank'
+          rel='noopener noreferrer'
           draggable='false'
           {...(icon.load ? { download: icon.load } : {})}
         >
-          <Image src={icon.src} width={200} height={200} alt={icon.alt}/>
+          <Image src={icon.src} width={52} height={52} alt={icon.alt}/>
         </Link>
       ))}
     </div>

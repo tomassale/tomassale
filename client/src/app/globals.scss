@@ -33,8 +33,9 @@ $largeTabletLandscape: "min-width: 1113px) and (max-width: 1366px) and (orientat
 
 @mixin divs{
   position: relative;
-  height: 100vh;
+  min-height: min-content; // el alto lo da el contenido, no un 100vh fijo -> menos espacio vacío entre secciones
   width: 100%;
+  padding-bottom: 4rem;    // separación controlada entre secciones (antes surgía del hueco de 100vh)
   scroll-snap-align: center;
   scroll-snap-stop: normal;
 }
@@ -67,6 +68,8 @@ $largeTabletLandscape: "min-width: 1113px) and (max-width: 1366px) and (orientat
     color: inherit;
     cursor: pointer;
     outline: none;
+    user-select: none;         // el texto del botón no se puede seleccionar/subrayar
+    -webkit-user-select: none;
   }
   h2{
     @include titles();
@@ -92,7 +95,8 @@ html{
   background-size: 40px 40px;
   width: 100vw;
   height: 100vh;
-  
+  overflow-x: hidden; // evita scroll horizontal por los reveals con translateX
+
   ::-webkit-scrollbar {
     width: 0;
   }
@@ -104,6 +108,7 @@ html{
       color: whitesmoke;
       background-color: rgba(29, 29, 29, 0.8);
       display: flex;
+      align-items: center; // centra verticalmente logo, links, íconos y controles
       position: fixed;
       top: 0;
       width: 100%;
@@ -115,13 +120,18 @@ html{
         font-size: 200%;
         margin-left: 8%;
         padding: 0.35%;
+        flex-shrink: 0;
+        white-space: nowrap;
       }
       .barra{
         display: flex;
+        flex: 1; // ocupa el espacio disponible (constante) -> el cambio de idioma
+                 // solo reordena el texto DENTRO de la barra, sin mover íconos/botones
         align-items: center;
         justify-content: center;
         margin-left: 15%;
         a{
+            white-space: nowrap;
             margin-left: 25px;
             padding: 14px 30px;
             font-size: 20px;
@@ -133,23 +143,42 @@ html{
       }
       .icons{
         margin: 0.5% 0 0 12%;
-        width: 9%;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-shrink: 0; // no se encoge al cambiar de idioma -> los íconos no se mueven
         a{
           img{
-            width: 20%;
-            height: 70%;
-            margin-left: 13%;
-          }
-          img:nth-child(1){
-            height: 75%;
+            width: 28px;   // tamaño fijo -> no cambian de forma entre en/es
+            height: 28px;
+            margin-left: 0;
           }
         }
       }
     }
     //-------------------------Sobre mi-------------------------//
-    .aboutMe{      
+    @keyframes heroFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .aboutMe{
       @include divs();
       text-align: center;
+
+      h2, h4, .description {
+        animation: heroFadeIn 0.7s ease backwards;
+      }
+      h2 { animation-delay: 0.1s; }
+      h4 { animation-delay: 0.3s; }
+      .description { animation-delay: 0.5s; }
+
       .description{
         color: rgb(255, 255, 255);
         font-size: 2rem;
@@ -157,6 +186,7 @@ html{
         margin: 3rem auto;
         width: 60%;
         text-align: justify;
+        text-align-last: center;
         padding: 5rem;
       }
       h4{
@@ -167,6 +197,17 @@ html{
       }
     }
     //-------------------------Conocimiento-------------------------//
+    @keyframes skillFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .skill {
       @include divs();
       
@@ -202,27 +243,32 @@ html{
         }
         
         .categorySection {
-          display: grid;
-          grid-template-columns: repeat(5, 1fr); 
-          justify-items: center;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
           align-items: center;
+          align-content: center;  // centra verticalmente el bloque de filas dentro del alto reservado
           gap: 2rem;
           width: 80%;
           max-width: 800px;
-          margin: 0;
-          
+          min-height: 360px;      // alto fijo = el de "Todos" -> al cambiar de categoría no salta el layout
+          margin: 0 auto;
+
           .imageContainer {
-            margin: 0; 
+            margin: 0;
+            min-width: 120px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 0.8rem;
             transition: transform 0.3s ease;
+            animation: skillFadeIn 0.5s ease backwards;
 
             &:hover {
               transform: translateY(-5px);
+              color: #e81cff;
             }
-
+            
             img {
               width: 60px;
               height: 60px;
@@ -260,21 +306,42 @@ html{
         .flip-card {
           background-color: transparent;
           perspective: 1000px;
-          
+
+          // Las cards laterales no reaccionan: no se pueden invertir ni interactuar.
+          &:not(.swiper-slide-active) {
+            pointer-events: none;
+          }
+
+          // Solo la card activa (centrada, al frente) se da vuelta al pasar el mouse.
+          &.swiper-slide-active:hover .flip-card-inner {
+            transform: rotateY(180deg);
+          }
+
           .flip-card-inner {
+            position: relative;
             width: 100%;
             height: 100%;
             text-align: center;
-            
-            .flip-card-front {
+            transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+
+            .flip-card-front,
+            .flip-card-back {
+              position: absolute;
+              top: 0;
+              left: 0;
               width: 100%;
               height: 100%;
+              backface-visibility: hidden;
+              -webkit-backface-visibility: hidden;
               @include border-gradient();
               background-color: rgb(20, 20, 20);
-              
+              overflow: hidden;
+            }
+
+            .flip-card-front {
               display: flex;
               flex-direction: column;
-              overflow: hidden;
 
               .profileMedia {
                 position: relative;
@@ -289,7 +356,7 @@ html{
 
               .name {
                 font-size: 26px;
-                color: #e81cff; 
+                color: #e81cff;
                 font-weight: bold;
                 display: flex;
                 align-items: center;
@@ -308,6 +375,53 @@ html{
                 img {
                   object-fit: contain;
                   filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
+                }
+              }
+            }
+
+            .flip-card-back {
+              transform: rotateY(180deg);
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              gap: 18px;
+              padding: 28px 24px;
+
+              .back-title {
+                font-size: 24px;
+                color: #e81cff;
+                font-weight: bold;
+              }
+
+              .back-description {
+                font-size: 15px;
+                color: rgba(255, 255, 255, 0.85);
+                line-height: 1.5;
+                max-height: 50%;
+                overflow-y: auto;
+                text-align: center;
+              }
+
+              .back-links {
+                display: flex;
+                gap: 14px;
+                flex-wrap: wrap;
+                justify-content: center;
+
+                a {
+                  padding: 10px 20px;
+                  border-radius: 8px;
+                  font-size: 15px;
+                  font-weight: 600;
+                  color: #fff;
+                  background: linear-gradient(145deg, #e81cff, #40c9ff);
+                  transition: transform 0.2s ease, filter 0.2s ease;
+
+                  &:hover {
+                    transform: translateY(-2px);
+                    filter: brightness(1.15);
+                  }
                 }
               }
             }
@@ -424,5 +538,340 @@ html{
         }
       }
     }
+  }
+}
+
+//-------------------------Scroll reveal-------------------------//
+.reveal {
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+
+  &.reveal--up { transform: translateY(50px); }
+  &.reveal--down { transform: translateY(-50px); }
+  &.reveal--left { transform: translateX(-70px); }
+  &.reveal--right { transform: translateX(70px); }
+  &.reveal--zoom { transform: scale(0.85); }
+
+  // El estado visible resetea cualquier variante.
+  &.reveal--visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// Transición suave al cambiar de tema (dark/light).
+// Solo color/fondo/borde: NO incluye transform ni opacity, así no interfiere
+// con las animaciones de entrada (heroFadeIn, skillFadeIn, reveal, flip).
+*,
+*::before,
+*::after {
+  transition: background-color 1s ease, color 1s ease, border-color 1s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+//-------------------------Controles (idioma / tema)-------------------------//
+.settingsControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 3rem;  // separación entre LinkedIn (íconos) y los botones de tema
+  margin-right: 2rem; // separa el grupo íconos/tema del borde derecho
+  flex-shrink: 0;     // no se encoge al cambiar de idioma
+
+  button {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: whitesmoke;
+    background: rgba(29, 29, 29, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+
+    &:hover {
+      transform: scale(1.12);
+      background: #b118c2;
+      border-color: #e81cff;
+    }
+    &:active { transform: scale(0.95); }
+  }
+}
+
+//-------------------------Tema claro-------------------------//
+html[data-theme='light'] {
+  background-color: #f4f4f5;
+  background-image:
+    linear-gradient(#e2e2e5 1px, transparent 1px),
+    linear-gradient(90deg, #e2e2e5 1px, transparent 1px);
+
+  h2 {
+    color: #1a1a1a;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  .navbar {
+    color: #1a1a1a;
+    background-color: rgba(244, 244, 245, 0.85);
+    .barra a:hover { color: #b118c2; }
+  }
+
+  .aboutMe {
+    h4 { color: #b118c2; text-shadow: none; }
+    .description { color: #2a2a2a; text-shadow: none; }
+  }
+
+  .skill {
+    .skillsSelector button {
+      color: #1a1a1a;
+      &.active { color: #b118c2; }
+    }
+    .categorySection .imageContainer p { color: #1a1a1a; }
+  }
+
+  .project .flip-card .flip-card-inner {
+    .flip-card-front,
+    .flip-card-back {
+      background-color: #ffffff;
+    }
+    .flip-card-front .name { color: #b118c2; }
+    .flip-card-back {
+      .back-title { color: #b118c2; }
+      .back-description { color: #3a3a3a; }
+    }
+  }
+
+  .contact .form-container {
+    color: #1a1a1a;
+    .form-group {
+      label { color: #4a4a4a; }
+      input,
+      textarea {
+        color: #1a1a1a;
+        border-color: #c8c8c8;
+      }
+    }
+    .form-submit-btn {
+      color: #4a4a4a;
+      background: #e8e8e8;
+      border-color: #c8c8c8;
+      &:hover { background-color: #dcdcdc; border-color: #942fa1; }
+    }
+  }
+
+  .footer {
+    background-color: rgba(230, 230, 232, 0.9);
+    color: #1a1a1a;
+    h5 a {
+      color: #6a6a6a;
+      &:hover { color: #1a1a1a; }
+    }
+  }
+
+  .settingsControls button {
+    color: #1a1a1a;
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(0, 0, 0, 0.2);
+    &:hover { color: whitesmoke; }
+  }
+}
+
+//===================== RESPONSIVE =====================//
+
+// ---------- Tablet (768px - 1024px) ----------
+@media (max-width: 1024px) {
+  html .webDev {
+    h2 { font-size: 3rem; }
+
+    .navbar {
+      .logo { margin-left: 4%; }
+      .barra { margin-left: 4%; a { padding: 10px 16px; font-size: 17px; margin-left: 8px; } }
+      .icons { margin: 0.5% 3% 0 4%; width: auto; display: flex; align-items: center; gap: 10px;
+        a img { width: 26px; height: 26px; margin-left: 0; }
+        a img:nth-child(1) { height: 26px; }
+      }
+    }
+
+    .aboutMe .description { width: 80%; font-size: 1.4rem; padding: 2rem; }
+
+    .skill .skillContainer {
+      .skillsSelector { gap: 2rem; flex-wrap: wrap; margin-bottom: 3rem; button { font-size: 1.4rem; } }
+      .categorySection { width: 90%; .imageContainer { min-width: 100px; } }
+    }
+
+    .contact .form-container { width: 90%; max-width: 640px; }
+  }
+}
+
+// ---------- Mobile (<= 767px) ----------
+@media (max-width: 767px) {
+  html {
+    background-size: 30px 30px;
+  }
+  html .webDev {
+    height: auto;
+
+    h2 { font-size: 2rem; padding-top: 0; margin-bottom: 6%; }
+
+    // ----- Navbar -----
+    .navbar {
+      height: auto;
+      padding: 8px 12px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+
+      .logo { margin-left: 0; font-size: 150%; padding: 0; }
+      .barra { display: none; } // links ocultos en mobile (no hay hamburguesa)
+      .icons {
+        margin: 0;
+        width: auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        a img { width: 22px; height: 22px; margin-left: 0; }
+        a img:nth-child(1) { height: 22px; }
+      }
+      .settingsControls { margin-left: 4px; margin-right: 0; button { width: 30px; height: 30px; font-size: 0.75rem; } }
+    }
+
+    // ----- Secciones: alto según contenido para achicar la distancia entre ellas -----
+    .aboutMe, .skill, .project, .contact {
+      height: auto;
+      min-height: 0;
+    }
+
+    // ----- Hero -----
+    .aboutMe {
+      padding: 70px 0 20px;
+      h4 { font-size: 20px; margin-top: 0; }
+      .description {
+        width: 90%;
+        font-size: 1rem;
+        line-height: 1.6;
+        padding: 1.2rem;
+        margin: 1.5rem auto;
+        text-align: justify;
+        text-align-last: center;
+      }
+    }
+
+    // ----- Skills -----
+    .skill {
+      padding: 40px 0 20px;
+      .skillContainer {
+        gap: 0.5rem;
+        .skillsSelector {
+          gap: 0.8rem 1.2rem;
+          flex-wrap: wrap;
+          justify-content: center;
+          margin-bottom: 2.5rem;
+          padding: 0 1rem;
+          button { font-size: 1.1rem; }
+        }
+        .categorySection {
+          width: 92%;
+          gap: 1.4rem 1rem;
+          min-height: 420px; // alto de "Todos" en mobile (más filas por ser menos ítems por fila)
+          .imageContainer {
+            min-width: 78px;
+            gap: 0.5rem;
+            img { width: 42px; height: 42px; }
+            p { font-size: 0.85rem; }
+          }
+        }
+      }
+    }
+
+    // ----- Proyectos -----
+    .project {
+      padding: 40px 0 20px;
+      .gridCard {
+        .swiper-slide { width: 280px; height: 420px; }
+        .flip-card .flip-card-inner {
+          .flip-card-front .name { font-size: 22px; }
+          .flip-card-back {
+            padding: 20px 16px;
+            gap: 12px;
+            .back-title { font-size: 20px; }
+            .back-description { font-size: 13px; max-height: 45%; }
+            .back-links a { padding: 8px 16px; font-size: 14px; }
+          }
+        }
+      }
+    }
+
+    // ----- Contacto -----
+    .contact {
+      padding: 40px 0 30px;
+      .form-container {
+        width: 90%;
+        max-width: 440px;
+        padding: 24px 18px;
+        .form-group {
+          input, textarea { width: 100%; box-sizing: border-box; }
+          label { font-size: 16px; }
+        }
+        .form-submit-btn { width: 100%; align-self: stretch; }
+      }
+    }
+
+    // ----- Footer -----
+    .footer {
+      height: auto;
+      padding: 16px 0;
+      h5 { font-size: 18px; padding: 0 12px; }
+    }
+  }
+}
+
+// ---------- Landscape en mobile (poca altura) ----------
+@media (max-width: 950px) and (orientation: landscape) and (max-height: 600px) {
+  html .webDev {
+    .aboutMe, .skill, .project, .contact { height: auto; min-height: 0; padding-top: 70px; padding-bottom: 30px; }
+    h2 { font-size: 1.8rem; }
+  }
+}
+
+// ---------- Notebook (1025px - 1439px) ----------
+@media (min-width: 1025px) and (max-width: 1439px) {
+  html .webDev {
+    h2 { font-size: 3.4rem; padding-top: 4%; }
+
+    .navbar {
+      .logo { margin-left: 5%; }
+      .barra { margin-left: 8%; a { padding: 12px 22px; font-size: 18px; margin-left: 16px; } }
+      .icons { margin: 0.5% 0 0 8%; width: 11%;
+        a img { width: 26px; height: auto; margin-left: 12px; }
+      }
+    }
+
+    .aboutMe .description {
+      width: 72%;
+      font-size: 1.6rem;
+      padding: 3rem;
+      margin: 2rem auto;
+    }
+
+    .skill .skillContainer {
+      .skillsSelector { gap: 3rem; button { font-size: 1.6rem; } }
+      .categorySection { width: 88%; max-width: 760px; gap: 1.6rem; }
+    }
+
+    .project .gridCard .swiper-slide { width: 320px; height: 460px; }
+
+    .contact .form-container { width: 700px; }
   }
 }

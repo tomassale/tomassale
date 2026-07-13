@@ -1,22 +1,11 @@
 "use client"
 import HeaderLinks from "./HeaderLinks"
 import HeaderIcons from './HeaderIcons'
+import SettingsControls from '../_settings/SettingsControls'
 import { Link } from "react-scroll"
-import { useEffect, useState } from 'react'
+import headerData from '../../../../public/data/header.json'
 
 export default function Header() {
-
-  const [headerData, setHeaderData] = useState({ links: [], icons: []})
-
-  useEffect(()=> {
-    fetch('/data/header.json')
-      .then(res => res.json())
-      .then(data => setHeaderData(data))
-      .catch(err => 
-        console.error("Error cargando el header: ", err)
-      )
-  }, [])
-
   const { links, icons } = headerData;
 
   return (
@@ -26,6 +15,7 @@ export default function Header() {
       </Link>
       <HeaderLinks links={links}/>
       <HeaderIcons icons={icons}/>
+      <SettingsControls/>
     </header>
   )
 }

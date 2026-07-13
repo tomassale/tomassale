@@ -1,5 +1,7 @@
 "use client"
 import { Link } from "react-scroll";
+import { useSettings } from "../_settings/SettingsProvider";
+import { translateNav } from "@/lib/i18n";
 
 interface LinkItem {
   id: number;
@@ -12,6 +14,7 @@ interface HeaderItemProps {
 }
 
 export default function HeaderLinks({ links }: HeaderItemProps) {
+  const { lang } = useSettings()
   return (
     <nav className='barra'>
       {links.map((link) => (
@@ -23,7 +26,7 @@ export default function HeaderLinks({ links }: HeaderItemProps) {
           offset={-40}
           draggable='false'
         >
-          {link.text}
+          {translateNav(lang, link.ref, link.text)}
         </Link>
       ))}
     </nav>

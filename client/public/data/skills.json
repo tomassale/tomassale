@@ -1,8 +1,8 @@
 {
   "Front-End": [
     { "id": 0, "tech": "Next", "src": "/img/skills/front/next.svg", "alt": "Next Logo" },
-    { "id": 1, "tech": "React Native", "src": "/img/skills/front/react.svg", "alt": "React Logo" },
-    { "id": 2, "tech": "Angular", "src": "/img/skills/front/angular.svg", "alt": "Angular Logo" }
+    { "id": 1, "tech": "Angular", "src": "/img/skills/front/angular.svg", "alt": "Angular Logo" },
+    { "id": 2, "tech": "Expo", "src": "/img/skills/front/expo.svg", "alt": "Expo Logo" }
   ],
   "Back-End": [
     { "id": 0, "tech": "Node.js", "src": "/img/skills/back/node.svg", "alt": "NodeJS Logo" },
@@ -18,6 +18,8 @@
     { "id": 1, "tech": "Photoshop", "src": "/img/skills/design/photoshop.svg", "alt": "Photoshop Logo" }
   ],
   "Tools": [
-    { "id": 0, "tech": "GitHub", "src": "/img/skills/tools/github.svg", "alt": "GitHub Logo" }
+    { "id": 0, "tech": "GitHub", "src": "/img/skills/tools/github.svg", "alt": "GitHub Logo" },
+    { "id": 1, "tech": "Teams", "src": "/img/skills/tools/microsoft-teams.svg", "alt": "Teams Logo" },
+    { "id": 2, "tech": "Slack", "src": "/img/skills/tools/slack.svg", "alt": "Slack Logo" }
   ]
 }

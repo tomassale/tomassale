@@ -38,7 +38,7 @@
   "exclude": [
     "node_modules",
     "src/app/test/page.test.tsx",
-    "src/app/Desarrollo-Web/_contact/FormContact.tsx",
+    "src/app/_components/_contact/FormContact.tsx",
     "src/app/Analista-Datos"
   ]
 }

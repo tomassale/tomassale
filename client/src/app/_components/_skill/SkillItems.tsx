@@ -15,7 +15,11 @@ export default function SkillItems({items}: HeaderProps){
   return(
     <>
       {items.map((skill:Items, index: number) => (
-        <div className='imageContainer' key={`${skill.tech}-${index}`}>
+        <div
+          className='imageContainer'
+          key={`${skill.tech}-${index}`}
+          style={{ animationDelay: `${index * 0.05}s` }}
+        >
           <Image 
             src={skill.src}
             alt={skill.alt}
