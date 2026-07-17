@@ -9,6 +9,7 @@ export interface ProjectData { // Exportamos la interfaz para usarla en el Swipe
   img: string;
   title: string;
   description?: string;
+  description_en?: string;
   github?: string;
   url?: string;
   link?: string;
@@ -16,11 +17,12 @@ export interface ProjectData { // Exportamos la interfaz para usarla en el Swipe
 }
 
 function ProjectCard({ project }: Readonly<{ project: ProjectData }>) {
-  const { t } = useSettings()
+  const { t, lang } = useSettings()
   // Algunos proyectos usan "url" y otros "link" para el sitio en vivo.
   const github = safeHref(project.github)
   const liveUrl = safeHref(project.url ?? project.link)
   const hasLiveUrl = Boolean(liveUrl) && liveUrl !== github
+  const description = (lang === 'en' ? project.description_en : project.description) ?? project.description
 
   return (
     <div className='flip-card-inner'>
@@ -51,8 +53,8 @@ function ProjectCard({ project }: Readonly<{ project: ProjectData }>) {
 
       <div className='flip-card-back'>
         <h3 className='back-title'>{project.title}</h3>
-        {project.description && project.description.trim() !== '.' && (
-          <p className='back-description'>{project.description}</p>
+        {description && description.trim() !== '.' && (
+          <p className='back-description'>{description}</p>
         )}
         <div className='back-links'>
           {github && (

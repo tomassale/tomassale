@@ -15,7 +15,7 @@ export default function WebDev() {
       <Reveal animation="left"><Skill/></Reveal>
       <Reveal animation="zoom"><Project/></Reveal>
       <Reveal animation="right"><Contact/></Reveal>
-      <Reveal animation="up"><Footer/></Reveal>
+      <Footer/>
     </div>
   )
 }

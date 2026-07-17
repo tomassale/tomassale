@@ -53,6 +53,7 @@ $largeTabletLandscape: "min-width: 1113px) and (max-width: 1366px) and (orientat
   padding: 0;
   margin: 0;
   list-style: none;
+  -webkit-tap-highlight-color: transparent; // sin recuadro azul al tocar en táctiles
   a{
     text-decoration: none;
     cursor: pointer;
@@ -112,6 +113,7 @@ html{
       position: fixed;
       top: 0;
       width: 100%;
+      box-sizing: border-box; // el padding no ensancha la barra más allá del viewport
       height: 5%;
       backdrop-filter: blur(8px);
       z-index: 2;
@@ -125,11 +127,12 @@ html{
       }
       .barra{
         display: flex;
-        flex: 1; // ocupa el espacio disponible (constante) -> el cambio de idioma
-                 // solo reordena el texto DENTRO de la barra, sin mover íconos/botones
         align-items: center;
         justify-content: center;
-        margin-left: 15%;
+        position: absolute; // centrada respecto del viewport, sin depender
+        left: 50%;          // del ancho de logo/íconos/controles laterales
+        top: 50%;
+        transform: translate(-50%, -50%);
         a{
             white-space: nowrap;
             margin-left: 25px;
@@ -142,7 +145,7 @@ html{
         }
       }
       .icons{
-        margin: 0.5% 0 0 12%;
+        margin: 0.5% 2% 0 auto; // margin-left auto -> pegados a la derecha
         display: flex;
         align-items: center;
         gap: 14px;
@@ -171,6 +174,7 @@ html{
     .aboutMe{
       @include divs();
       text-align: center;
+      margin-top:5%;
 
       h2, h4, .description {
         animation: heroFadeIn 0.7s ease backwards;
@@ -383,7 +387,7 @@ html{
               transform: rotateY(180deg);
               display: flex;
               flex-direction: column;
-              justify-content: center;
+              justify-content: space-between; // título arriba de todo, botones abajo de todo
               align-items: center;
               gap: 18px;
               padding: 28px 24px;
@@ -398,7 +402,8 @@ html{
                 font-size: 15px;
                 color: rgba(255, 255, 255, 0.85);
                 line-height: 1.5;
-                max-height: 50%;
+                flex: 1;       // ocupa el espacio entre título y botones
+                min-height: 0; // permite scrollear si la descripción no entra
                 overflow-y: auto;
                 text-align: center;
               }
@@ -434,7 +439,8 @@ html{
       @include divs();
       .form-container {
         width: 800px;
-        margin: auto;
+        margin-inline: auto;
+        margin-bottom: 5%;
         @include border-gradient();
         padding: 32px 24px;
         font-size: 16px;
@@ -582,8 +588,8 @@ html{
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-left: 3rem;  // separación entre LinkedIn (íconos) y los botones de tema
-  margin-right: 2rem; // separa el grupo íconos/tema del borde derecho
+  margin-left: 1.5rem; // a la izquierda del navbar, junto al logo
+  margin-right: 0;
   flex-shrink: 0;     // no se encoge al cambiar de idioma
 
   button {
@@ -633,12 +639,27 @@ html[data-theme='light'] {
     .description { color: #2a2a2a; text-shadow: none; }
   }
 
-  .skill {
+  .skill .skillContainer { // .skillContainer necesario para superar la especificidad del color base
     .skillsSelector button {
       color: #1a1a1a;
       &.active { color: #b118c2; }
     }
     .categorySection .imageContainer p { color: #1a1a1a; }
+
+    // logos blancos (invisibles sobre fondo claro) -> se invierten a negro
+    .categorySection .imageContainer img[alt='Expo Logo'],
+    .categorySection .imageContainer img[alt='Express Logo'],
+    .categorySection .imageContainer img[alt='GitHub Logo'] {
+      filter: invert(1);
+    }
+
+    // delfín blanco de MySQL sobre su teal característico
+    .categorySection .imageContainer img[alt='SQL Logo'] {
+      background-color: #00758f;
+      border-radius: 10px;
+      padding: 6px;
+      box-sizing: border-box; // el padding no agranda el ícono (sigue en 60px)
+    }
   }
 
   .project .flip-card .flip-card-inner {
@@ -659,7 +680,7 @@ html[data-theme='light'] {
       label { color: #4a4a4a; }
       input,
       textarea {
-        color: #1a1a1a;
+        color: #fff; // el fondo de la tarjeta sigue oscuro (border-gradient) también en claro
         border-color: #c8c8c8;
       }
     }
@@ -684,7 +705,7 @@ html[data-theme='light'] {
     color: #1a1a1a;
     background: rgba(255, 255, 255, 0.85);
     border-color: rgba(0, 0, 0, 0.2);
-    &:hover { color: whitesmoke; }
+    
   }
 }
 
@@ -696,12 +717,13 @@ html[data-theme='light'] {
     h2 { font-size: 3rem; }
 
     .navbar {
-      .logo { margin-left: 4%; }
-      .barra { margin-left: 4%; a { padding: 10px 16px; font-size: 17px; margin-left: 8px; } }
-      .icons { margin: 0.5% 3% 0 4%; width: auto; display: flex; align-items: center; gap: 10px;
-        a img { width: 26px; height: 26px; margin-left: 0; }
-        a img:nth-child(1) { height: 26px; }
+      .logo { display: none; } // sin logo en tablet y mobile
+      .barra { a { padding: 8px 10px; font-size: 15px; margin-left: 6px; } }
+      .icons { margin: 0 2% 0 auto; width: auto; display: flex; align-items: center; gap: 8px;
+        a img { width: 24px; height: 24px; margin-left: 0; }
+        a img:nth-child(1) { height: 24px; }
       }
+      .settingsControls { margin-left: 12px; margin-right: 0; button { width: 30px; height: 30px; font-size: 0.75rem; } }
     }
 
     .aboutMe .description { width: 80%; font-size: 1.4rem; padding: 2rem; }
@@ -730,13 +752,19 @@ html[data-theme='light'] {
       height: auto;
       padding: 8px 12px;
       align-items: center;
-      justify-content: space-between;
-      gap: 6px;
+      flex-wrap: wrap; // dos filas: controles+íconos arriba, links abajo
+      row-gap: 4px;
 
-      .logo { margin-left: 0; font-size: 150%; padding: 0; }
-      .barra { display: none; } // links ocultos en mobile (no hay hamburguesa)
+      .barra {
+        position: static; // vuelve al flujo: ocupa su propia fila
+        transform: none;
+        order: 10;        // después de íconos y controles
+        width: 100%;
+        justify-content: center;
+        a { padding: 6px 8px; font-size: 13px; margin-left: 0; }
+      }
       .icons {
-        margin: 0;
+        margin: 0 0 0 auto; // a la derecha
         width: auto;
         display: flex;
         align-items: center;
@@ -744,7 +772,7 @@ html[data-theme='light'] {
         a img { width: 22px; height: 22px; margin-left: 0; }
         a img:nth-child(1) { height: 22px; }
       }
-      .settingsControls { margin-left: 4px; margin-right: 0; button { width: 30px; height: 30px; font-size: 0.75rem; } }
+      .settingsControls { margin-left: 0; margin-right: 0; button { width: 30px; height: 30px; font-size: 0.75rem; } }
     }
 
     // ----- Secciones: alto según contenido para achicar la distancia entre ellas -----
@@ -806,7 +834,7 @@ html[data-theme='light'] {
             padding: 20px 16px;
             gap: 12px;
             .back-title { font-size: 20px; }
-            .back-description { font-size: 13px; max-height: 45%; }
+            .back-description { font-size: 13px; }
             .back-links a { padding: 8px 16px; font-size: 14px; }
           }
         }
@@ -831,8 +859,8 @@ html[data-theme='light'] {
     // ----- Footer -----
     .footer {
       height: auto;
-      padding: 16px 0;
-      h5 { font-size: 18px; padding: 0 12px; }
+      padding: 0 0 16px; // sin padding-top: la línea (hr) queda pegada arriba
+      h5 { font-size: 18px; padding: 16px 12px 0; }
     }
   }
 }
@@ -851,11 +879,12 @@ html[data-theme='light'] {
     h2 { font-size: 3.4rem; padding-top: 4%; }
 
     .navbar {
-      .logo { margin-left: 5%; }
-      .barra { margin-left: 8%; a { padding: 12px 22px; font-size: 18px; margin-left: 16px; } }
-      .icons { margin: 0.5% 0 0 8%; width: 11%;
-        a img { width: 26px; height: auto; margin-left: 12px; }
+      .logo { margin-left: 3%; }
+      .barra { a { padding: 10px 14px; font-size: 17px; margin-left: 8px; } }
+      .icons { margin: 0 2% 0 auto; width: auto; display: flex; align-items: center; gap: 12px;
+        a img { width: 26px; height: 26px; margin-left: 0; }
       }
+      .settingsControls { margin-left: 1rem; margin-right: 0; }
     }
 
     .aboutMe .description {

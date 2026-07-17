@@ -13,9 +13,9 @@ export default function Header() {
       <Link className='logo' to='aboutMe' draggable='false'>
         {'<TOMAS/>'}
       </Link>
+      <SettingsControls/>
       <HeaderLinks links={links}/>
       <HeaderIcons icons={icons}/>
-      <SettingsControls/>
     </header>
   )
 }

@@ -30,7 +30,8 @@ export default function ProjectSwiper({ cards }: SwiperProps) {
           }}
           modules={[EffectCoverflow]}
           breakpoints={{
-            0: { slidesPerView: 1 },
+            // 'auto' respeta el ancho CSS de la card (280px) en vez de estirarla al 100% del viewport
+            0: { slidesPerView: 'auto' },
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
