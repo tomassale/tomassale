@@ -145,7 +145,7 @@ html{
         }
       }
       .icons{
-        margin: 0.5% 2% 0 auto; // margin-left auto -> pegados a la derecha
+        margin: 0.5% 0 0 auto; // margin-left auto -> empuja el grupo derecho (íconos + controles)
         display: flex;
         align-items: center;
         gap: 14px;
@@ -298,12 +298,14 @@ html{
         padding-bottom: 50px;
 
         .swiper-slide {
-          width: 350px; 
-          height: 500px; 
-          opacity: 0.4; 
+          width: 350px;
+          height: 500px;
+          opacity: 0.4;
           transition: all 0.3s ease;
-          
-          &.swiper-slide-active {
+
+          // .is-active la maneja React desde realIndex: es confiable al retroceder,
+          // a diferencia de swiper-slide-active que se desincroniza en loop.
+          &.is-active {
             opacity: 1;
           }
         }
@@ -312,12 +314,12 @@ html{
           perspective: 1000px;
 
           // Las cards laterales no reaccionan: no se pueden invertir ni interactuar.
-          &:not(.swiper-slide-active) {
+          &:not(.is-active) {
             pointer-events: none;
           }
 
           // Solo la card activa (centrada, al frente) se da vuelta al pasar el mouse.
-          &.swiper-slide-active:hover .flip-card-inner {
+          &.is-active:hover .flip-card-inner {
             transform: rotateY(180deg);
           }
 
@@ -588,8 +590,8 @@ html{
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-left: 1.5rem; // a la izquierda del navbar, junto al logo
-  margin-right: 0;
+  margin-left: 14px;  // a la derecha de los íconos (redes y CVs)
+  margin-right: 3%;   // un poco despegado del borde derecho del navbar
   flex-shrink: 0;     // no se encoge al cambiar de idioma
 
   button {
@@ -632,6 +634,8 @@ html[data-theme='light'] {
     color: #1a1a1a;
     background-color: rgba(244, 244, 245, 0.85);
     .barra a:hover { color: #b118c2; }
+    // el logo de GitHub (blanco) se invierte a negro solo en tema claro
+    .icons a img[alt='github'] { filter: invert(1); }
   }
 
   .aboutMe {
@@ -719,11 +723,11 @@ html[data-theme='light'] {
     .navbar {
       .logo { display: none; } // sin logo en tablet y mobile
       .barra { a { padding: 8px 10px; font-size: 15px; margin-left: 6px; } }
-      .icons { margin: 0 2% 0 auto; width: auto; display: flex; align-items: center; gap: 8px;
+      .icons { margin: 0 0 0 auto; width: auto; display: flex; align-items: center; gap: 8px;
         a img { width: 24px; height: 24px; margin-left: 0; }
         a img:nth-child(1) { height: 24px; }
       }
-      .settingsControls { margin-left: 12px; margin-right: 0; button { width: 30px; height: 30px; font-size: 0.75rem; } }
+      .settingsControls { margin-left: 12px; margin-right: 2%; button { width: 30px; height: 30px; font-size: 0.75rem; } }
     }
 
     .aboutMe .description { width: 80%; font-size: 1.4rem; padding: 2rem; }
@@ -772,7 +776,7 @@ html[data-theme='light'] {
         a img { width: 22px; height: 22px; margin-left: 0; }
         a img:nth-child(1) { height: 22px; }
       }
-      .settingsControls { margin-left: 0; margin-right: 0; button { width: 30px; height: 30px; font-size: 0.75rem; } }
+      .settingsControls { margin-left: 12px; margin-right: 4px; button { width: 30px; height: 30px; font-size: 0.75rem; } }
     }
 
     // ----- Secciones: alto según contenido para achicar la distancia entre ellas -----
@@ -881,10 +885,10 @@ html[data-theme='light'] {
     .navbar {
       .logo { margin-left: 3%; }
       .barra { a { padding: 10px 14px; font-size: 17px; margin-left: 8px; } }
-      .icons { margin: 0 2% 0 auto; width: auto; display: flex; align-items: center; gap: 12px;
+      .icons { margin: 0 0 0 auto; width: auto; display: flex; align-items: center; gap: 12px;
         a img { width: 26px; height: 26px; margin-left: 0; }
       }
-      .settingsControls { margin-left: 1rem; margin-right: 0; }
+      .settingsControls { margin-left: 1rem; margin-right: 2%; }
     }
 
     .aboutMe .description {
