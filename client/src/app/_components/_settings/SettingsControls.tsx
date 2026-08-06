@@ -5,7 +5,7 @@ export default function SettingsControls() {
   const { lang, theme, toggleLang, toggleTheme, t } = useSettings()
 
   return (
-    <div className="settingsControls">
+    <>
       <button
         onClick={toggleLang}
         title={lang === 'es' ? t('switchToEnglish') : t('switchToSpanish')}
@@ -20,6 +20,6 @@ export default function SettingsControls() {
       >
         {theme === 'dark' ? '☀' : '☾'}
       </button>
-    </div>
+    </>
   )
 }

@@ -1,7 +1,5 @@
 "use client"
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import ProjectSwiper from './ProjectSwiper';
+import ProjectList from './ProjectList';
 import { ProjectData } from './ProjectCard';
 import { useSettings } from '../_settings/SettingsProvider';
 import projectData from '../../../../public/data/project.json';
@@ -10,9 +8,11 @@ export default function Project() {
   const { t } = useSettings()
 
   return (
-    <div className='project' id='portfolio'>
-      <h2>{t('portfolio')}</h2>
-      <ProjectSwiper cards={projectData as ProjectData[]}/>
-    </div>
+    <section className='panel panel--projects' id='portfolio'>
+      <div className='panel__inner'>
+        <h2 className='panel__title'>{t('portfolio')}</h2>
+      </div>
+      <ProjectList cards={projectData as ProjectData[]}/>
+    </section>
   )
 }

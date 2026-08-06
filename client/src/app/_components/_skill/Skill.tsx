@@ -7,9 +7,11 @@ export default function Skill() {
   const { t } = useSettings()
 
   return (
-    <div className='skill' id='skill'>
-      <h2>{t('skills')}</h2>
-      <SkillList itemList={skillsData}/>
-    </div>
+    <section className='panel' id='skill'>
+      <div className='panel__inner'>
+        <h2 className='panel__title'>{t('skills')}</h2>
+        <SkillList itemList={skillsData}/>
+      </div>
+    </section>
   )
 }

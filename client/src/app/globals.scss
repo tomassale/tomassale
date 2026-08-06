@@ -1,910 +1,779 @@
-//DISPLAYS
-$miniMobile: "max-width: 360px";
-$mobile: "min-width: 361px) and (max-width: 767px";
-$largeMobile: "min-width: 361px) and (max-width: 767px) and (min-height: 700px) and (max-height: 1000px";
-$tablet: "min-width: 768px) and (max-width: 870px";
-$largeTablet: "min-width: 871px) and (max-width: 1024px";
-$notebook: "min-width: 1025px) and (max-width: 1439px";
-$medium: "min-width: 1440px) and (max-width: 1900px";
-$desktop: "min-width: 1901px";
+//=====================================================================
+//  Tomás Sale — portfolio
+//
+//  Paleta tomada de su propio banner: azul noche con cian eléctrico.
+//  Estructura: recorrido horizontal por paneles (abajo de 900px vuelve
+//  a ser vertical, sin cambiar el markup).
+//=====================================================================
 
-//DISPLAYS LANDSCAPE
-$mobileLandscape: "max-width: 950px) and (orientation: landscape) and (max-height: 600px";
-$largeMobileLandscape: "min-width: 700px) and (max-width: 1000px) and (orientation: landscape) and (min-height: 361px) and (max-height: 767px";
-$tabletLandscape: "min-width: 768px) and (max-width: 1112px) and (orientation: landscape) and (min-height: 768px";
-$largeTabletLandscape: "min-width: 1113px) and (max-width: 1366px) and (orientation: landscape) and (min-height: 1024px";
+:root {
+  --night: #050b1e;    // fondo
+  --night-2: #0b1430;  // paneles y tarjetas
+  --night-3: #131e42;  // superficies elevadas
+  --ink: #e6ecff;
+  --ink-dim: #8290c2;
+  --volt: #22e4ff;     // cian eléctrico
+  --volt-2: #3d5afe;   // azul eléctrico, extremo frío del degradado
+  --glow: rgba(34, 228, 255, 0.4);
+  --line: rgba(130, 144, 194, 0.22);
+  --danger: #ff6b6b;
 
-@mixin titles{
-  text-align: center;
-  font-size: 4rem;
-  padding-bottom: 2rem;
-  color: blue;
+  --t-hero: clamp(2.6rem, 6.5vw, 5.6rem);
+  --t-title: clamp(1.8rem, 3.4vw, 3rem);
+  --t-lead: clamp(1rem, 1.15vw, 1.15rem);
+
+  --nav-h: 60px;
+  --bar-h: 64px;
+  --gutter: clamp(1.25rem, 5vw, 4.5rem);
+  --content: 1180px;
 }
 
-//Mixins
-@mixin border-gradient{
-  background: linear-gradient(#212121, #212121) padding-box,
-  linear-gradient(145deg, transparent 35%,#e81cff, #40c9ff) border-box;
-  border: 2px solid transparent;
-  border-radius: 16px;
-  box-sizing: border-box;
-  animation: gradient 5s ease infinite;
+html[data-theme='light'] {
+  --night: #eef1fb;
+  --night-2: #ffffff;
+  --night-3: #e4e9fa;
+  --ink: #0a1233;
+  --ink-dim: #58628f;
+  // El cian puro no se lee sobre papel: en claro la tinta se profundiza.
+  --volt: #0b78c8;
+  --volt-2: #3149e0;
+  --glow: rgba(11, 120, 200, 0.22);
+  --line: rgba(10, 18, 51, 0.16);
+  --danger: #c22c2c;
 }
 
-@mixin divs{
-  position: relative;
-  min-height: min-content; // el alto lo da el contenido, no un 100vh fijo -> menos espacio vacío entre secciones
-  width: 100%;
-  padding-bottom: 4rem;    // separación controlada entre secciones (antes surgía del hueco de 100vh)
-  scroll-snap-align: center;
-  scroll-snap-stop: normal;
-}
-
-//Keyframes
-@keyframes gradient {
-  0% { background-position: 0% 50% }
-  50% { background-position: 100% 50% }
-  100% { background-position: 0% 50% }
-}
-
-
-//General Styles
-*{
-  padding: 0;
+//---------------------------------------------------------------- base
+* {
   margin: 0;
+  padding: 0;
+  // border-box en todo: la altura del recorrido se calcula restando la
+  // barra y el riel, y sus bordes tienen que entrar en esa cuenta.
+  box-sizing: border-box;
   list-style: none;
-  -webkit-tap-highlight-color: transparent; // sin recuadro azul al tocar en táctiles
-  a{
-    text-decoration: none;
-    cursor: pointer;
-    color: inherit;
-    user-select: none;
-    -webkit-user-drag: none;            
-  }
-  button{
-    background: none;
-    border: none;
-    padding: 0;
-    font: inherit;
-    color: inherit;
-    cursor: pointer;
-    outline: none;
-    user-select: none;         // el texto del botón no se puede seleccionar/subrayar
-    -webkit-user-select: none;
-  }
-  h2{
-    @include titles();
-    text-align: center;
-    color: #e0e0e0;
-    padding-top: 5%;
-    margin-bottom: 5%;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  }
-  ::-moz-selection, ::selection{
-    background: #8c00ff;
-    color: whitesmoke;
-  }
+  -webkit-tap-highlight-color: transparent;
 }
 
-
-//Styles
-html{
-  background-color: #0a0a0a;
-  background-image: 
-    linear-gradient(#1f1f1f 1px, transparent 1px),
-    linear-gradient(90deg, #1f1f1f 1px, transparent 1px);
-  background-size: 40px 40px;
-  width: 100vw;
-  height: 100vh;
-  overflow-x: hidden; // evita scroll horizontal por los reveals con translateX
-
-  ::-webkit-scrollbar {
-    width: 0;
-  }
-  .webDev{
-    height: 100vh;
-    width: 100%;
-    //-------------------------Encabezado-------------------------//
-    .navbar{
-      color: whitesmoke;
-      background-color: rgba(29, 29, 29, 0.8);
-      display: flex;
-      align-items: center; // centra verticalmente logo, links, íconos y controles
-      position: fixed;
-      top: 0;
-      width: 100%;
-      box-sizing: border-box; // el padding no ensancha la barra más allá del viewport
-      height: 5%;
-      backdrop-filter: blur(8px);
-      z-index: 2;
-      .logo{
-        font-family: 'Dancing Script', cursive;
-        font-size: 200%;
-        margin-left: 8%;
-        padding: 0.35%;
-        flex-shrink: 0;
-        white-space: nowrap;
-      }
-      .barra{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute; // centrada respecto del viewport, sin depender
-        left: 50%;          // del ancho de logo/íconos/controles laterales
-        top: 50%;
-        transform: translate(-50%, -50%);
-        a{
-            white-space: nowrap;
-            margin-left: 25px;
-            padding: 14px 30px;
-            font-size: 20px;
-            transition: color 0.4s ease, transform 0.3s ease;
-            &:hover{
-              color: #e81cff;
-            }
-        }
-      }
-      .icons{
-        margin: 0.5% 0 0 auto; // margin-left auto -> empuja el grupo derecho (íconos + controles)
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        flex-shrink: 0; // no se encoge al cambiar de idioma -> los íconos no se mueven
-        a{
-          img{
-            width: 28px;   // tamaño fijo -> no cambian de forma entre en/es
-            height: 28px;
-            margin-left: 0;
-          }
-        }
-      }
-    }
-    //-------------------------Sobre mi-------------------------//
-    @keyframes heroFadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .aboutMe{
-      @include divs();
-      text-align: center;
-      margin-top:5%;
-
-      h2, h4, .description {
-        animation: heroFadeIn 0.7s ease backwards;
-      }
-      h2 { animation-delay: 0.1s; }
-      h4 { animation-delay: 0.3s; }
-      .description { animation-delay: 0.5s; }
-
-      .description{
-        color: rgb(255, 255, 255);
-        font-size: 2rem;
-        text-shadow: 0 0 2px #ffffff, 0 0 4px #ffffff, 0 0 6px #000000, 0 0 8px #000000;
-        margin: 3rem auto;
-        width: 60%;
-        text-align: justify;
-        text-align-last: center;
-        padding: 5rem;
-      }
-      h4{
-        color: #fab6fa;
-        text-shadow: 0 0 2px #b8b8b8, 0 0 4px #b8b8b8, 0 0 6px #000000, 0 0 8px #000000;
-        font-size: 40px;
-        margin-top: -40;
-      }
-    }
-    //-------------------------Conocimiento-------------------------//
-    @keyframes skillFadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .skill {
-      @include divs();
-      
-      .skillContainer {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-        justify-content: center;
-        width: 100%;
-        justify-items: center;
-        align-items: center;
-        gap: 1rem;
-        
-        .skillsSelector {
-          display: flex;
-          gap: 4rem;
-          margin-bottom: 6rem;
-          
-          button {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.85rem;
-            cursor: pointer;
-            transition: color 0.4s ease, transform 0.3s ease;
-            
-            &:hover { color: #e81cff; }
-            &.active {
-              color: #b118c2;
-              transform: scale(1.1);
-            }
-          }
-        }
-        
-        .categorySection {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          align-items: center;
-          align-content: center;  // centra verticalmente el bloque de filas dentro del alto reservado
-          gap: 2rem;
-          width: 80%;
-          max-width: 800px;
-          min-height: 360px;      // alto fijo = el de "Todos" -> al cambiar de categoría no salta el layout
-          margin: 0 auto;
-
-          .imageContainer {
-            margin: 0;
-            min-width: 120px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.8rem;
-            transition: transform 0.3s ease;
-            animation: skillFadeIn 0.5s ease backwards;
-
-            &:hover {
-              transform: translateY(-5px);
-              color: #e81cff;
-            }
-            
-            img {
-              width: 60px;
-              height: 60px;
-            }
-            
-            p {
-              color: white;
-              font-size: 1.3rem;
-              text-align: center;
-            }
-          }
-        }
-      }
-    }
-    
-    //-------------------------Proyecto-------------------------//
-    .project {
-      @include divs();
-      .gridCard {
-        width: 100%;
-        max-width: 1000px;
-        margin: 0 auto;
-        padding-bottom: 50px;
-
-        .swiper-slide {
-          width: 350px;
-          height: 500px;
-          opacity: 0.4;
-          transition: all 0.3s ease;
-
-          // .is-active la maneja React desde realIndex: es confiable al retroceder,
-          // a diferencia de swiper-slide-active que se desincroniza en loop.
-          &.is-active {
-            opacity: 1;
-          }
-        }
-        .flip-card {
-          background-color: transparent;
-          perspective: 1000px;
-
-          // Las cards laterales no reaccionan: no se pueden invertir ni interactuar.
-          &:not(.is-active) {
-            pointer-events: none;
-          }
-
-          // Solo la card activa (centrada, al frente) se da vuelta al pasar el mouse.
-          &.is-active:hover .flip-card-inner {
-            transform: rotateY(180deg);
-          }
-
-          .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
-            transform-style: preserve-3d;
-
-            .flip-card-front,
-            .flip-card-back {
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              backface-visibility: hidden;
-              -webkit-backface-visibility: hidden;
-              @include border-gradient();
-              background-color: rgb(20, 20, 20);
-              overflow: hidden;
-            }
-
-            .flip-card-front {
-              display: flex;
-              flex-direction: column;
-
-              .profileMedia {
-                position: relative;
-                width: 98%;
-                height: 70%;
-                margin: 1%;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                img{
-                  border-radius: 10px;
-                }
-              }
-
-              .name {
-                font-size: 26px;
-                color: #e81cff;
-                font-weight: bold;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 15%;
-              }
-
-              .tech {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 15%;
-                gap: 12px;
-                padding-bottom: 5px;
-
-                img {
-                  object-fit: contain;
-                  filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
-                }
-              }
-            }
-
-            .flip-card-back {
-              transform: rotateY(180deg);
-              display: flex;
-              flex-direction: column;
-              justify-content: space-between; // título arriba de todo, botones abajo de todo
-              align-items: center;
-              gap: 18px;
-              padding: 28px 24px;
-
-              .back-title {
-                font-size: 24px;
-                color: #e81cff;
-                font-weight: bold;
-              }
-
-              .back-description {
-                font-size: 15px;
-                color: rgba(255, 255, 255, 0.85);
-                line-height: 1.5;
-                flex: 1;       // ocupa el espacio entre título y botones
-                min-height: 0; // permite scrollear si la descripción no entra
-                overflow-y: auto;
-                text-align: center;
-              }
-
-              .back-links {
-                display: flex;
-                gap: 14px;
-                flex-wrap: wrap;
-                justify-content: center;
-
-                a {
-                  padding: 10px 20px;
-                  border-radius: 8px;
-                  font-size: 15px;
-                  font-weight: 600;
-                  color: #fff;
-                  background: linear-gradient(145deg, #e81cff, #40c9ff);
-                  transition: transform 0.2s ease, filter 0.2s ease;
-
-                  &:hover {
-                    transform: translateY(-2px);
-                    filter: brightness(1.15);
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    //-------------------------Contacto-------------------------//
-    .contact{
-      @include divs();
-      .form-container {
-        width: 800px;
-        margin-inline: auto;
-        margin-bottom: 5%;
-        @include border-gradient();
-        padding: 32px 24px;
-        font-size: 16px;
-        font-family: inherit;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        background-size: 200% 100%;
-        button:active {
-          scale: 0.95;
-        }
-        .form {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-        }
-        .form-group {
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
-          label {
-            display: block;
-            margin: 7px 0 7px 10px;
-            color: #717171;
-            font-weight: 600;
-            font-size: 18px;
-          }
-          input {
-            width: 95%;
-            padding: 12px 16px;
-            border-radius: 8px;
-            color: #fff;
-            font-family: inherit;
-            background-color: transparent;
-            font-size: 17px;
-            border: 1px solid #414141;
-          }
-          textarea {
-            width: 95%;
-            padding: 12px 16px;
-            border-radius: 8px;
-            resize: none;
-            color: #fff;
-            height: 96px;
-            border: 1px solid #414141;
-            background-color: transparent;
-            font-family: inherit;
-            font-size: 17px;
-          }
-          input::placeholder {
-            opacity: 0.5;
-          }
-          input:focus {
-            outline: none;
-            border-color: #e81cff;
-          }
-          textarea:focus {
-            outline: none;
-            border-color: #e81cff;
-          }
-        }
-        .form-submit-btn {
-          display: flex;
-          justify-content: center;
-          align-self: flex-end;
-          font-family: inherit;
-          color: #717171;
-          font-weight: 600;
-          width: 40%;
-          background: #313131;
-          border: 1px solid #414141;
-          padding: 12px 16px;
-          font-size: inherit;
-          gap: 8px;
-          margin-top: 8px;
-          cursor: pointer;
-          border-radius: 6px;
-          &:hover {
-            background-color: #474747;
-            border-color: #942fa1;
-          }
-        }
-      }
-    }
-    //-------------------------Pie de pagina-------------------------//
-    .footer{
-      background-color: rgba(20, 20, 20, 0.8);
-      color: whitesmoke;
-      height: 70px;
-      h5{
-        text-align: center;
-        font-size: 27px;
-        padding-top: 20px;
-        a{
-          color: rgb(179, 179, 179);
-          transition: color 0.6s ease, filter 0.6s ease;
-          &:hover{
-            color: rgba(255,255,255,0.9)
-          }
-        }
-      }
-    }
-  }
-}
-
-//-------------------------Scroll reveal-------------------------//
-.reveal {
-  opacity: 0;
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-
-  &.reveal--up { transform: translateY(50px); }
-  &.reveal--down { transform: translateY(-50px); }
-  &.reveal--left { transform: translateX(-70px); }
-  &.reveal--right { transform: translateX(70px); }
-  &.reveal--zoom { transform: scale(0.85); }
-
-  // El estado visible resetea cualquier variante.
-  &.reveal--visible {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-// Transición suave al cambiar de tema (dark/light).
-// Solo color/fondo/borde: NO incluye transform ni opacity, así no interfiere
-// con las animaciones de entrada (heroFadeIn, skillFadeIn, reveal, flip).
 *,
 *::before,
 *::after {
-  transition: background-color 1s ease, color 1s ease, border-color 1s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+html {
+  background: var(--night);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-user-drag: none;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+img { max-width: 100%; }
+
+::selection {
+  background: var(--volt);
+  color: var(--night);
+}
+
+:focus-visible {
+  outline: 2px solid var(--volt);
+  outline-offset: 3px;
+}
+
+// Los contenedores que se desplazan lo hacen guiados por el recorrido, el
+// riel o la marquesina: sus barras de scroll no aportan y ensucian.
+// Hace falta la regla de cada motor — `::-webkit-scrollbar` sola deja la
+// barra a la vista en Firefox.
+@mixin hide-scrollbar {
+  scrollbar-width: none;         // Firefox
+  -ms-overflow-style: none;      // Edge heredado
+  &::-webkit-scrollbar {         // Chrome, Edge, Safari
+    width: 0;
+    height: 0;
+  }
+}
+
+//----------------------------------------------- el recorrido horizontal
+.deck {
+  display: flex;
+  height: calc(100dvh - var(--nav-h) - var(--bar-h));
+  overflow-x: auto;
+  overflow-y: hidden;
+  // proximity y no mandatory: guía el descanso entre paneles sin atrapar
+  // al que quiere frenar en medio del riel de proyectos.
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+  @include hide-scrollbar;
+}
+
+.panel {
+  // basis en % y no en vw: descuenta la barra de scroll vertical.
+  flex: 0 0 100%;
+  height: 100%;
+  // overflow-y auto obliga a overflow-x a computar auto: sin esconderla,
+  // cada panel dibuja su propia barra horizontal abajo.
+  overflow-y: auto;
+  @include hide-scrollbar;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: flex-start;
+  padding-inline: var(--gutter);
+}
+
+// Los proyectos son un carrusel propio: el título respeta el ancho de
+// contenido y la marquesina llega a los bordes de la pantalla.
+.panel--projects {
+  flex-direction: column;
+  justify-content: center;
+  padding-inline: 0;
+
+  .panel__inner {
+    margin: 0 auto;
+    padding-inline: var(--gutter);
+  }
+}
+
+.panel__inner {
+  width: 100%;
+  max-width: var(--content);
+  // margin auto y no align-items:center: cuando el contenido no entra,
+  // los márgenes se resuelven en 0 y el tope sigue siendo alcanzable.
+  margin: auto;
+  padding-block: clamp(1.5rem, 4vh, 3rem);
+}
+
+.panel__title {
+  font-size: var(--t-title);
+  margin-bottom: clamp(1.5rem, 3.5vw, 2.5rem);
+}
+
+//--------------------------------------------------------------- navbar
+.navbar {
+  position: relative;
+  z-index: 10;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 2.5vw, 2rem);
+  padding-inline: var(--gutter);
+  border-bottom: 1px solid var(--line);
+
+  .logo {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1.02rem;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+    span { color: var(--volt); }
+  }
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1.75rem);
+  margin-left: auto;
+
+  button {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink-dim);
+    padding: 0.3em 0;
+    transition: color 0.2s ease;
+
+    &:hover { color: var(--ink); }
+    &.is-active { color: var(--volt); }
+  }
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-shrink: 0;
+
+  a, button {
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.5rem 0.6rem;
+    border-radius: 6px;
+    color: var(--ink-dim);
+    transition: color 0.2s ease, background-color 0.2s ease;
+
+    &:hover {
+      color: var(--volt);
+      background: var(--night-3);
+    }
+  }
+}
+
+//----------------------------------------------------------------- hero
+.panel--hero {
+  position: relative;
+  overflow: hidden;
+}
+
+// El campo de ondas del banner. Vive detrás del texto y solo en el
+// primer panel: es el único gesto decorativo de la página.
+.waveField {
+  position: absolute;
+  inset: auto 0 -8% 0;
+  width: 100%;
+  height: 78%;
+  pointer-events: none;
+
+  path {
+    fill: none;
+    stroke: var(--volt);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+    transform-box: view-box; // el desplazamiento se mide en unidades del viewBox
+    transform-origin: 0 0;
+    // Cada línea trae su propia duración desde WaveField: la deriva en
+    // parallax es lo que da profundidad al campo.
+    animation: waveDrift 26s linear infinite;
+  }
+}
+
+// 500 es exactamente una longitud de onda: el bucle cierra sin salto.
+@keyframes waveDrift {
+  to { transform: translateX(-500px); }
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+  max-width: 46rem;
+}
+
+.hero__name {
+  font-size: var(--t-hero);
+  margin-bottom: 0.6rem;
+
+  span {
+    background: linear-gradient(100deg, var(--volt), var(--volt-2));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
+
+.hero__role {
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  font-weight: 600;
+  color: var(--volt);
+  margin-bottom: 1.5rem;
+}
+
+.hero__description {
+  font-size: var(--t-lead);
+  color: var(--ink-dim);
+  text-wrap: pretty;
+}
+
+.hero__cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: clamp(1.5rem, 4vh, 2.5rem);
+  font-weight: 600;
+  color: var(--volt);
+
+  span { transition: transform 0.25s ease; }
+  &:hover span { transform: translateX(5px); }
+}
+
+//--------------------------------------------------------------- skills
+.skillsSelector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+
+  button {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink-dim);
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+
+    &:hover { color: var(--ink); }
+
+    &.active {
+      color: var(--volt);
+      border-color: var(--volt);
+      background: var(--night-3);
+    }
+  }
+}
+
+.skillFlow {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+
+.skillChip {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  font-weight: 600;
+  background: var(--night-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  transition: opacity 0.35s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+
+  img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--volt);
+    box-shadow: 0 0 0 1px var(--volt), 0 6px 24px -8px var(--glow);
+  }
+
+  // Filtrar atenúa en vez de desmontar: cero salto de layout y se sigue
+  // viendo el stack completo.
+  &--dim {
+    opacity: 0.2;
+    pointer-events: none;
+  }
+}
+
+//------------------------------------------------------------ proyectos
+//---------------------------------------------------------- marquesina
+.marquee {
+  overflow: hidden;
+  // El recorte del overflow cae en el borde del padding: sin este aire, el
+  // hover de la tarjeta (sube 4px y tira sombra hacia abajo) queda cortado.
+  padding-block: 0.5rem 1.5rem;
+  cursor: grab;
+  user-select: none; // arrastrar no selecciona el texto de las tarjetas
+  // pan-y: el arrastre horizontal es nuestro, el scroll vertical del
+  // navegador sigue siendo del navegador.
+  touch-action: pan-y;
+
+  &:active { cursor: grabbing; }
+}
+
+.marquee__track {
+  display: flex;
+  align-items: stretch;
+  width: max-content;
+  will-change: transform;
+}
+
+.cardSet {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(1rem, 2vw, 1.75rem);
+  // El mismo hueco entre las dos copias que entre tarjetas, para que el
+  // salto del bucle sea invisible.
+  padding-right: clamp(1rem, 2vw, 1.75rem);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  height: 100%;
+  background: var(--night-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--volt);
+    box-shadow: 0 14px 40px -18px var(--glow);
+  }
+}
+
+.card__shot {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--night-3);
+  flex-shrink: 0;
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+    user-select: none;
+  }
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.card__title { font-size: 1.2rem; }
+
+.card__description {
+  font-size: 0.92rem;
+  color: var(--ink-dim);
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  @include hide-scrollbar;
+}
+
+.card__tech {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    opacity: 0.6;
+  }
+}
+
+.card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+// Enlace-botón: contorno por defecto, relleno con degradado para la
+// acción principal.
+.boltLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.6rem 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    color: var(--volt);
+    border-color: var(--volt);
+  }
+
+  &--solid {
+    color: var(--night);
+    border-color: transparent;
+    background: linear-gradient(100deg, var(--volt), var(--volt-2));
+
+    &:hover:not(:disabled) {
+      color: var(--night);
+      box-shadow: 0 6px 22px -8px var(--glow);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: progress;
+  }
+}
+
+html[data-theme='light'] .boltLink--solid { color: #ffffff; }
+
+//------------------------------------------------------------- contacto
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink-dim);
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem 0.9rem;
+    font-family: inherit;
+    font-size: 0.98rem;
+    color: var(--ink);
+    background: var(--night-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &::placeholder { color: var(--ink-dim); opacity: 0.65; }
+
+    &:focus {
+      outline: none;
+      border-color: var(--volt);
+      box-shadow: 0 0 0 3px var(--glow);
+    }
+  }
+
+  textarea {
+    height: 120px;
+    resize: none;
+  }
+}
+
+.form__field { position: relative; }
+
+.form__counter {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.6rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  color: var(--ink-dim);
+  pointer-events: none;
+
+  &--full { color: var(--danger); }
+}
+
+.form__feedback {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--volt);
+
+  &--error { color: var(--danger); }
+}
+
+.contact__direct {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.contact__directTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-dim);
+  margin-bottom: 0.25rem;
+}
+
+//----------------------------------------------- riel de avance + crédito
+.deckBar {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  height: var(--bar-h);
+  padding-inline: var(--gutter);
+  border-top: 1px solid var(--line);
+}
+
+.rail {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  flex: 1;
+  min-width: 0;
+}
+
+.rail__steps {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.75rem);
+}
+
+.rail__step {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: var(--ink-dim);
+  transition: color 0.2s ease;
+
+  &:hover { color: var(--ink); }
+  &--active { color: var(--volt); }
+}
+
+// Los paneles sí son una secuencia: acá el número dice en qué tramo del
+// recorrido estás, no es ornamento.
+.rail__index {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  opacity: 0.75;
+}
+
+.rail__label {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.rail__track {
+  flex: 1;
+  min-width: 60px;
+  height: 2px;
+  background: var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.rail__progress {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--volt-2), var(--volt));
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
+.credit {
+  font-size: 0.78rem;
+  color: var(--ink-dim);
+  flex-shrink: 0;
+
+  a {
+    color: var(--ink);
+    &:hover { color: var(--volt); }
+  }
+}
+
+//------------------------------------------------- logos monocromáticos
+// Los SVG blancos desaparecen sobre el papel del tema claro.
+html[data-theme='light'] {
+  .skillChip img[alt='Expo Logo'],
+  .skillChip img[alt='Express Logo'],
+  .skillChip img[alt='GitHub Logo'] {
+    filter: invert(1);
+  }
+
+  // el delfín blanco de MySQL, sobre su teal característico
+  .skillChip img[alt='SQL Logo'] {
+    background: #00758f;
+    border-radius: 4px;
+    padding: 2px;
+    box-sizing: border-box;
+  }
+}
+
+//=================== VERTICAL (mobile y tablet) ===================//
+
+@media (max-width: 899px) {
+  .deck {
+    display: block;
+    height: auto;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .panel {
+    height: auto;
+    overflow: visible;
+    padding-block: clamp(3rem, 9vw, 5rem);
+    scroll-margin-top: var(--nav-h);
+  }
+
+  .panel--hero { min-height: 78dvh; }
+
+  .navbar {
+    position: sticky;
+    top: 0;
+    background: var(--night);
+    height: auto;
+    flex-wrap: wrap;
+    padding-block: 0.6rem;
+    row-gap: 0.4rem;
+  }
+
+  .barra {
+    order: 10;
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+  }
+
+  .navActions { margin-left: auto; }
+
+  // El riel guía un recorrido horizontal; en vertical no aporta nada.
+  .rail__steps, .rail__track { display: none; }
+
+  .deckBar {
+    height: auto;
+    padding-block: 1.25rem;
+    justify-content: center;
+  }
+
+  .contact { grid-template-columns: 1fr; }
+}
+
+// En pantallas angostas el riel conserva los números y suelta las
+// etiquetas: sigue diciendo dónde estás sin empujar al crédito.
+@media (min-width: 900px) and (max-width: 1150px) {
+  .rail__label { display: none; }
+}
+
+@media (max-width: 560px) {
+  .skillFlow { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+
+  // La marquesina sigue siendo horizontal en mobile; solo achica la tarjeta.
+  .card { width: 270px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
+  .waveField path { animation: none; }
+
+  .card,
+  .skillChip,
+  .hero__cue span {
     transition: none;
   }
-}
 
-//-------------------------Controles (idioma / tema)-------------------------//
-.settingsControls {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-left: 14px;  // a la derecha de los íconos (redes y CVs)
-  margin-right: 3%;   // un poco despegado del borde derecho del navbar
-  flex-shrink: 0;     // no se encoge al cambiar de idioma
-
-  button {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: whitesmoke;
-    background: rgba(29, 29, 29, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    cursor: pointer;
-    transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-
-    &:hover {
-      transform: scale(1.12);
-      background: #b118c2;
-      border-color: #e81cff;
-    }
-    &:active { transform: scale(0.95); }
-  }
-}
-
-//-------------------------Tema claro-------------------------//
-html[data-theme='light'] {
-  background-color: #f4f4f5;
-  background-image:
-    linear-gradient(#e2e2e5 1px, transparent 1px),
-    linear-gradient(90deg, #e2e2e5 1px, transparent 1px);
-
-  h2 {
-    color: #1a1a1a;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
-  }
-
-  .navbar {
-    color: #1a1a1a;
-    background-color: rgba(244, 244, 245, 0.85);
-    .barra a:hover { color: #b118c2; }
-    // el logo de GitHub (blanco) se invierte a negro solo en tema claro
-    .icons a img[alt='github'] { filter: invert(1); }
-  }
-
-  .aboutMe {
-    h4 { color: #b118c2; text-shadow: none; }
-    .description { color: #2a2a2a; text-shadow: none; }
-  }
-
-  .skill .skillContainer { // .skillContainer necesario para superar la especificidad del color base
-    .skillsSelector button {
-      color: #1a1a1a;
-      &.active { color: #b118c2; }
-    }
-    .categorySection .imageContainer p { color: #1a1a1a; }
-
-    // logos blancos (invisibles sobre fondo claro) -> se invierten a negro
-    .categorySection .imageContainer img[alt='Expo Logo'],
-    .categorySection .imageContainer img[alt='Express Logo'],
-    .categorySection .imageContainer img[alt='GitHub Logo'] {
-      filter: invert(1);
-    }
-
-    // delfín blanco de MySQL sobre su teal característico
-    .categorySection .imageContainer img[alt='SQL Logo'] {
-      background-color: #00758f;
-      border-radius: 10px;
-      padding: 6px;
-      box-sizing: border-box; // el padding no agranda el ícono (sigue en 60px)
-    }
-  }
-
-  .project .flip-card .flip-card-inner {
-    .flip-card-front,
-    .flip-card-back {
-      background-color: #ffffff;
-    }
-    .flip-card-front .name { color: #b118c2; }
-    .flip-card-back {
-      .back-title { color: #b118c2; }
-      .back-description { color: #3a3a3a; }
-    }
-  }
-
-  .contact .form-container {
-    color: #1a1a1a;
-    .form-group {
-      label { color: #4a4a4a; }
-      input,
-      textarea {
-        color: #fff; // el fondo de la tarjeta sigue oscuro (border-gradient) también en claro
-        border-color: #c8c8c8;
-      }
-    }
-    .form-submit-btn {
-      color: #4a4a4a;
-      background: #e8e8e8;
-      border-color: #c8c8c8;
-      &:hover { background-color: #dcdcdc; border-color: #942fa1; }
-    }
-  }
-
-  .footer {
-    background-color: rgba(230, 230, 232, 0.9);
-    color: #1a1a1a;
-    h5 a {
-      color: #6a6a6a;
-      &:hover { color: #1a1a1a; }
-    }
-  }
-
-  .settingsControls button {
-    color: #1a1a1a;
-    background: rgba(255, 255, 255, 0.85);
-    border-color: rgba(0, 0, 0, 0.2);
-    
-  }
-}
-
-//===================== RESPONSIVE =====================//
-
-// ---------- Tablet (768px - 1024px) ----------
-@media (max-width: 1024px) {
-  html .webDev {
-    h2 { font-size: 3rem; }
-
-    .navbar {
-      .logo { display: none; } // sin logo en tablet y mobile
-      .barra { a { padding: 8px 10px; font-size: 15px; margin-left: 6px; } }
-      .icons { margin: 0 0 0 auto; width: auto; display: flex; align-items: center; gap: 8px;
-        a img { width: 24px; height: 24px; margin-left: 0; }
-        a img:nth-child(1) { height: 24px; }
-      }
-      .settingsControls { margin-left: 12px; margin-right: 2%; button { width: 30px; height: 30px; font-size: 0.75rem; } }
-    }
-
-    .aboutMe .description { width: 80%; font-size: 1.4rem; padding: 2rem; }
-
-    .skill .skillContainer {
-      .skillsSelector { gap: 2rem; flex-wrap: wrap; margin-bottom: 3rem; button { font-size: 1.4rem; } }
-      .categorySection { width: 90%; .imageContainer { min-width: 100px; } }
-    }
-
-    .contact .form-container { width: 90%; max-width: 640px; }
-  }
-}
-
-// ---------- Mobile (<= 767px) ----------
-@media (max-width: 767px) {
-  html {
-    background-size: 30px 30px;
-  }
-  html .webDev {
-    height: auto;
-
-    h2 { font-size: 2rem; padding-top: 0; margin-bottom: 6%; }
-
-    // ----- Navbar -----
-    .navbar {
-      height: auto;
-      padding: 8px 12px;
-      align-items: center;
-      flex-wrap: wrap; // dos filas: controles+íconos arriba, links abajo
-      row-gap: 4px;
-
-      .barra {
-        position: static; // vuelve al flujo: ocupa su propia fila
-        transform: none;
-        order: 10;        // después de íconos y controles
-        width: 100%;
-        justify-content: center;
-        a { padding: 6px 8px; font-size: 13px; margin-left: 0; }
-      }
-      .icons {
-        margin: 0 0 0 auto; // a la derecha
-        width: auto;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        a img { width: 22px; height: 22px; margin-left: 0; }
-        a img:nth-child(1) { height: 22px; }
-      }
-      .settingsControls { margin-left: 12px; margin-right: 4px; button { width: 30px; height: 30px; font-size: 0.75rem; } }
-    }
-
-    // ----- Secciones: alto según contenido para achicar la distancia entre ellas -----
-    .aboutMe, .skill, .project, .contact {
-      height: auto;
-      min-height: 0;
-    }
-
-    // ----- Hero -----
-    .aboutMe {
-      padding: 70px 0 20px;
-      h4 { font-size: 20px; margin-top: 0; }
-      .description {
-        width: 90%;
-        font-size: 1rem;
-        line-height: 1.6;
-        padding: 1.2rem;
-        margin: 1.5rem auto;
-        text-align: justify;
-        text-align-last: center;
-      }
-    }
-
-    // ----- Skills -----
-    .skill {
-      padding: 40px 0 20px;
-      .skillContainer {
-        gap: 0.5rem;
-        .skillsSelector {
-          gap: 0.8rem 1.2rem;
-          flex-wrap: wrap;
-          justify-content: center;
-          margin-bottom: 2.5rem;
-          padding: 0 1rem;
-          button { font-size: 1.1rem; }
-        }
-        .categorySection {
-          width: 92%;
-          gap: 1.4rem 1rem;
-          min-height: 420px; // alto de "Todos" en mobile (más filas por ser menos ítems por fila)
-          .imageContainer {
-            min-width: 78px;
-            gap: 0.5rem;
-            img { width: 42px; height: 42px; }
-            p { font-size: 0.85rem; }
-          }
-        }
-      }
-    }
-
-    // ----- Proyectos -----
-    .project {
-      padding: 40px 0 20px;
-      .gridCard {
-        .swiper-slide { width: 280px; height: 420px; }
-        .flip-card .flip-card-inner {
-          .flip-card-front .name { font-size: 22px; }
-          .flip-card-back {
-            padding: 20px 16px;
-            gap: 12px;
-            .back-title { font-size: 20px; }
-            .back-description { font-size: 13px; }
-            .back-links a { padding: 8px 16px; font-size: 14px; }
-          }
-        }
-      }
-    }
-
-    // ----- Contacto -----
-    .contact {
-      padding: 40px 0 30px;
-      .form-container {
-        width: 90%;
-        max-width: 440px;
-        padding: 24px 18px;
-        .form-group {
-          input, textarea { width: 100%; box-sizing: border-box; }
-          label { font-size: 16px; }
-        }
-        .form-submit-btn { width: 100%; align-self: stretch; }
-      }
-    }
-
-    // ----- Footer -----
-    .footer {
-      height: auto;
-      padding: 0 0 16px; // sin padding-top: la línea (hr) queda pegada arriba
-      h5 { font-size: 18px; padding: 16px 12px 0; }
-    }
-  }
-}
-
-// ---------- Landscape en mobile (poca altura) ----------
-@media (max-width: 950px) and (orientation: landscape) and (max-height: 600px) {
-  html .webDev {
-    .aboutMe, .skill, .project, .contact { height: auto; min-height: 0; padding-top: 70px; padding-bottom: 30px; }
-    h2 { font-size: 1.8rem; }
-  }
-}
-
-// ---------- Notebook (1025px - 1439px) ----------
-@media (min-width: 1025px) and (max-width: 1439px) {
-  html .webDev {
-    h2 { font-size: 3.4rem; padding-top: 4%; }
-
-    .navbar {
-      .logo { margin-left: 3%; }
-      .barra { a { padding: 10px 14px; font-size: 17px; margin-left: 8px; } }
-      .icons { margin: 0 0 0 auto; width: auto; display: flex; align-items: center; gap: 12px;
-        a img { width: 26px; height: 26px; margin-left: 0; }
-      }
-      .settingsControls { margin-left: 1rem; margin-right: 2%; }
-    }
-
-    .aboutMe .description {
-      width: 72%;
-      font-size: 1.6rem;
-      padding: 3rem;
-      margin: 2rem auto;
-    }
-
-    .skill .skillContainer {
-      .skillsSelector { gap: 3rem; button { font-size: 1.6rem; } }
-      .categorySection { width: 88%; max-width: 760px; gap: 1.6rem; }
-    }
-
-    .project .gridCard .swiper-slide { width: 320px; height: 460px; }
-
-    .contact .form-container { width: 700px; }
-  }
+  // La marquesina NO se detiene acá a propósito: mueve contenido, y si se
+  // frenara habría proyectos que solo se alcanzan arrastrando. Las ondas
+  // del encabezado sí paran, porque son decoración.
 }

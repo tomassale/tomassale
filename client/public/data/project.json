@@ -2,8 +2,8 @@
   {
     "_id": 0,
     "title": "Electro Tecnico",
-    "description": "Este proyecto de e-commerce de ropa permite a los usuarios explorar una variedad de prendas, crear cuentas, agregar productos al carrito y realizar pagos seguros en línea.",
-    "description_en": "This clothing e-commerce project allows users to browse a variety of garments, create accounts, add products to the cart and make secure online payments.",
+    "description": "Sitio institucional para un electricista matriculado. Presenta los servicios para hogares y comercios, la zona de cobertura y el pedido de presupuesto sin cargo, con contacto directo por WhatsApp o llamada.",
+    "description_en": "Institutional site for a licensed electrician. It presents the services for homes and businesses, the coverage area and the free quote request, with direct contact by WhatsApp or phone call.",
     "github": "https://github.com/tomassale/Electricista",
     "link": "https://electricista-three.vercel.app",
     "img": "/img/projects/Electricista.webp",
@@ -16,8 +16,8 @@
   { 
     "_id": 1,
     "title": "Odontology",
-    "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
-    "description_en": "This photographer website project allows users to explore portfolios, view galleries of previous work, read client testimonials and get in touch for project inquiries.",
+    "description": "Sitio para un consultorio odontológico privado. Presenta a la profesional a cargo y los tratamientos que ofrece —prótesis, endodoncia, periodoncia y estética dental—, y resuelve el pedido de turno en un solo llamado, sin formularios de por medio.",
+    "description_en": "Site for a private dental practice. It introduces the professional in charge and the treatments offered —prosthetics, endodontics, periodontics and cosmetic dentistry—, and turns the appointment request into a single phone call, with no forms in between.",
     "github": "https://github.com/tomassale/Odontologia",
     "url": "https://odontologia-gules.vercel.app",
     "img": "/img/projects/Odontologia.webp",
@@ -27,29 +27,11 @@
       "img2": "back/express.svg"
     }
   },
-  { 
+  {
     "_id": 2,
-    "title": "Venta Repuestos",
-    "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
-    "description_en": "This photographer website project allows users to explore portfolios, view galleries of previous work, read client testimonials and get in touch for project inquiries.",
-    "github": "https://github.com/tomassale/Photographer-portfolio",
-    "url": "https://github.com/tomassale/Photographer-portfolio",
-    "img": "/img/projects/coming-soon.webp",
-    "class": "flip-card",
-    "icons": {
-      "img1": "front/angular.svg",
-      "img2": "back/express.svg",
-      "img3": "back/node.svg",
-      "img4": "database/sql.svg"
-    }
-  },
-  { 
-    "_id": 3,
     "title": "Malvinas Argentinas",
-    "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
-    "description_en": "This photographer website project allows users to explore portfolios, view galleries of previous work, read client testimonials and get in touch for project inquiries.",
-    "github": "https://github.com/tomassale/Photographer-portfolio",
-    "url": "https://github.com/tomassale/Photographer-portfolio",
+    "description": "Proyecto en desarrollo.",
+    "description_en": "Work in progress.",
     "img": "/img/projects/coming-soon.webp",
     "class": "flip-card",
     "icons": {
@@ -59,11 +41,11 @@
       "img4": "database/sql.svg"
     }
   },
-  { 
-    "_id": 4,
+  {
+    "_id": 3,
     "title": "Bytek Technology",
-    "description": "Este proyecto de página para fotógrafo permite a los usuarios explorar portafolios, ver galerías de trabajos previos, leer testimonios de clientes y contactar para consultas sobre proyectos.",
-    "description_en": "This photographer website project allows users to explore portfolios, view galleries of previous work, read client testimonials and get in touch for project inquiries.",
+    "description": "Sitio corporativo de Bytek Technology: desarrollo de software a medida y de alto rendimiento, orientado al crecimiento digital de cada cliente.",
+    "description_en": "Corporate site for Bytek Technology: custom, high-performance software development aimed at each client's digital growth.",
     "github": "https://github.com/BytekTech/BytekTech",
     "url": "https://bytek-technology.vercel.app",
     "img": "/img/projects/Bytek.webp",
@@ -74,7 +56,7 @@
     }
   },
   {
-    "_id": 5,
+    "_id": 4,
     "title": "SuperYa",
     "description": "El objetivo de esta aplicación es resolver los inconvenientes habituales al hacer la compra en el supermercado: artículos olvidados, falta de control del presupuesto y recorridos ineficientes por los pasillos de la tienda. Mediante el uso de datos en tiempo real y una interfaz centrada en el usuario, SuperYa ayuda a los usuarios a ahorrar tiempo y dinero.",
     "description_en": "The goal of this application is to solve the usual inconveniences of grocery shopping: forgotten items, lack of budget control and inefficient routes through the store aisles. By using real-time data and a user-centered interface, SuperYa helps users save time and money.",

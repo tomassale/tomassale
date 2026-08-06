@@ -1,33 +1,22 @@
 "use client"
-import { Link } from "react-scroll";
-import { useSettings } from "../_settings/SettingsProvider";
-import { translateNav } from "@/lib/i18n";
+import { useDeck } from "../_deck/DeckContext";
 
-interface LinkItem {
-  id: number;
-  ref: string;
-  text: string;
-}
+// Los enlaces no saben sobre qué eje se desplaza la página: le piden al
+// recorrido que los lleve al panel.
+export default function HeaderLinks() {
+  const { panels, activeId, goTo } = useDeck()
 
-interface HeaderItemProps {
-  readonly links: LinkItem[];
-}
-
-export default function HeaderLinks({ links }: HeaderItemProps) {
-  const { lang } = useSettings()
   return (
     <nav className='barra'>
-      {links.map((link) => (
-        <Link
-          key={link.id}
-          to={link.ref}
-          smooth={true}
-          duration={500}
-          offset={-40}
-          draggable='false'
+      {panels.map((panel) => (
+        <button
+          key={panel.id}
+          className={panel.id === activeId ? 'is-active' : ''}
+          onClick={() => goTo(panel.id)}
+          aria-current={panel.id === activeId ? 'true' : undefined}
         >
-          {translateNav(lang, link.ref, link.text)}
-        </Link>
+          {panel.label}
+        </button>
       ))}
     </nav>
   );

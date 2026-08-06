@@ -1,4 +1,3 @@
-// SkillList.tsx
 import { useMemo, useState } from "react";
 import SkillItems from "./SkillItems";
 import SkillsSelector from "./SkillsSelector";
@@ -14,35 +13,39 @@ interface SkillListProps {
   readonly itemList: Record<string, Item[]> | null;
 }
 
+export const ALL_CATEGORIES = "All";
+
 export default function SkillList({ itemList }: SkillListProps) {
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [selectedCategory, setSelectedCategory] = useState<string>(ALL_CATEGORIES);
 
   const categoriesForSelector = useMemo(() => {
     if (!itemList) return [];
     const names = Object.keys(itemList);
-    return names.includes("All") ? names : ["All", ...names];
+    return names.includes(ALL_CATEGORIES) ? names : [ALL_CATEGORIES, ...names];
   }, [itemList]);
 
-  const itemsToRender = useMemo(() => {
+  // Se renderiza el stack completo siempre, con la categoría a cuestas:
+  // filtrar atenúa en vez de desmontar, así no hay salto de layout.
+  const items = useMemo(() => {
     if (!itemList) return [];
-    return selectedCategory === "All"
-      ? Object.values(itemList).flat()
-      : itemList[selectedCategory] || [];
-  }, [itemList, selectedCategory]);
+    return Object.entries(itemList).flatMap(([category, list]) =>
+      list.map((item) => ({ ...item, category }))
+    );
+  }, [itemList]);
 
   if (!itemList) return null;
 
   return (
-    <div className="skillContainer">
-      <SkillsSelector 
-        categories={categoriesForSelector} 
+    <>
+      <SkillsSelector
+        categories={categoriesForSelector}
         selectedCategory={selectedCategory}
-        onSelect={setSelectedCategory} 
+        onSelect={setSelectedCategory}
       />
-      
-      <div className="categorySection" key={selectedCategory}>
-        <SkillItems items={itemsToRender}/>
+
+      <div className="skillFlow">
+        <SkillItems items={items} selectedCategory={selectedCategory}/>
       </div>
-    </div>
+    </>
   )
 }

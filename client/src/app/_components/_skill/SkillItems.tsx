@@ -1,34 +1,41 @@
 import Image from 'next/image'
+import { ALL_CATEGORIES } from './SkillList'
 
-interface Items{
+interface Item {
   id: number;
   tech: string;
   src: string;
   alt: string;
+  category: string;
 }
 
-interface HeaderProps{
-  readonly items: Items[];
+interface SkillItemsProps {
+  readonly items: Item[];
+  readonly selectedCategory: string;
 }
 
-export default function SkillItems({items}: HeaderProps){
+export default function SkillItems({ items, selectedCategory }: SkillItemsProps){
+  const isFiltering = selectedCategory !== ALL_CATEGORIES
+
   return(
     <>
-      {items.map((skill:Items, index: number) => (
-        <div
-          className='imageContainer'
-          key={`${skill.tech}-${index}`}
-          style={{ animationDelay: `${index * 0.05}s` }}
-        >
-          <Image 
-            src={skill.src}
-            alt={skill.alt}
-            width={50}
-            height={50}
-          />
-          <p>{skill.tech}</p>
-        </div>
-      ))}
+      {items.map((skill) => {
+        const dimmed = isFiltering && skill.category !== selectedCategory
+        return (
+          <span
+            className={`skillChip${dimmed ? ' skillChip--dim' : ''}`}
+            key={`${skill.category}-${skill.tech}`}
+          >
+            <Image
+              src={skill.src}
+              alt={skill.alt}
+              width={24}
+              height={24}
+            />
+            {skill.tech}
+          </span>
+        )
+      })}
     </>
   )
 }

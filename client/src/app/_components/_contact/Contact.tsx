@@ -1,6 +1,9 @@
 "use client"
 import { useState, ChangeEvent, FormEvent } from "react"
 import { useSettings } from "../_settings/SettingsProvider"
+import { translateLink } from "@/lib/i18n"
+import { safeHref } from "@/lib/url"
+import headerData from "../../../../public/data/header.json"
 
 interface FormData {
   number: string
@@ -8,8 +11,14 @@ interface FormData {
   message: string
 }
 
+const MESSAGE_MAX_LENGTH = 500
+
+// El servidor rechazó el envío con un motivo que ya es mostrable al usuario.
+// Se distingue de una falla de red, que no dice nada útil y va traducida.
+class ContactError extends Error {}
+
 export default function Contact() {
-  const { t } = useSettings()
+  const { t, lang } = useSettings()
   const [formData, setFormData] = useState<FormData>({
     number: "",
     email: "",
@@ -42,7 +51,7 @@ export default function Contact() {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || t('sendError'))
+        throw new ContactError(data.error || t('sendError'))
       }
 
       setSuccess(true)
@@ -52,8 +61,12 @@ export default function Contact() {
         message: "",
       })
     } catch (error) {
-      if(error instanceof Error) {
-        setErrorMessage(error.message || t('connectionError'))
+      if (error instanceof ContactError) {
+        setErrorMessage(error.message)
+      } else if (error instanceof TypeError) {
+        // fetch solo tira TypeError cuando la petición no llegó a salir:
+        // el "Failed to fetch" del navegador no le sirve a nadie.
+        setErrorMessage(t('connectionError'))
       } else {
         setErrorMessage(t('unexpectedError'))
       }
@@ -63,87 +76,97 @@ export default function Contact() {
     }
   }
 
+  const messageLength = formData.message.length
+  const messageIsFull = messageLength >= MESSAGE_MAX_LENGTH
+
   return (
-    <div className="contact" id="contact">
-      <h2 className="titleContact">{t('contactMe')}</h2>
-      <div className="formContainer">
-        <div className="form-container">
+    <section className="panel" id="contact">
+      <div className="panel__inner">
+        <h2 className="panel__title">{t('contactMe')}</h2>
+
+        <div className="contact">
           <form className="form" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="email">{t('emailLabel')}</label>
-              <input
-                name="email"
-                id="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                placeholder={t('emailPlaceholder')}
-              />
-              <label htmlFor="phone">{t('phoneLabel')}</label>
-              <input
-                name="number"
-                id="phone"
-                type="tel"
-                value={formData.number}
-                onChange={handleChange}
-                required
-                placeholder={t('phonePlaceholder')}
-              />
+            <div className="form__row">
+              <div className="form-group">
+                <label htmlFor="email">{t('emailLabel')}</label>
+                <input
+                  name="email"
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder={t('emailPlaceholder')}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="phone">{t('phoneLabel')}</label>
+                <input
+                  name="number"
+                  id="phone"
+                  type="tel"
+                  value={formData.number}
+                  onChange={handleChange}
+                  required
+                  placeholder={t('phonePlaceholder')}
+                />
+              </div>
             </div>
+
             <div className="form-group">
               <label htmlFor="message">{t('messageLabel')}</label>
-              <div style={{ position: "relative" }}>
+              <div className="form__field">
                 <textarea
-                  cols={50}
-                  rows={10}
-                  id="textarea"
+                  id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  maxLength={500}
+                  maxLength={MESSAGE_MAX_LENGTH}
                   placeholder={t('messagePlaceholder')}
                 />
-                <span
-                  style={{
-                    position: "absolute",
-                    bottom: "8px",
-                    right: "12px",
-                    fontSize: "12px",
-                    color: formData.message.length >= 500 ? "#e53e3e" : "#888",
-                    pointerEvents: "none",
-                  }}
-                >
-                  {formData.message.length}/500
+                <span className={`form__counter${messageIsFull ? ' form__counter--full' : ''}`}>
+                  {messageLength}/{MESSAGE_MAX_LENGTH}
                 </span>
               </div>
             </div>
-            
-            <button 
-              type="submit" 
-              className="form-submit-btn" 
-              disabled={loading}
-              style={{ opacity: loading ? 0.7 : 1 }}
-            >
+
+            <button type="submit" className="boltLink boltLink--solid" disabled={loading}>
               {loading ? t('sending') : t('submit')}
             </button>
 
             {success && (
-              <p style={{ color: "green", marginTop: "10px", fontWeight: "bold" }}>
+              <p className="form__feedback" role="status">
                 {t('success')}
               </p>
             )}
 
             {errorMessage && (
-              <p style={{ color: "red", marginTop: "10px", fontWeight: "bold" }}>
+              <p className="form__feedback form__feedback--error" role="alert">
                 {t('errorLabel')}: {errorMessage}
               </p>
             )}
-
           </form>
+
+          <aside className="contact__direct">
+            <p className="contact__directTitle">{t('directLinks')}</p>
+            {headerData.icons.map((icon) => (
+              <a
+                className="boltLink"
+                key={icon.id}
+                href={safeHref(icon.ref) ?? '#'}
+                target="_blank"
+                rel="noopener noreferrer"
+                draggable="false"
+                {...(icon.load ? { download: icon.load } : {})}
+              >
+                {translateLink(lang, icon.alt, icon.alt)}
+              </a>
+            ))}
+          </aside>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

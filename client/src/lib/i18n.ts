@@ -16,11 +16,14 @@ export const translations = {
     contactMe: 'Contáctame',
     loadingProjects: 'Cargando proyectos...',
     viewSite: 'Ver sitio',
+    scrollCue: 'Recorré el portfolio',
+    sectionsNav: 'Secciones',
+    directLinks: 'Enlaces directos',
     // Nav (por ref)
-    nav_aboutMe: 'SOBRE MÍ',
-    nav_skill: 'HABILIDADES',
-    nav_portfolio: 'PORTAFOLIO',
-    nav_contact: 'CONTACTO',
+    nav_aboutMe: 'Sobre mí',
+    nav_skill: 'Habilidades',
+    nav_portfolio: 'Portafolio',
+    nav_contact: 'Contacto',
     // Categorías de skills
     cat_All: 'Todas',
     'cat_Front-End': 'Front-End',
@@ -47,6 +50,10 @@ export const translations = {
     switchToSpanish: 'Cambiar a Español',
     switchToLight: 'Modo claro',
     switchToDark: 'Modo oscuro',
+    // Enlaces (por alt del ícono)
+    link_linkedin: 'LinkedIn',
+    link_github: 'GitHub',
+    link_curriculum: 'CV',
   },
   en: {
     webDeveloper: 'Web Developer',
@@ -63,11 +70,14 @@ export const translations = {
     contactMe: 'Contact Me',
     loadingProjects: 'Loading projects...',
     viewSite: 'View site',
+    scrollCue: 'Take the tour',
+    sectionsNav: 'Sections',
+    directLinks: 'Direct links',
     // Nav (por ref)
-    nav_aboutMe: 'ABOUT ME',
-    nav_skill: 'SKILLS',
-    nav_portfolio: 'PORTFOLIO',
-    nav_contact: 'CONTACT ME',
+    nav_aboutMe: 'About me',
+    nav_skill: 'Skills',
+    nav_portfolio: 'Portfolio',
+    nav_contact: 'Contact',
     // Categorías de skills
     cat_All: 'All',
     'cat_Front-End': 'Front-End',
@@ -94,6 +104,10 @@ export const translations = {
     switchToSpanish: 'Cambiar a Español',
     switchToLight: 'Light mode',
     switchToDark: 'Dark mode',
+    // Enlaces (por alt del ícono)
+    link_linkedin: 'LinkedIn',
+    link_github: 'GitHub',
+    link_curriculum: 'CV',
   },
 } as const
 
@@ -108,4 +122,9 @@ export function translateCategory(lang: Lang, category: string): string {
 export function translateNav(lang: Lang, ref: string, fallback: string): string {
   const dict = translations[lang] as Record<string, string>
   return dict[`nav_${ref}`] ?? fallback
+}
+
+export function translateLink(lang: Lang, alt: string, fallback: string): string {
+  const dict = translations[lang] as Record<string, string>
+  return dict[`link_${alt}`] ?? fallback
 }

@@ -1,21 +1,24 @@
 "use client"
 import HeaderLinks from "./HeaderLinks"
-import HeaderIcons from './HeaderIcons'
+import HeaderActions from './HeaderActions'
 import SettingsControls from '../_settings/SettingsControls'
-import { Link } from "react-scroll"
+import { useDeck } from '../_deck/DeckContext'
 import headerData from '../../../../public/data/header.json'
 
 export default function Header() {
-  const { links, icons } = headerData;
+  const { icons } = headerData;
+  const { panels, goTo } = useDeck()
 
   return (
     <header className='navbar'>
-      <Link className='logo' to='aboutMe' draggable='false'>
-        {'<TOMAS/>'}
-      </Link>
-      <HeaderLinks links={links}/>
-      <HeaderIcons icons={icons}/>
-      <SettingsControls/>
+      <button className='logo' onClick={() => goTo(panels[0].id)}>
+        <span aria-hidden='true'>&lt;</span>Tomás<span aria-hidden='true'>/&gt;</span>
+      </button>
+      <HeaderLinks/>
+      <div className='navActions'>
+        <HeaderActions actions={icons}/>
+        <SettingsControls/>
+      </div>
     </header>
   )
 }
