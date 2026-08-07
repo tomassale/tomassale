@@ -59,7 +59,6 @@ if (typeof globalThis.ResizeObserver === 'undefined') {
     unobserve() {}
     disconnect() {}
   }
-  // @ts-expect-error -- stub mínimo, no implementa el resto de la interfaz DOM
   globalThis.ResizeObserver = ResizeObserverStub
 }
 

@@ -1,17 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 395 224">
   <!--
-    Marca de la pestaña: campo pleno con el degradado del banner (cian
-    eléctrico -> azul eléctrico) y la T recortada en azul noche. Campo de
-    color en vez de acento sobre oscuro, para que se lea a 16 px y no se
-    pierda contra pestañas claras ni oscuras. El travesaño es asimétrico
-    a propósito.
+    Marca de la pestaña: el `</>` de siempre, en vector y sin fondo — el
+    degradado va sobre el trazo, así que el ícono se recorta contra
+    pestañas claras y oscuras por igual. Las coordenadas y los colores
+    salen del PNG original (395x224, #8eccff -> #dc8cfc de izquierda a
+    derecha); el trazo es de 44 con puntas redondeadas.
   -->
   <defs>
-    <linearGradient id="brand" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#22e4ff"/>
-      <stop offset="1" stop-color="#3d5afe"/>
+    <linearGradient id="brand" x1="32" y1="0" x2="362" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8eccff"/>
+      <stop offset="1" stop-color="#dc8cfc"/>
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="14" fill="url(#brand)"/>
-  <path d="M12 15h42v10H36v24H26V25H12z" fill="#050b1e"/>
+  <g fill="none" stroke="url(#brand)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M99 65 54 112 99 160"/>
+    <path d="M165 180 229 45"/>
+    <path d="M296 65 341 112 296 160"/>
+  </g>
 </svg>
