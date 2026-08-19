@@ -67,5 +67,28 @@
     "icons": {
       "img1": "front/expo.svg"
     }
+  },
+  {
+    "_id": 5,
+    "title": "Larrañaga Muebles",
+    "description": "Sitio de una mueblería que fabrica a medida. Muestra el catálogo por categoría —placares, cocinas, escritorios, living—, los trabajos ya entregados y el contacto directo. Detrás tiene un portal de administración donde el dueño carga fotos, edita el catálogo y publica los PDF sin depender de nadie.",
+    "description_en": "Site for a furniture workshop that builds to measure. It shows the catalog by category —wardrobes, kitchens, desks, living rooms—, the work already delivered and direct contact. Behind it sits an admin portal where the owner uploads photos, edits the catalog and publishes the PDFs without depending on anyone.",
+    "url": "https://www.larranagamuebles.com.ar",
+    "img": "/img/projects/Larranaga.webp",
+    "icons": {
+      "img1": "front/angular.svg",
+      "img2": "back/php.svg"
+    }
+  },
+  {
+    "_id": 6,
+    "title": "Servicios Nuñez",
+    "description": "Landing de un electricista, plomero y gasista matriculado que atiende CABA y GBA. Tiene una página por oficio con sus servicios y preguntas frecuentes, las zonas de cobertura y las opiniones de clientes; toda consulta termina en un WhatsApp con el mensaje ya escrito.",
+    "description_en": "Landing page for a licensed electrician, plumber and gas fitter working across Buenos Aires. It has one page per trade with its services and FAQs, the coverage areas and customer reviews; every enquiry ends in a WhatsApp chat with the message already written.",
+    "url": "https://serviciosnuñez.com.ar",
+    "img": "/img/projects/ServiciosNunez.webp",
+    "icons": {
+      "img1": "front/next.svg"
+    }
   }
 ]
