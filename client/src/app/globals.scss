@@ -15,6 +15,7 @@
   --volt: #22e4ff;     // cian eléctrico
   --volt-2: #3d5afe;   // azul eléctrico, extremo frío del degradado
   --glow: rgba(34, 228, 255, 0.4);
+  --volt-soft: rgba(34, 228, 255, 0.08); // relleno apenas insinuado
   --line: rgba(130, 144, 194, 0.22);
   --danger: #ff6b6b;
 
@@ -38,6 +39,7 @@ html[data-theme='light'] {
   --volt: #0b78c8;
   --volt-2: #3149e0;
   --glow: rgba(11, 120, 200, 0.22);
+  --volt-soft: rgba(11, 120, 200, 0.1);
   --line: rgba(10, 18, 51, 0.16);
   --danger: #c22c2c;
 }
@@ -683,22 +685,110 @@ html[data-theme='light'] .boltLink--solid { color: #ffffff; }
   }
 }
 
-//------------------------------------------------- logos monocromáticos
-// Los SVG blancos desaparecen sobre el papel del tema claro.
-html[data-theme='light'] {
-  .skillChip img[alt='Expo Logo'],
-  .skillChip img[alt='Express Logo'],
-  .skillChip img[alt='GitHub Logo'] {
-    filter: invert(1);
+//---------------------------------------------------------- cursor propio
+// El puntero del sistema se apaga solo si el componente llegó a montarse
+// (él pone la clase), así nadie se queda sin cursor por un fallo del script.
+html.has-cursorTrail,
+html.has-cursorTrail * {
+  cursor: none;
+}
+
+// El caret de los campos de texto es información, no decoración: se queda.
+html.has-cursorTrail input,
+html.has-cursorTrail textarea {
+  cursor: text;
+}
+
+.cursorTrail {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+
+  &__dot,
+  &__ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    // `translate` lo escribe el bucle del hook con la posición del mouse;
+    // acá `transform` solo centra la figura y le da la forma del estado.
+    transform: translate(-50%, -50%);
+    transition: transform 0.18s ease, opacity 0.18s ease, border-color 0.18s ease;
+    will-change: translate, transform;
   }
 
-  // el delfín blanco de MySQL, sobre su teal característico
-  .skillChip img[alt='SQL Logo'] {
-    background: #00758f;
-    border-radius: 4px;
-    padding: 2px;
-    box-sizing: border-box;
+  // Cuadrado y no círculo: el punto marca la mira, el anillo hace el redondeo.
+  &__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 2px;
+    background: var(--volt);
+    box-shadow: 0 0 12px var(--glow);
   }
+
+  &__ring {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--volt);
+    border-radius: 50%;
+    opacity: 0.45;
+  }
+
+  // Sobre algo clickeable el anillo abre y se lo come al punto.
+  &--interactive {
+    .cursorTrail__ring {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0.9;
+      background: var(--volt-soft);
+    }
+
+    .cursorTrail__dot { transform: translate(-50%, -50%) scale(0); }
+  }
+
+  // En la marquesina el anillo se achata sobre el eje del arrastre: es el
+  // reemplazo del `grab` del navegador, que acá ya no se ve.
+  &--draggable .cursorTrail__ring {
+    transform: translate(-50%, -50%) scale(1.7, 0.6);
+    opacity: 0.75;
+  }
+
+  &--pressed .cursorTrail__ring { transform: translate(-50%, -50%) scale(0.8); }
+
+  &--pressed.cursorTrail--interactive .cursorTrail__ring {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+
+  &--pressed.cursorTrail--draggable .cursorTrail__ring {
+    transform: translate(-50%, -50%) scale(1.4, 0.5);
+  }
+
+  // Mouse fuera de la ventana: se apaga sin moverse de donde quedó.
+  &--away {
+    .cursorTrail__dot,
+    .cursorTrail__ring { opacity: 0; }
+  }
+}
+
+html[data-theme='light'] .cursorTrail__ring { opacity: 0.6; }
+
+//------------------------------------------------- logos monocromáticos
+// Cada logo de un solo tono declara en logoTone.ts sobre qué fondo está
+// pensado; acá se lo da vuelta cuando el tema es el contrario, así se lee
+// igual en las skills y en las tarjetas de proyecto.
+// El tema oscuro es el default (el data-theme recién aparece al hidratar),
+// así que el logo pensado para fondo claro arranca invertido.
+.logo--onLight { filter: invert(1); }
+
+html[data-theme='light'] {
+  .logo--onDark { filter: invert(1); }
+  .logo--onLight { filter: none; }
+}
+
+// El delfín blanco de MySQL no se invierte: se apoya sobre su teal de marca.
+.logo--plate {
+  background: #00758f;
+  border-radius: 4px;
+  padding: 2px;
 }
 
 //=================== VERTICAL (mobile y tablet) ===================//
@@ -770,6 +860,14 @@ html[data-theme='light'] {
   .card,
   .skillChip,
   .hero__cue span {
+    transition: none;
+  }
+
+  // El cursor propio no se apaga acá: se apaga su demora. El anillo pasa a
+  // ir pegado al puntero (lo resuelve el hook) y los cambios de forma dejan
+  // de interpolarse, pero el cursor sigue estando.
+  .cursorTrail__dot,
+  .cursorTrail__ring {
     transition: none;
   }
 

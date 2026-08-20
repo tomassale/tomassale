@@ -62,6 +62,22 @@ if (typeof globalThis.ResizeObserver === 'undefined') {
   globalThis.ResizeObserver = ResizeObserverStub
 }
 
+// jsdom no implementa matchMedia; el cursor propio lo consulta para saber si
+// hay un puntero fino y si el usuario pidió menos movimiento. Por defecto
+// nada matchea: los tests que necesitan otra respuesta la fuerzan.
+if (typeof window !== 'undefined' && !window.matchMedia) {
+  window.matchMedia = (query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    addListener: () => {},
+    removeListener: () => {},
+    dispatchEvent: () => false,
+  }) as MediaQueryList
+}
+
 // next/image exige el pipeline de optimización de Next, que no corre en
 // tests. Lo reemplazamos por un <img> plano que conserva los props visibles
 // y descarta los que son exclusivos de next/image (no válidos en un <img>).

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Sora, Manrope, JetBrains_Mono } from 'next/font/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { SettingsProvider } from './_components/_settings/SettingsProvider'
+import CursorTrail from './_components/_shared/CursorTrail'
 import './globals.scss'
 
 const display = Sora({
@@ -39,6 +40,7 @@ export default function RootLayout({
       <body>
         <SettingsProvider>
           {children}
+          <CursorTrail />
         </SettingsProvider>
       </body>
       <SpeedInsights />

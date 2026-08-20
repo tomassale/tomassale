@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { logoToneClass } from '@/lib/logoTone'
 import { ALL_CATEGORIES } from './SkillList'
 
 interface Item {
@@ -27,6 +28,7 @@ export default function SkillItems({ items, selectedCategory }: SkillItemsProps)
             key={`${skill.category}-${skill.tech}`}
           >
             <Image
+              className={logoToneClass(skill.src)}
               src={skill.src}
               alt={skill.alt}
               width={24}

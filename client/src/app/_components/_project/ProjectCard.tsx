@@ -3,6 +3,7 @@ import { memo } from 'react'
 import Image from 'next/image'
 import { useSettings } from '../_settings/SettingsProvider'
 import { safeHref } from '@/lib/url'
+import { logoToneClass } from '@/lib/logoTone'
 
 export interface ProjectData {
   _id: string | number;
@@ -60,6 +61,7 @@ function ProjectCard({ project, focusable = true }: ProjectCardProps) {
           {project.icons && Object.keys(project.icons).map((iconKey) => (
             <Image
               key={iconKey}
+              className={logoToneClass(project.icons[iconKey])}
               src={`/img/skills/${project.icons[iconKey]}`}
               width={20}
               height={20}
