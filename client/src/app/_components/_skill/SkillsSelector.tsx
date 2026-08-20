@@ -13,9 +13,13 @@ export default function SkillsSelector({ categories, selectedCategory, onSelect 
   return (
     <div className='skillsSelector'>
       {categories.map((category) => (
+        // aria-pressed y no solo la clase: una clase de CSS no llega al
+        // lector de pantalla, y sin esto los seis botones se anuncian iguales.
         <button
           key={category}
+          type='button'
           onClick={() => onSelect(category)}
+          aria-pressed={selectedCategory === category}
           className={selectedCategory === category ? 'active' : ''}
         >
           {translateCategory(lang, category)}

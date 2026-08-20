@@ -17,7 +17,7 @@ interface DeckProviderProps {
  * "¿en cuál estoy?", sin saber sobre qué eje se desplaza la página.
  */
 export function DeckProvider({ panels, children }: DeckProviderProps) {
-  const scrollerRef = useRef<HTMLDivElement>(null)
+  const scrollerRef = useRef<HTMLElement>(null)
   const [activeId, setActiveId] = useState(panels[0]?.id ?? '')
   const [progress, setProgress] = useState(0)
 
@@ -33,6 +33,13 @@ export function DeckProvider({ panels, children }: DeckProviderProps) {
       inline: isHorizontal ? 'start' : 'nearest',
       block: isHorizontal ? 'nearest' : 'start',
     })
+
+    // Desplazar la pantalla no mueve el foco: sin esto, quien navega por
+    // teclado llega al panel pero su próximo Tab sigue en la barra, no en el
+    // contenido que acaba de pedir. El panel no está en el recorrido
+    // (tabindex -1): solo puede recibir el foco de esta forma.
+    target.setAttribute('tabindex', '-1')
+    target.focus({ preventScroll: true })
   }, [])
 
   // El panel activo es el que tiene su centro más cerca del centro de la
@@ -99,6 +106,7 @@ export function DeckProvider({ panels, children }: DeckProviderProps) {
     const onWheel = (event: WheelEvent) => {
       if (!window.matchMedia(HORIZONTAL_QUERY).matches) return
       if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return
+      if (canScrollVertically(event.target, event.deltaY, scroller)) return
 
       event.preventDefault()
       scroller.scrollLeft += event.deltaY
@@ -120,8 +128,32 @@ export function DeckViewport({ children }: { readonly children: ReactNode }) {
   const { scrollerRef } = useDeck()
 
   return (
-    <div className='deck' ref={scrollerRef}>
+    <main className='deck' id='main' ref={scrollerRef} tabIndex={-1}>
       {children}
-    </div>
+    </main>
   )
+}
+
+/**
+ * ¿Hay algo entre el puntero y el recorrido que todavía pueda desplazarse
+ * hacia donde apunta la rueda?
+ *
+ * Si lo hay, el evento es suyo. Robárselo siempre deja contenido
+ * inalcanzable: un panel que desborda —al ampliar el texto, por ejemplo—
+ * no se puede bajar con la rueda, y su barra de scroll tampoco está a mano.
+ */
+function canScrollVertically(from: EventTarget | null, deltaY: number, limit: HTMLElement) {
+  let node = from instanceof HTMLElement ? from : null
+
+  while (node && node !== limit) {
+    const overflows = node.scrollHeight > node.clientHeight
+    const room = deltaY > 0
+      ? Math.ceil(node.scrollTop + node.clientHeight) < node.scrollHeight
+      : node.scrollTop > 0
+
+    if (overflows && room && getComputedStyle(node).overflowY !== 'visible') return true
+    node = node.parentElement
+  }
+
+  return false
 }

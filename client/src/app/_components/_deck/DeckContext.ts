@@ -9,7 +9,7 @@ export interface DeckPanel {
 export interface DeckContextValue {
   panels: DeckPanel[]
   /** Contenedor que se desplaza; lo monta DeckViewport. */
-  scrollerRef: RefObject<HTMLDivElement | null>
+  scrollerRef: RefObject<HTMLElement | null>
   /** Id del panel que ocupa el centro de la pantalla. */
   activeId: string
   /** Avance del recorrido, de 0 a 1. */

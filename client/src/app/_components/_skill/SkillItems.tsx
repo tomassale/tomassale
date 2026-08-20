@@ -27,10 +27,12 @@ export default function SkillItems({ items, selectedCategory }: SkillItemsProps)
             className={`skillChip${dimmed ? ' skillChip--dim' : ''}`}
             key={`${skill.category}-${skill.tech}`}
           >
+            {/* Decorativo: el nombre de la tecnología va escrito acá al
+                lado, y repetirlo hace que se lea dos veces. */}
             <Image
               className={logoToneClass(skill.src)}
               src={skill.src}
-              alt={skill.alt}
+              alt=''
               width={24}
               height={24}
             />

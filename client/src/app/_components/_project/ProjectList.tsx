@@ -13,7 +13,9 @@ interface CardSetProps extends ProjectListProps {
 
 function CardSet({ cards, focusable }: CardSetProps) {
   return (
-    <ul className='cardSet'>
+    // role='list' explícito: el reset global aplica list-style: none a todo,
+    // y con eso Safari deja de anunciarla como lista.
+    <ul className='cardSet' role='list'>
       {cards.map((project) => (
         <li key={project._id}>
           <ProjectCard project={project} focusable={focusable}/>

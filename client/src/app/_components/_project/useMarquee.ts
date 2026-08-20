@@ -1,10 +1,12 @@
 "use client"
-import { useCallback, useEffect, useRef, PointerEvent, MouseEvent } from 'react'
+import { useCallback, useEffect, useRef, FocusEvent, PointerEvent, MouseEvent } from 'react'
 
 const AUTO_SPEED_PX_PER_SECOND = 70
 const RESUME_AFTER_MS = 7000
 /** Arrastre mínimo para considerar que no fue un click sobre un enlace. */
 const DRAG_THRESHOLD_PX = 5
+/** Aire entre el borde de la franja y la tarjeta que acaba de recibir foco. */
+const FOCUS_MARGIN_PX = 24
 
 /**
  * Marquesina infinita con control manual.
@@ -16,9 +18,9 @@ const DRAG_THRESHOLD_PX = 5
  * usuario y el avance automático escriben sobre la misma variable y no hay
  * que distinguir un scroll propio de uno ajeno.
  *
- * Solo el arrastre pausa el avance, y se reanuda a los 7 s de soltar.
- * Pasar el puntero por encima no lo detiene: si lo hiciera, bastaría con
- * dejar el mouse apoyado sobre el carrusel para que pareciera roto.
+ * El arrastre y el foco pausan el avance, y se reanuda a los 7 s. Pasar el
+ * puntero por encima no lo detiene: si lo hiciera, bastaría con dejar el
+ * mouse apoyado sobre el carrusel para que pareciera roto.
  */
 export function useMarquee() {
   const trackRef = useRef<HTMLDivElement>(null)
@@ -119,6 +121,31 @@ export function useMarquee() {
     scheduleResume()
   }, [scheduleResume])
 
+  // Tabular hasta una tarjeta la pausa y la trae a la vista. Sin esto el
+  // foco queda puesto sobre algo que se sigue moviendo hasta salir de la
+  // franja: el recuadro de foco desaparece de pantalla sin que la persona
+  // haya hecho nada.
+  const onFocusCapture = useCallback((event: FocusEvent<HTMLDivElement>) => {
+    paused.current = true
+    window.clearTimeout(resumeTimer.current)
+
+    const card = event.target.closest('li')
+    if (!card) return
+
+    // La pista se mueve por transform, así que el navegador no puede
+    // desplazarla él solo para revelar lo enfocado: hay que correrla a mano.
+    const cardBox = card.getBoundingClientRect()
+    const viewBox = event.currentTarget.getBoundingClientRect()
+    const hidden = cardBox.left < viewBox.left || cardBox.right > viewBox.right
+    if (hidden) offset.current += cardBox.left - viewBox.left - FOCUS_MARGIN_PX
+  }, [])
+
+  const onBlurCapture = useCallback((event: FocusEvent<HTMLDivElement>) => {
+    // Moverse entre dos enlaces de la misma franja no es haberla dejado.
+    if (event.currentTarget.contains(event.relatedTarget)) return
+    scheduleResume()
+  }, [scheduleResume])
+
   // Un arrastre que termina sobre un enlace no debe abrirlo.
   const onClickCapture = useCallback((event: MouseEvent<HTMLDivElement>) => {
     if (dragDistance.current <= DRAG_THRESHOLD_PX) return
@@ -134,6 +161,8 @@ export function useMarquee() {
       onPointerUp: endDrag,
       onPointerCancel: endDrag,
       onClickCapture,
+      onFocusCapture,
+      onBlurCapture,
     },
   }
 }

@@ -8,7 +8,10 @@ vi.mock('../_settings/SettingsProvider', () => ({
 }))
 
 const cards: ProjectData[] = [
-  { _id: '1', img: '/a.png', title: 'Proyecto A', icons: {}, github: 'https://github.com/a' },
+  {
+    _id: '1', img: '/a.png', title: 'Proyecto A', icons: { img1: 'back/php.svg' },
+    github: 'https://github.com/a', description: 'Una descripción larga.',
+  },
   { _id: '2', img: '/b.png', title: 'Proyecto B', icons: {}, github: 'https://github.com/b' },
 ]
 
@@ -44,5 +47,25 @@ describe('ProjectList', () => {
       expect(link).toHaveAttribute('tabindex', '-1')
       expect(link.closest('[aria-hidden="true"]')).not.toBeNull()
     })
+  })
+
+  // Cuando la descripción desborda, el navegador la vuelve una región
+  // desplazable y eso la hace enfocable: en la copia dejaría foco dentro de
+  // un aria-hidden, que es justo lo que el resto del componente evita.
+  it('la descripción de la copia tampoco se tabula', () => {
+    render(<ProjectList cards={cards} />)
+
+    const descriptions = screen.getAllByText('Una descripción larga.')
+    expect(descriptions).toHaveLength(2)
+
+    const [original, duplicate] = descriptions
+    expect(original).not.toHaveAttribute('tabindex')
+    expect(duplicate).toHaveAttribute('tabindex', '-1')
+  })
+
+  it('el stack de cada proyecto se anuncia: es el único lugar donde figura', () => {
+    render(<ProjectList cards={cards} />)
+
+    expect(screen.getAllByAltText('PHP').length).toBeGreaterThan(0)
   })
 })

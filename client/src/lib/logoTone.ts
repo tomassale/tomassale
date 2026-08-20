@@ -17,9 +17,35 @@ const TONE_BY_LOGO: Record<string, LogoTone> = {
   sql: 'plate',
 }
 
+/** Nombre del archivo de logo, sin carpeta ni extensión: 'front/next.svg' -> 'next'. */
+function logoName(src: string): string {
+  return src.split('/').pop()?.replace(/\.svg$/, '') ?? ''
+}
+
 /** Clase de ajuste para el logo de `src`, o undefined si se lee en ambos temas. */
 export function logoToneClass(src: string): string | undefined {
-  const name = src.split('/').pop()?.replace(/\.svg$/, '')
-  const tone = name ? TONE_BY_LOGO[name] : undefined
+  const tone = TONE_BY_LOGO[logoName(src)]
   return tone && `logo--${tone}`
+}
+
+/**
+ * Cómo se llama la tecnología que dibuja ese logo.
+ *
+ * En las tarjetas de proyecto, estos íconos son el único lugar donde se dice
+ * con qué está hecho cada trabajo: sin texto alternativo, esa información no
+ * existe para quien no ve las imágenes.
+ */
+export function techName(src: string): string {
+  const name = logoName(src)
+  return DISPLAY_NAME[name] ?? name.charAt(0).toUpperCase() + name.slice(1)
+}
+
+/** Solo los que no se escriben capitalizando el nombre del archivo. */
+const DISPLAY_NAME: Record<string, string> = {
+  php: 'PHP',
+  sql: 'SQL',
+  node: 'Node.js',
+  mongodb: 'MongoDB',
+  github: 'GitHub',
+  'microsoft-teams': 'Microsoft Teams',
 }

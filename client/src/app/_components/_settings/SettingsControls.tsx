@@ -6,16 +6,17 @@ export default function SettingsControls() {
 
   return (
     <>
+      {/* La etiqueta de este botón siempre está en el idioma de destino:
+          sin lang, el sintetizador la pronuncia con la fonética equivocada. */}
       <button
         onClick={toggleLang}
-        title={lang === 'es' ? t('switchToEnglish') : t('switchToSpanish')}
+        lang={lang === 'es' ? 'en' : 'es'}
         aria-label={lang === 'es' ? t('switchToEnglish') : t('switchToSpanish')}
       >
         {lang === 'es' ? 'EN' : 'ES'}
       </button>
       <button
         onClick={toggleTheme}
-        title={theme === 'dark' ? t('switchToLight') : t('switchToDark')}
         aria-label={theme === 'dark' ? t('switchToLight') : t('switchToDark')}
       >
         {theme === 'dark' ? '☀' : '☾'}

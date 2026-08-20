@@ -36,6 +36,10 @@ export default function Contact() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    // El botón queda con aria-disabled y no disabled: un botón deshabilitado
+    // mientras tiene el foco lo pierde, y el recorrido por teclado vuelve al
+    // principio de la página. El envío repetido se corta acá.
+    if (loading) return
     setLoading(true)
     setErrorMessage(null)
     setSuccess(false)
@@ -93,6 +97,7 @@ export default function Contact() {
                   name="email"
                   id="email"
                   type="email"
+                  autoComplete="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
@@ -106,6 +111,8 @@ export default function Contact() {
                   name="number"
                   id="phone"
                   type="tel"
+                  autoComplete="tel"
+                  inputMode="tel"
                   value={formData.number}
                   onChange={handleChange}
                   required
@@ -117,6 +124,11 @@ export default function Contact() {
             <div className="form-group">
               <label htmlFor="message">{t('messageLabel')}</label>
               <div className="form__field">
+                {/* El límite se anuncia antes de escribir: si no, el campo
+                    deja de aceptar letras sin explicar por qué. */}
+                <span id="messageLimit" className="visually-hidden">
+                  {t('messageLimit').replace('{max}', String(MESSAGE_MAX_LENGTH))}
+                </span>
                 <textarea
                   id="message"
                   name="message"
@@ -124,6 +136,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   maxLength={MESSAGE_MAX_LENGTH}
+                  aria-describedby="messageLimit"
                   placeholder={t('messagePlaceholder')}
                 />
                 <span className={`form__counter${messageIsFull ? ' form__counter--full' : ''}`}>
@@ -132,18 +145,31 @@ export default function Contact() {
               </div>
             </div>
 
-            <button type="submit" className="boltLink boltLink--solid" disabled={loading}>
+            <button type="submit" className="boltLink boltLink--solid" aria-disabled={loading}>
               {loading ? t('sending') : t('submit')}
             </button>
 
+            {/* Regiones permanentes: un aria-live que se inserta junto con
+                su mensaje no llega a anunciarse, y quien no ve la pantalla se
+                queda sin saber si el mensaje salió. Los avisos de abajo son
+                los que se ven; estos son los que se escuchan. El resultado
+                informa y el error interrumpe: no son el mismo aviso. */}
+            <p className="visually-hidden" role="status">
+              {loading ? t('sending') : ''}
+              {success ? t('success') : ''}
+            </p>
+            <p className="visually-hidden" role="alert">
+              {errorMessage ? `${t('errorLabel')}: ${errorMessage}` : ''}
+            </p>
+
             {success && (
-              <p className="form__feedback" role="status">
+              <p className="form__feedback">
                 {t('success')}
               </p>
             )}
 
             {errorMessage && (
-              <p className="form__feedback form__feedback--error" role="alert">
+              <p className="form__feedback form__feedback--error">
                 {t('errorLabel')}: {errorMessage}
               </p>
             )}

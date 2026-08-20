@@ -3,7 +3,7 @@ import { memo } from 'react'
 import Image from 'next/image'
 import { useSettings } from '../_settings/SettingsProvider'
 import { safeHref } from '@/lib/url'
-import { logoToneClass } from '@/lib/logoTone'
+import { logoToneClass, techName } from '@/lib/logoTone'
 
 export interface ProjectData {
   _id: string | number;
@@ -39,10 +39,12 @@ function ProjectCard({ project, focusable = true }: ProjectCardProps) {
   return (
     <article className='card'>
       <div className='card__shot'>
+        {/* La captura es decorativa: el título de la tarjeta, que va acá
+            abajo, ya dice de qué proyecto es. */}
         {project.img && (
           <Image
             src={project.img}
-            alt={project.title}
+            alt=''
             fill
             sizes='340px'
             draggable={false}
@@ -54,7 +56,17 @@ function ProjectCard({ project, focusable = true }: ProjectCardProps) {
         <h3 className='card__title'>{project.title}</h3>
 
         {description && description.trim() !== '.' && (
-          <p className='card__description'>{description}</p>
+          // Cuando el texto desborda, el navegador convierte el párrafo en una
+          // región desplazable y eso lo vuelve enfocable: en la copia dejaría
+          // foco adentro de un aria-hidden, y en la original hay que decir de
+          // qué proyecto es el texto que se está por leer.
+          <p
+            className='card__description'
+            tabIndex={tabIndex}
+            aria-label={focusable ? project.title : undefined}
+          >
+            {description}
+          </p>
         )}
 
         <div className='card__tech'>
@@ -65,7 +77,7 @@ function ProjectCard({ project, focusable = true }: ProjectCardProps) {
               src={`/img/skills/${project.icons[iconKey]}`}
               width={20}
               height={20}
-              alt=''
+              alt={techName(project.icons[iconKey])}
               draggable={false}
             />
           ))}

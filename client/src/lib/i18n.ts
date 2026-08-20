@@ -18,6 +18,9 @@ export const translations = {
     viewSite: 'Ver sitio',
     scrollCue: 'Recorré el portfolio',
     sectionsNav: 'Secciones',
+    mainNav: 'Principal',
+    messageLimit: 'Máximo {max} caracteres',
+    showingCategory: 'Mostrando la categoría {category}',
     directLinks: 'Enlaces directos',
     // Nav (por ref)
     nav_aboutMe: 'Sobre mí',
@@ -72,6 +75,9 @@ export const translations = {
     viewSite: 'View site',
     scrollCue: 'Take the tour',
     sectionsNav: 'Sections',
+    mainNav: 'Main',
+    messageLimit: 'Maximum {max} characters',
+    showingCategory: 'Showing the {category} category',
     directLinks: 'Direct links',
     // Nav (por ref)
     nav_aboutMe: 'About me',

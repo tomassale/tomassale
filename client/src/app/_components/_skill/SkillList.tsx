@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import SkillItems from "./SkillItems";
 import SkillsSelector from "./SkillsSelector";
+import { useSettings } from "../_settings/SettingsProvider";
+import { translateCategory } from "@/lib/i18n";
 
 interface Item {
   id: number;
@@ -17,6 +19,7 @@ export const ALL_CATEGORIES = "All";
 
 export default function SkillList({ itemList }: SkillListProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>(ALL_CATEGORIES);
+  const { t, lang } = useSettings();
 
   const categoriesForSelector = useMemo(() => {
     if (!itemList) return [];
@@ -42,6 +45,15 @@ export default function SkillList({ itemList }: SkillListProps) {
         selectedCategory={selectedCategory}
         onSelect={setSelectedCategory}
       />
+
+      {/* Filtrar atenúa los chips, y eso no llega a quien no ve la pantalla.
+          La región vive siempre en el DOM: una que aparece junto con su
+          mensaje no se anuncia. */}
+      <p className="visually-hidden" role="status">
+        {selectedCategory === ALL_CATEGORIES
+          ? ''
+          : t('showingCategory').replace('{category}', translateCategory(lang, selectedCategory))}
+      </p>
 
       <div className="skillFlow">
         <SkillItems items={items} selectedCategory={selectedCategory}/>

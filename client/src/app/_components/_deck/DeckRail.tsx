@@ -12,17 +12,23 @@ export default function DeckRail() {
 
   return (
     <nav className='rail' aria-label={t('sectionsNav')}>
-      <ol className='rail__steps'>
+      {/* role='list' explícito: el reset global pone list-style: none en
+          todo, y con eso Safari deja de anunciar la lista y su cantidad. */}
+      <ol className='rail__steps' role='list'>
         {panels.map((panel, index) => (
           <li key={panel.id}>
-            <button
+            <a
+              href={`#${panel.id}`}
               className={`rail__step${panel.id === activeId ? ' rail__step--active' : ''}`}
-              onClick={() => goTo(panel.id)}
+              onClick={(event) => {
+                event.preventDefault()
+                goTo(panel.id)
+              }}
               aria-current={panel.id === activeId ? 'true' : undefined}
             >
               <span className='rail__index'>{String(index + 1).padStart(2, '0')}</span>
               <span className='rail__label'>{panel.label}</span>
-            </button>
+            </a>
           </li>
         ))}
       </ol>
