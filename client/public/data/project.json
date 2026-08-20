@@ -15,7 +15,7 @@
   },
   { 
     "_id": 1,
-    "title": "Odontology",
+    "title": "Dra. Silvia Pellegrino",
     "description": "Sitio para un consultorio odontológico privado. Presenta a la profesional a cargo y los tratamientos que ofrece —prótesis, endodoncia, periodoncia y estética dental—, y resuelve el pedido de turno en un solo llamado, sin formularios de por medio.",
     "description_en": "Site for a private dental practice. It introduces the professional in charge and the treatments offered —prosthetics, endodontics, periodontics and cosmetic dentistry—, and turns the appointment request into a single phone call, with no forms in between.",
     "github": "https://github.com/tomassale/Odontologia",
