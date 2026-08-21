@@ -1,10 +1,14 @@
 "use client"
-import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { CSSProperties, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { DeckContext, DeckPanel, useDeck } from './DeckContext'
 
 // Por debajo de este ancho el recorrido vuelve a ser vertical.
 const HORIZONTAL_QUERY = '(min-width: 900px)'
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
+// Un gesto de rueda son muchos eventos seguidos: el umbral descarta el
+// temblor del trackpad y el descanso evita que un empujón salte tres paneles.
+const WHEEL_THRESHOLD = 16
+const STEP_COOLDOWN_MS = 600
 
 interface DeckProviderProps {
   readonly panels: DeckPanel[]
@@ -12,70 +16,71 @@ interface DeckProviderProps {
 }
 
 /**
- * El recorrido horizontal vive acá: es el único que conoce el scroller.
+ * El recorrido vive acá: es el único que sabe cómo se pasa de panel.
+ *
+ * En horizontal no hay scroll —la pantalla entera es un panel y la fila se
+ * corre con transform—, así que el índice es la única verdad. En vertical
+ * (mobile) manda el scroll de la ventana y el índice lo sigue.
+ *
  * La barra de navegación y el riel solo piden "llevame a este panel" y
- * "¿en cuál estoy?", sin saber sobre qué eje se desplaza la página.
+ * "¿en cuál estoy?", sin saber cuál de los dos modos está en juego.
  */
 export function DeckProvider({ panels, children }: DeckProviderProps) {
-  const scrollerRef = useRef<HTMLElement>(null)
-  const [activeId, setActiveId] = useState(panels[0]?.id ?? '')
-  const [progress, setProgress] = useState(0)
+  const viewportRef = useRef<HTMLElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const index = clampIndex(activeIndex, panels.length)
+
+  const step = useCallback((direction: number) => {
+    setActiveIndex((current) => clampIndex(current + direction, panels.length))
+  }, [panels.length])
 
   const goTo = useCallback((id: string) => {
     const target = document.getElementById(id)
-    if (!target) return
+    const targetIndex = panels.findIndex((panel) => panel.id === id)
+    if (!target || targetIndex < 0) return
 
-    const isHorizontal = window.matchMedia(HORIZONTAL_QUERY).matches
-    const reducedMotion = window.matchMedia(REDUCED_MOTION_QUERY).matches
+    if (window.matchMedia(HORIZONTAL_QUERY).matches) {
+      setActiveIndex(targetIndex)
+    } else {
+      target.scrollIntoView({
+        behavior: window.matchMedia(REDUCED_MOTION_QUERY).matches ? 'auto' : 'smooth',
+        block: 'start',
+      })
+    }
 
-    target.scrollIntoView({
-      behavior: reducedMotion ? 'auto' : 'smooth',
-      inline: isHorizontal ? 'start' : 'nearest',
-      block: isHorizontal ? 'nearest' : 'start',
-    })
-
-    // Desplazar la pantalla no mueve el foco: sin esto, quien navega por
-    // teclado llega al panel pero su próximo Tab sigue en la barra, no en el
+    // Cambiar de panel no mueve el foco: sin esto, quien navega por teclado
+    // llega al panel pero su próximo Tab sigue en la barra, no en el
     // contenido que acaba de pedir. El panel no está en el recorrido
     // (tabindex -1): solo puede recibir el foco de esta forma.
     target.setAttribute('tabindex', '-1')
     target.focus({ preventScroll: true })
-  }, [])
+  }, [panels])
 
-  // El panel activo es el que tiene su centro más cerca del centro de la
-  // pantalla. Sirve para los dos ejes y tolera paneles de distinto ancho.
+  // En vertical el scroll de la ventana es el que manda: el índice lo sigue
+  // para que la barra marque dónde está parado el que baja. El panel activo
+  // es el que tiene su centro más cerca del centro de la pantalla.
   useEffect(() => {
-    const scroller = scrollerRef.current
-    if (!scroller) return
-
     let frame = 0
 
     const measure = () => {
       frame = 0
-      const isHorizontal = window.matchMedia(HORIZONTAL_QUERY).matches
-      const viewportCenter = (isHorizontal ? window.innerWidth : window.innerHeight) / 2
+      if (window.matchMedia(HORIZONTAL_QUERY).matches) return
 
-      let closestId = ''
+      const viewportCenter = window.innerHeight / 2
+      let closest = 0
       let closestDistance = Number.POSITIVE_INFINITY
 
-      for (const panel of panels) {
+      panels.forEach((panel, panelIndex) => {
         const rect = document.getElementById(panel.id)?.getBoundingClientRect()
-        if (!rect) continue
-        const center = isHorizontal ? rect.left + rect.width / 2 : rect.top + rect.height / 2
-        const distance = Math.abs(center - viewportCenter)
+        if (!rect) return
+        const distance = Math.abs(rect.top + rect.height / 2 - viewportCenter)
         if (distance < closestDistance) {
           closestDistance = distance
-          closestId = panel.id
+          closest = panelIndex
         }
-      }
+      })
 
-      if (closestId) setActiveId(closestId)
-
-      const travelled = isHorizontal ? scroller.scrollLeft : window.scrollY
-      const total = isHorizontal
-        ? scroller.scrollWidth - scroller.clientWidth
-        : document.documentElement.scrollHeight - window.innerHeight
-      setProgress(total > 0 ? Math.min(travelled / total, 1) : 0)
+      setActiveIndex(closest)
     }
 
     const schedule = () => {
@@ -84,63 +89,111 @@ export function DeckProvider({ panels, children }: DeckProviderProps) {
     }
 
     measure()
-    scroller.addEventListener('scroll', schedule, { passive: true })
     window.addEventListener('scroll', schedule, { passive: true })
     window.addEventListener('resize', schedule)
 
     return () => {
       if (frame) cancelAnimationFrame(frame)
-      scroller.removeEventListener('scroll', schedule)
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', schedule)
     }
   }, [panels])
 
-  // Un contenedor horizontal no responde a la rueda vertical del mouse.
-  // Traducimos deltaY a scrollLeft; el gesto horizontal del trackpad y el
-  // swipe táctil siguen funcionando solos.
+  // En horizontal ya no hay scroll que llevar el recorrido: la rueda y las
+  // flechas son las que dan el paso, o el mouse y el teclado se quedan sin
+  // forma de avanzar que no sea la barra.
   useEffect(() => {
-    const scroller = scrollerRef.current
-    if (!scroller) return
+    const viewport = viewportRef.current
+    if (!viewport) return
+
+    let lastStepAt = 0
+
+    const takeStep = (direction: number, at: number) => {
+      if (at - lastStepAt < STEP_COOLDOWN_MS) return
+      lastStepAt = at
+      step(direction)
+    }
 
     const onWheel = (event: WheelEvent) => {
       if (!window.matchMedia(HORIZONTAL_QUERY).matches) return
-      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return
-      if (canScrollVertically(event.target, event.deltaY, scroller)) return
+
+      const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX
+      if (canScrollVertically(event.target, delta, viewport)) return
 
       event.preventDefault()
-      scroller.scrollLeft += event.deltaY
+      if (Math.abs(delta) < WHEEL_THRESHOLD) return
+      takeStep(Math.sign(delta), event.timeStamp)
     }
 
-    scroller.addEventListener('wheel', onWheel, { passive: false })
-    return () => scroller.removeEventListener('wheel', onWheel)
-  }, [])
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (!window.matchMedia(HORIZONTAL_QUERY).matches) return
+      if (event.ctrlKey || event.metaKey || event.altKey) return
+      // Dentro de un campo las flechas mueven el cursor de texto, no el recorrido.
+      if (event.target instanceof HTMLElement && event.target.closest('input, textarea, select')) return
+
+      const direction = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0
+      if (!direction) return
+
+      event.preventDefault()
+      takeStep(direction, event.timeStamp)
+    }
+
+    viewport.addEventListener('wheel', onWheel, { passive: false })
+    viewport.addEventListener('keydown', onKeyDown)
+
+    return () => {
+      viewport.removeEventListener('wheel', onWheel)
+      viewport.removeEventListener('keydown', onKeyDown)
+    }
+  }, [step])
 
   const value = useMemo(
-    () => ({ panels, scrollerRef, activeId, progress, goTo }),
-    [panels, activeId, progress, goTo]
+    () => ({
+      panels,
+      viewportRef,
+      activeIndex: index,
+      activeId: panels[index]?.id ?? '',
+      progress: panels.length > 1 ? index / (panels.length - 1) : 0,
+      goTo,
+    }),
+    [panels, index, goTo]
   )
 
   return <DeckContext.Provider value={value}>{children}</DeckContext.Provider>
 }
 
 export function DeckViewport({ children }: { readonly children: ReactNode }) {
-  const { scrollerRef } = useDeck()
+  const { viewportRef, activeIndex } = useDeck()
 
   return (
-    <main className='deck' id='main' ref={scrollerRef} tabIndex={-1}>
+    <main
+      className='deck'
+      id='main'
+      ref={viewportRef}
+      tabIndex={-1}
+      // Cuánto vale un paso lo sabe el CSS: acá solo se dice en cuál estamos,
+      // y así el modo vertical puede ignorar la variable sin más.
+      style={{ '--deck-step': activeIndex } as CSSProperties}
+    >
       {children}
     </main>
   )
+}
+
+// El paso no puede salirse del recorrido: acá terminan la rueda, las flechas
+// y los enlaces, y de acá sale siempre un panel que existe.
+function clampIndex(value: number, length: number) {
+  if (length < 1) return 0
+  return Math.min(Math.max(value, 0), length - 1)
 }
 
 /**
  * ¿Hay algo entre el puntero y el recorrido que todavía pueda desplazarse
  * hacia donde apunta la rueda?
  *
- * Si lo hay, el evento es suyo. Robárselo siempre deja contenido
- * inalcanzable: un panel que desborda —al ampliar el texto, por ejemplo—
- * no se puede bajar con la rueda, y su barra de scroll tampoco está a mano.
+ * Los paneles ya no se desplazan, pero adentro quedan dos que sí: el mensaje
+ * del formulario y la descripción de las tarjetas. Robarles el evento deja su
+ * texto inalcanzable, porque su barra tampoco está a la vista.
  */
 function canScrollVertically(from: EventTarget | null, deltaY: number, limit: HTMLElement) {
   let node = from instanceof HTMLElement ? from : null

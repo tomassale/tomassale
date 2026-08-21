@@ -61,12 +61,20 @@ html[data-theme='light'] {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+// El recorrido ocupa exactamente una pantalla y sus paneles no se desplazan:
+// nada tiene que scrollear, así que la ventana se clava acá. En vertical
+// (mobile) el bloque del final devuelve el scroll.
 html {
   background: var(--night);
   color: var(--ink);
+  height: 100%;
+  overflow: hidden;
+  // El rebote del trackpad mueve la página aunque no haya adónde ir.
+  overscroll-behavior: none;
 }
 
 body {
+  height: 100%;
   font-family: var(--font-body), system-ui, sans-serif;
   font-size: 1rem;
   line-height: 1.6;
@@ -107,8 +115,8 @@ img { max-width: 100%; }
   outline-offset: 3px;
 }
 
-// Los contenedores que se desplazan lo hacen guiados por el recorrido, el
-// riel o la marquesina: sus barras de scroll no aportan y ensucian.
+// Lo poco que todavía se desplaza —el mensaje del formulario, la descripción
+// de una tarjeta— lo hace dentro de su caja: su barra no aporta y ensucia.
 // Hace falta la regla de cada motor — `::-webkit-scrollbar` sola deja la
 // barra a la vista en Firefox.
 @mixin hide-scrollbar {
@@ -139,24 +147,18 @@ img { max-width: 100%; }
 .deck {
   display: flex;
   height: calc(100dvh - var(--nav-h) - var(--bar-h));
-  overflow-x: auto;
-  overflow-y: hidden;
-  // proximity y no mandatory: guía el descanso entre paneles sin atrapar
-  // al que quiere frenar en medio del riel de proyectos.
-  scroll-snap-type: x proximity;
-  overscroll-behavior-x: contain;
-  @include hide-scrollbar;
+  overflow: hidden;
 }
 
 .panel {
-  // basis en % y no en vw: descuenta la barra de scroll vertical.
   flex: 0 0 100%;
   height: 100%;
-  // overflow-y auto obliga a overflow-x a computar auto: sin esconderla,
-  // cada panel dibuja su propia barra horizontal abajo.
-  overflow-y: auto;
-  @include hide-scrollbar;
-  scroll-snap-align: start;
+  overflow: hidden;
+  // El paso no es scroll: la fila entera se corre un panel por vez. `--deck-step`
+  // lo escribe DeckViewport, y como se hereda del recorrido, los cuatro paneles
+  // se mueven juntos sin necesidad de una pista que los envuelva.
+  transform: translateX(calc(var(--deck-step, 0) * -100%));
+  transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
   display: flex;
   align-items: flex-start;
   padding-inline: var(--gutter);
@@ -176,6 +178,13 @@ img { max-width: 100%; }
   .panel__inner {
     margin: 0 auto;
     padding-inline: var(--gutter);
+  }
+
+  // Sin scroll, la marquesina no puede empujar hacia abajo: cede alto y las
+  // tarjetas se ajustan a lo que queda. min-height 0 porque un elemento
+  // flexible no baja de su contenido mientras no se lo permitan.
+  .marquee {
+    min-height: 0;
   }
 }
 
@@ -255,9 +264,9 @@ img { max-width: 100%; }
 }
 
 //----------------------------------------------------------------- hero
+// El campo de ondas se ancla acá; el recorte ya lo pone `.panel`.
 .panel--hero {
   position: relative;
-  overflow: hidden;
 }
 
 // El campo de ondas del banner. Vive detrás del texto y solo en el
@@ -414,6 +423,9 @@ img { max-width: 100%; }
   display: flex;
   align-items: stretch;
   width: max-content;
+  // Las tarjetas heredan el alto de la marquesina, que es el que sobró en el
+  // panel: lo que no entre lo resuelve la descripción, que sí se desplaza.
+  height: 100%;
   will-change: transform;
 }
 
@@ -834,16 +846,28 @@ html[data-theme='light'] {
 //=================== VERTICAL (mobile y tablet) ===================//
 
 @media (max-width: 899px) {
+  // Acá los paneles se apilan y son más altos que la pantalla: el scroll de
+  // la ventana vuelve a ser la forma de recorrerlos.
+  html {
+    height: auto;
+    overflow: visible;
+    overscroll-behavior: auto;
+  }
+
+  body { height: auto; }
+
   .deck {
     display: block;
     height: auto;
     overflow: visible;
-    scroll-snap-type: none;
   }
 
   .panel {
     height: auto;
     overflow: visible;
+    // El paso lo da el scroll, no el índice.
+    transform: none;
+    transition: none;
     padding-block: clamp(3rem, 9vw, 5rem);
     scroll-margin-top: var(--nav-h);
   }
@@ -887,6 +911,22 @@ html[data-theme='light'] {
   .rail__label { display: none; }
 }
 
+// Sin scroll, lo que no entra en el panel no se alcanza. En pantallas bajas
+// el recorrido cede aire —encabezado, riel, márgenes— antes que contenido.
+@media (min-width: 900px) and (max-height: 760px) {
+  :root {
+    --nav-h: 52px;
+    --bar-h: 52px;
+  }
+
+  .panel__inner { padding-block: 0.75rem; }
+  .panel__title { margin-bottom: 1rem; }
+  .skillsSelector { margin-bottom: 1rem; }
+  .form { gap: 0.8rem; }
+  .form__row { gap: 0.8rem; }
+  .form-group textarea { height: 90px; }
+}
+
 @media (max-width: 560px) {
   .skillFlow { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
 
@@ -897,6 +937,9 @@ html[data-theme='light'] {
 @media (prefers-reduced-motion: reduce) {
   .waveField path { animation: none; }
 
+  // El panel aparece de una en vez de deslizarse: el recorrido sigue
+  // funcionando igual, sin el barrido lateral que es lo que molesta.
+  .panel,
   .card,
   .skillChip,
   .hero__cue span {
