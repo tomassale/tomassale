@@ -13,7 +13,11 @@ export default defineConfig({
   },
   test: {
     environment: 'jsdom',
-    environmentMatchGlobs: [['src/app/api/**', 'node']],
+    // Los route handlers trabajan con Request/Response y fs de Node, no con DOM.
+    environmentMatchGlobs: [
+      ['src/app/api/**', 'node'],
+      ['src/app/cv/**', 'node'],
+    ],
     setupFiles: ['./src/test/setup.ts'],
     css: false,
     // src/app/test/page.test.tsx es un scratch file viejo (ya excluido del

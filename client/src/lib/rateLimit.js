@@ -22,7 +22,15 @@ export function rateLimit(ip) {
 
   if (!entry || now > entry.resetAt) {
     // Barremos oportunísticamente al superar el techo para acotar la memoria.
-    if (hits.size >= MAX_ENTRIES) sweep(now);
+    if (hits.size >= MAX_ENTRIES) {
+      sweep(now);
+      // Si el barrido no liberó nada, todas las entradas están vigentes: es
+      // una avalancha en curso. Acá se rechaza en vez de seguir insertando —
+      // el techo tiene que ser duro o no es un techo. Cuesta que un visitante
+      // legítimo no pueda escribir durante el ataque; la alternativa es que
+      // el Map crezca sin límite y se lleve puesta la función.
+      if (hits.size >= MAX_ENTRIES) return false;
+    }
     hits.set(ip, { count: 1, resetAt: now + WINDOW_MS });
     return true;
   }

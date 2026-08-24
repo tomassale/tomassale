@@ -42,6 +42,14 @@ export function useCursorTrail() {
   const [pressed, setPressed] = useState(false)
   const [inWindow, setInWindow] = useState(false)
 
+  // Espejo de lo que ya está publicado en el estado. El puntero dispara
+  // decenas de eventos por segundo y casi siempre traen el mismo valor:
+  // comparar acá evita pedirle a React que descubra por su cuenta que no
+  // había nada que cambiar.
+  const targetRef = useRef<CursorTarget>('idle')
+  const inWindowRef = useRef(false)
+  const lastNodeRef = useRef<EventTarget | null>(null)
+
   useEffect(() => {
     const fine = window.matchMedia('(pointer: fine)')
     const sync = () => setEnabled(fine.matches)
@@ -79,7 +87,19 @@ export function useCursorTrail() {
       if (dotRef.current) dotRef.current.style.translate = `${mouse.x}px ${mouse.y}px`
       if (ringRef.current) ringRef.current.style.translate = `${ring.x}px ${ring.y}px`
 
+      // Alcanzado el puntero, el bucle no tiene nada que hacer: seguir pidiendo
+      // cuadros para escribir el mismo valor mantiene despierto al hilo
+      // principal mientras el mouse está quieto. `onMove` lo vuelve a arrancar.
+      if (Math.abs(mouse.x - ring.x) < 0.1 && Math.abs(mouse.y - ring.y) < 0.1) {
+        frame = 0
+        return
+      }
+
       frame = requestAnimationFrame(tick)
+    }
+
+    const start = () => {
+      if (!frame) frame = requestAnimationFrame(tick)
     }
 
     const onMove = (event: PointerEvent) => {
@@ -96,13 +116,31 @@ export function useCursorTrail() {
         placed = true
       }
 
-      setInWindow(true)
-      setTarget(targetUnder(event.target))
+      start()
+
+      if (!inWindowRef.current) {
+        inWindowRef.current = true
+        setInWindow(true)
+      }
+
+      // Moverse dentro del mismo elemento no puede cambiar qué hay debajo:
+      // los tres `closest()` solo hacen falta cuando el nodo cambia.
+      if (event.target !== lastNodeRef.current) {
+        lastNodeRef.current = event.target
+        const next = targetUnder(event.target)
+        if (next !== targetRef.current) {
+          targetRef.current = next
+          setTarget(next)
+        }
+      }
     }
 
     const onDown = () => setPressed(true)
     const onUp = () => setPressed(false)
-    const onLeave = () => setInWindow(false)
+    const onLeave = () => {
+      inWindowRef.current = false
+      setInWindow(false)
+    }
 
     window.addEventListener('pointermove', onMove, { passive: true })
     window.addEventListener('pointerdown', onDown, { passive: true })
@@ -110,7 +148,7 @@ export function useCursorTrail() {
     window.addEventListener('blur', onUp)
     document.addEventListener('mouseleave', onLeave)
 
-    frame = requestAnimationFrame(tick)
+    start()
 
     return () => {
       cancelAnimationFrame(frame)

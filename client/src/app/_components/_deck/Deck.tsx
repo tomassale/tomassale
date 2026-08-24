@@ -10,6 +10,24 @@ const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
 const WHEEL_THRESHOLD = 16
 const STEP_COOLDOWN_MS = 600
 
+// `matchMedia` parsea la consulta y devuelve un objeto nuevo cada vez, y acá
+// se pregunta por evento de rueda —un trackpad manda más de cien por segundo—.
+// La lista se crea una sola vez: es un objeto vivo, así que `matches` sigue
+// estando al día cuando cambia el tamaño de la ventana.
+const mediaLists = new Map<string, MediaQueryList>()
+
+function mediaMatches(query: string) {
+  if (typeof window === 'undefined') return false
+
+  let list = mediaLists.get(query)
+  if (!list) {
+    list = window.matchMedia(query)
+    mediaLists.set(query, list)
+  }
+
+  return list.matches
+}
+
 interface DeckProviderProps {
   readonly panels: DeckPanel[]
   readonly children: ReactNode
@@ -39,11 +57,11 @@ export function DeckProvider({ panels, children }: DeckProviderProps) {
     const targetIndex = panels.findIndex((panel) => panel.id === id)
     if (!target || targetIndex < 0) return
 
-    if (window.matchMedia(HORIZONTAL_QUERY).matches) {
+    if (mediaMatches(HORIZONTAL_QUERY)) {
       setActiveIndex(targetIndex)
     } else {
       target.scrollIntoView({
-        behavior: window.matchMedia(REDUCED_MOTION_QUERY).matches ? 'auto' : 'smooth',
+        behavior: mediaMatches(REDUCED_MOTION_QUERY) ? 'auto' : 'smooth',
         block: 'start',
       })
     }
@@ -64,7 +82,7 @@ export function DeckProvider({ panels, children }: DeckProviderProps) {
 
     const measure = () => {
       frame = 0
-      if (window.matchMedia(HORIZONTAL_QUERY).matches) return
+      if (mediaMatches(HORIZONTAL_QUERY)) return
 
       const viewportCenter = window.innerHeight / 2
       let closest = 0
@@ -115,7 +133,7 @@ export function DeckProvider({ panels, children }: DeckProviderProps) {
     }
 
     const onWheel = (event: WheelEvent) => {
-      if (!window.matchMedia(HORIZONTAL_QUERY).matches) return
+      if (!mediaMatches(HORIZONTAL_QUERY)) return
 
       const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX
       if (canScrollVertically(event.target, delta, viewport)) return
@@ -126,7 +144,7 @@ export function DeckProvider({ panels, children }: DeckProviderProps) {
     }
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (!window.matchMedia(HORIZONTAL_QUERY).matches) return
+      if (!mediaMatches(HORIZONTAL_QUERY)) return
       if (event.ctrlKey || event.metaKey || event.altKey) return
       // Dentro de un campo las flechas mueven el cursor de texto, no el recorrido.
       if (event.target instanceof HTMLElement && event.target.closest('input, textarea, select')) return

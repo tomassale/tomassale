@@ -23,6 +23,18 @@ function wavePath(phase: number, amplitude: number, baseY: number) {
   return `M ${points.join(' L ')}`
 }
 
+// Las líneas no dependen de nada: mismo campo en cada render. Calcularlas acá
+// —una vez por carga, en vez de una por render del panel— evita rehacer 1.134
+// senos y otros tantos `toFixed` cada vez que el recorrido da un paso.
+const LINES = Array.from({ length: LINE_COUNT }, (_, index) => {
+  const ratio = index / (LINE_COUNT - 1)
+  return {
+    d: wavePath(ratio * 0.6, 26 + index * 4, VIEW_HEIGHT * 0.35 + index * 16),
+    opacity: 0.14 + ratio * 0.5,
+    duration: `${(SLOWEST - ratio * (SLOWEST - FASTEST)).toFixed(1)}s`,
+  }
+})
+
 /**
  * El campo de líneas del banner de Tomás, rehecho en SVG. Es el único
  * gesto decorativo de la página y vive solo en el primer panel.
@@ -37,17 +49,14 @@ export default function WaveField() {
       focusable='false'
     >
       <g>
-        {Array.from({ length: LINE_COUNT }, (_, index) => {
-          const ratio = index / (LINE_COUNT - 1)
-          return (
-            <path
-              key={index}
-              d={wavePath(ratio * 0.6, 26 + index * 4, VIEW_HEIGHT * 0.35 + index * 16)}
-              opacity={0.14 + ratio * 0.5}
-              style={{ animationDuration: `${(SLOWEST - ratio * (SLOWEST - FASTEST)).toFixed(1)}s` }}
-            />
-          )
-        })}
+        {LINES.map((line, index) => (
+          <path
+            key={index}
+            d={line.d}
+            opacity={line.opacity}
+            style={{ animationDuration: line.duration }}
+          />
+        ))}
       </g>
     </svg>
   )

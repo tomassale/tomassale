@@ -11,6 +11,7 @@ vi.mock('@/lib/logger', () => ({
 
 const { POST } = await import('./route.js')
 const { sendEmail } = await import('@/lib/nodemailer')
+const { logger } = await import('@/lib/logger')
 
 const validBody = {
   email: 'tomas@example.com',
@@ -54,6 +55,30 @@ describe('POST /api/contact', () => {
 
     expect(res.status).toBe(413)
     expect((await res.json()).error).toBe('Payload demasiado grande')
+  })
+
+  // El encabezado lo escribe quien llama: declarar 5 bytes y mandar 20.000 es
+  // gratis. Si el tope se midiera solo sobre lo declarado, el cuerpo entero
+  // se acumularía en memoria antes de que nadie lo revisara.
+  it('413 cuando el content-length declarado miente sobre el tamaño real', async () => {
+    const res = await POST(
+      makeRequest({ body: JSON.stringify({ message: 'a'.repeat(20_000) }), contentLength: 5, ip: '1.1.1.20' })
+    )
+
+    expect(res.status).toBe(413)
+    expect((await res.json()).error).toBe('Payload demasiado grande')
+  })
+
+  it('400 —no 500— cuando el JSON está roto, y el cuerpo recibido no llega al log', async () => {
+    const res = await POST(makeRequest({ body: '{"email": "AAAAAAAAAA', ip: '1.1.1.21' }))
+
+    expect(res.status).toBe(400)
+    expect((await res.json()).error).toBe('Formato de datos inválido')
+
+    // El mensaje de error de V8 arrastra un fragmento del cuerpo: loguearlo
+    // deja escribir en los logs a cualquiera que mande basura.
+    const logged = logger.warn.mock.calls.flat().join(' ')
+    expect(logged).not.toContain('AAAAAAAAAA')
   })
 
   it('400 cuando faltan campos obligatorios', async () => {

@@ -5,9 +5,12 @@ import { useSettings } from '../_settings/SettingsProvider'
 
 interface ProjectListProps {
   readonly cards: ProjectData[]
+  /** Si la franja está a la vista; fuera de ella el avance se apaga. */
+  readonly running: boolean
 }
 
-interface CardSetProps extends ProjectListProps {
+interface CardSetProps {
+  readonly cards: ProjectData[]
   readonly focusable: boolean
 }
 
@@ -25,9 +28,9 @@ function CardSet({ cards, focusable }: CardSetProps) {
   )
 }
 
-export default function ProjectList({ cards }: ProjectListProps) {
+export default function ProjectList({ cards, running }: ProjectListProps) {
   const { t } = useSettings()
-  const { trackRef, handlers } = useMarquee()
+  const { trackRef, handlers } = useMarquee(running)
 
   if (cards.length === 0) {
     return <p className='card__description'>{t('loadingProjects')}</p>

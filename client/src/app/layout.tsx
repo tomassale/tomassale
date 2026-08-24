@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Sora, Manrope, JetBrains_Mono } from 'next/font/google'
+import { Sora, Manrope } from 'next/font/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { SettingsProvider } from './_components/_settings/SettingsProvider'
 import CursorTrail from './_components/_shared/CursorTrail'
@@ -17,11 +17,9 @@ const body = Manrope({
   variable: '--font-body',
 })
 
-const mono = JetBrains_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-mono',
-})
+// Lo monoespaciado son los números del riel y el contador del formulario: una
+// docena de glifos. JetBrains Mono costaba 41 KB precargados compitiendo con
+// el LCP por eso, así que ahora sale del sistema (--font-mono en globals.scss).
 
 // Los iconos salen de los archivos icon.svg / favicon.ico / apple-icon.png
 // de este mismo directorio: declararlos acá a mano tapa esos links.
@@ -55,7 +53,7 @@ export default function RootLayout({
     <html
       lang='es'
       data-theme='dark'
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      className={`${display.variable} ${body.variable}`}
       suppressHydrationWarning
     >
       <body>

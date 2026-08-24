@@ -7,6 +7,12 @@ const RESUME_AFTER_MS = 7000
 const DRAG_THRESHOLD_PX = 5
 /** Aire entre el borde de la franja y la tarjeta que acaba de recibir foco. */
 const FOCUS_MARGIN_PX = 24
+/**
+ * Tope del salto entre cuadros. `requestAnimationFrame` se detiene con la
+ * pestaña oculta pero el reloj no: al volver, el primer cuadro traería el
+ * minuto entero y la pista se teletransportaría.
+ */
+const MAX_STEP_SECONDS = 0.1
 
 /**
  * Marquesina infinita con control manual.
@@ -21,8 +27,14 @@ const FOCUS_MARGIN_PX = 24
  * El arrastre y el foco pausan el avance, y se reanuda a los 7 s. Pasar el
  * puntero por encima no lo detiene: si lo hiciera, bastaría con dejar el
  * mouse apoyado sobre el carrusel para que pareciera roto.
+ *
+ * @param active Si la franja está a la vista. Fuera de ella el bucle se
+ * apaga entero: escribir el `transform` cuadro a cuadro invalida el estilo
+ * 60 veces por segundo, y eso no se paga por algo que nadie está mirando.
+ * El hook recibe un booleano y no consulta el recorrido: no tiene por qué
+ * saber que existen los paneles.
  */
-export function useMarquee() {
+export function useMarquee(active = true) {
   const trackRef = useRef<HTMLDivElement>(null)
 
   const offset = useRef(0)
@@ -54,13 +66,13 @@ export function useMarquee() {
 
   useEffect(() => {
     const track = trackRef.current
-    if (!track) return
+    if (!track || !active) return
 
     let frame = 0
     let previous = 0
 
     const tick = (now: number) => {
-      const elapsed = previous ? (now - previous) / 1000 : 0
+      const elapsed = previous ? Math.min((now - previous) / 1000, MAX_STEP_SECONDS) : 0
       previous = now
 
       // La pista se dibuja en translateX(-offset), así que sumar corre las
@@ -79,7 +91,7 @@ export function useMarquee() {
 
     frame = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(frame)
-  }, [])
+  }, [active])
 
   useEffect(() => () => window.clearTimeout(resumeTimer.current), [])
 

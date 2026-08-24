@@ -13,6 +13,13 @@ const securityHeaders = [
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  // El sitio no usa ninguna de estas capacidades. Declararlo no cierra nada
+  // explotable hoy: evita que un script que llegue a colarse mañana pueda
+  // pedirlas en nombre del visitante.
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+  },
   {
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",

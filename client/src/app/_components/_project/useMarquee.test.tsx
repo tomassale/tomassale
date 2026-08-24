@@ -8,8 +8,8 @@ function readOffsetX(track: HTMLElement) {
   return match ? parseFloat(match[1]) : 0
 }
 
-function Harness() {
-  const { trackRef, handlers } = useMarquee()
+function Harness({ active = true }: { readonly active?: boolean }) {
+  const { trackRef, handlers } = useMarquee(active)
   return (
     <div data-testid='wrapper' {...handlers}>
       <div data-testid='track' ref={trackRef}>
@@ -32,6 +32,17 @@ describe('useMarquee', () => {
     vi.advanceTimersByTime(1000)
 
     expect(readOffsetX(screen.getByTestId('track'))).toBeLessThan(0)
+  })
+
+  // Escribir el transform cuadro a cuadro invalida el estilo 60 veces por
+  // segundo. Fuera de la vista eso se paga por algo que nadie está mirando.
+  it('no gasta un solo cuadro mientras la franja no está a la vista', () => {
+    vi.useFakeTimers()
+    render(<Harness active={false} />)
+
+    vi.advanceTimersByTime(2000)
+
+    expect(screen.getByTestId('track').style.transform).toBe('')
   })
 
   it('el arrastre pausa el avance automático', () => {

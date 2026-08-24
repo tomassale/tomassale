@@ -53,6 +53,13 @@ export const translations = {
     switchToSpanish: 'Cambiar a Español',
     switchToLight: 'Modo claro',
     switchToDark: 'Modo oscuro',
+    // Páginas fuera del recorrido (404 y legales)
+    notFoundTitle: 'Acá no hay nada',
+    notFoundText:
+      'El enlace que seguiste no lleva a ninguna sección del portfolio. ' +
+      'Puede que la dirección esté mal escrita o que esa página ya no exista.',
+    backHome: 'Volver al inicio',
+    terms: 'Términos y condiciones',
     // Enlaces (por alt del ícono)
     link_linkedin: 'LinkedIn',
     link_github: 'GitHub',
@@ -110,6 +117,13 @@ export const translations = {
     switchToSpanish: 'Cambiar a Español',
     switchToLight: 'Light mode',
     switchToDark: 'Dark mode',
+    // Páginas fuera del recorrido (404 y legales)
+    notFoundTitle: 'Nothing here',
+    notFoundText:
+      'The link you followed does not lead to any section of the portfolio. ' +
+      'The address may be misspelled, or the page may no longer exist.',
+    backHome: 'Back to the start',
+    terms: 'Terms and conditions',
     // Enlaces (por alt del ícono)
     link_linkedin: 'LinkedIn',
     link_github: 'GitHub',

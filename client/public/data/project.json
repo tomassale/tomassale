@@ -85,6 +85,7 @@
     "title": "Servicios Nuñez",
     "description": "Landing de un electricista, plomero y gasista matriculado que atiende CABA y GBA. Tiene una página por oficio con sus servicios y preguntas frecuentes, las zonas de cobertura y las opiniones de clientes; toda consulta termina en un WhatsApp con el mensaje ya escrito.",
     "description_en": "Landing page for a licensed electrician, plumber and gas fitter working across Buenos Aires. It has one page per trade with its services and FAQs, the coverage areas and customer reviews; every enquiry ends in a WhatsApp chat with the message already written.",
+    "github": "https://github.com/BytekTech/Servicios-Nunez",
     "url": "https://serviciosnuñez.com.ar",
     "img": "/img/projects/ServiciosNunez.webp",
     "icons": {

@@ -8,7 +8,7 @@ describe('safeHref', () => {
   })
 
   it('acepta rutas relativas del propio sitio', () => {
-    expect(safeHref('/img/icons/github.png')).toBe('/img/icons/github.png')
+    expect(safeHref('/img/projects/Bytek.webp')).toBe('/img/projects/Bytek.webp')
   })
 
   it('acepta esquemas http, https y mailto', () => {

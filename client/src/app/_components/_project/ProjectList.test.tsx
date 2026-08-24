@@ -17,12 +17,12 @@ const cards: ProjectData[] = [
 
 describe('ProjectList', () => {
   it('muestra el estado de carga cuando no hay tarjetas', () => {
-    render(<ProjectList cards={[]} />)
+    render(<ProjectList cards={[]} running />)
     expect(screen.getByText('loadingProjects')).toBeInTheDocument()
   })
 
   it('renderiza el set de tarjetas dos veces para cerrar el bucle de la marquesina', () => {
-    render(<ProjectList cards={cards} />)
+    render(<ProjectList cards={cards} running />)
 
     // Título visible dos veces: original + copia que cierra el loop.
     expect(screen.getAllByText('Proyecto A')).toHaveLength(2)
@@ -30,7 +30,7 @@ describe('ProjectList', () => {
   })
 
   it('la copia duplicada no se anuncia (aria-hidden) ni se tabula (tabIndex=-1)', () => {
-    render(<ProjectList cards={cards} />)
+    render(<ProjectList cards={cards} running />)
 
     // Sin `hidden: true`, testing-library respeta aria-hidden: solo aparecen
     // los links "reales", uno por tarjeta.
@@ -53,7 +53,7 @@ describe('ProjectList', () => {
   // desplazable y eso la hace enfocable: en la copia dejaría foco dentro de
   // un aria-hidden, que es justo lo que el resto del componente evita.
   it('la descripción de la copia tampoco se tabula', () => {
-    render(<ProjectList cards={cards} />)
+    render(<ProjectList cards={cards} running />)
 
     const descriptions = screen.getAllByText('Una descripción larga.')
     expect(descriptions).toHaveLength(2)
@@ -64,7 +64,7 @@ describe('ProjectList', () => {
   })
 
   it('el stack de cada proyecto se anuncia: es el único lugar donde figura', () => {
-    render(<ProjectList cards={cards} />)
+    render(<ProjectList cards={cards} running />)
 
     expect(screen.getAllByAltText('PHP').length).toBeGreaterThan(0)
   })

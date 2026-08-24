@@ -19,6 +19,10 @@
   --line: rgba(130, 144, 194, 0.22);
   --danger: #ff6b6b;
 
+  // Las otras dos familias las declara next/font en el <html>. Esta sale del
+  // sistema: se usa en una docena de glifos y no justifica una descarga.
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
   --t-hero: clamp(2.6rem, 6.5vw, 5.6rem);
   --t-title: clamp(1.8rem, 3.4vw, 3rem);
   --t-lead: clamp(1rem, 1.15vw, 1.15rem);
@@ -55,9 +59,45 @@ html[data-theme='light'] {
   -webkit-tap-highlight-color: transparent;
 }
 
-*,
-*::before,
-*::after {
+// El cambio de tema se anima solo donde hay un color declarado. Con `*` —más
+// sus dos pseudoelementos— eran unas 3.000 transiciones simultáneas por click:
+// 278 ms de recálculo de estilo y todas las tareas largas del sitio salían de
+// ahí. El texto que hereda su color no necesita regla propia: se anima junto
+// con el de `body`. Un componente nuevo que pinte fondo propio y no esté en
+// esta lista cambia de golpe, no queda roto.
+html,
+body,
+a,
+button,
+input,
+textarea,
+.navbar,
+.barra,
+.navActions,
+.skillsSelector,
+.skillChip,
+.card,
+.card__shot,
+.card__description,
+.boltLink,
+.form-group label,
+.form__counter,
+.form__feedback,
+.contact__directTitle,
+.deckBar,
+.rail__step,
+.rail__track,
+.rail__progress,
+.credit,
+.hero__role,
+.hero__description,
+.hero__cue,
+.notFound__code,
+.notFound__text,
+.legal__back,
+.legal__updated,
+.legal__intro,
+.legal__section p {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
@@ -843,6 +883,127 @@ html[data-theme='light'] {
   padding: 2px;
 }
 
+//------------------------------------ páginas fuera del recorrido
+// El recorrido ocupa la ventana entera y le prohíbe el scroll al documento
+// (ver la regla de `html`). Estas dos páginas viven fuera de él: la 404 se
+// planta en una pantalla y el texto legal se desplaza dentro de su caja.
+
+.notFound {
+  position: relative;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  padding-inline: var(--gutter);
+  overflow: hidden;
+}
+
+.notFound__inner {
+  // Por encima del campo de ondas, que se ancla al contenedor.
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+// El código repite la forma del logo: una etiqueta abierta y cerrada.
+.notFound__code {
+  font-family: var(--font-mono), monospace;
+  font-size: clamp(3rem, 9vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--volt);
+  margin-bottom: 0.8rem;
+
+  span { color: var(--ink-dim); }
+}
+
+.notFound__title {
+  font-size: var(--t-title);
+  margin-bottom: 0.9rem;
+}
+
+.notFound__text {
+  font-size: var(--t-lead);
+  color: var(--ink-dim);
+  text-wrap: pretty;
+  max-width: 34rem;
+  margin-bottom: 1.9rem;
+}
+
+// Acá la barra de scroll sí es información —el documento es largo— así que
+// es la única superficie del sitio que no la esconde.
+.legal {
+  height: 100dvh;
+  overflow-y: auto;
+  padding-inline: var(--gutter);
+}
+
+.legal__inner {
+  max-width: 46rem;
+  margin-inline: auto;
+  padding-block: clamp(2.5rem, 8vh, 5rem);
+  counter-reset: legal;
+}
+
+.legal__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-dim);
+  margin-bottom: 2.6rem;
+
+  &:hover { color: var(--volt); }
+}
+
+.legal__title {
+  font-size: var(--t-title);
+  margin-bottom: 0.5rem;
+}
+
+.legal__updated {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.78rem;
+  color: var(--ink-dim);
+  margin-bottom: 1.7rem;
+}
+
+.legal__intro {
+  font-size: var(--t-lead);
+  color: var(--ink-dim);
+  text-wrap: pretty;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.legal__section {
+  padding-top: 2.2rem;
+
+  h2 {
+    counter-increment: legal;
+    font-size: 1.15rem;
+    margin-bottom: 0.9rem;
+
+    // La numeración entra por CSS: ordena la lectura sin ensuciar el texto,
+    // que se escribe una sola vez por idioma en legal.ts.
+    &::before {
+      content: counter(legal) '. ';
+      font-family: var(--font-mono), monospace;
+      font-size: 0.9em;
+      color: var(--volt);
+    }
+  }
+
+  p {
+    color: var(--ink-dim);
+    text-wrap: pretty;
+
+    & + p { margin-top: 0.85rem; }
+  }
+}
+
 //=================== VERTICAL (mobile y tablet) ===================//
 
 @media (max-width: 899px) {
@@ -855,6 +1016,18 @@ html[data-theme='light'] {
   }
 
   body { height: auto; }
+
+  // Con el scroll de la ventana de vuelta, las páginas sueltas no necesitan
+  // su propia caja desplazable: dejan de fijar el alto y crecen con el texto.
+  .notFound {
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  .legal {
+    height: auto;
+    overflow: visible;
+  }
 
   .deck {
     display: block;
