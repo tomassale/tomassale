@@ -13,7 +13,7 @@
       "img2": "back/express.svg"
     }
   },
-  { 
+  {
     "_id": 1,
     "title": "Dra. Silvia Pellegrino",
     "description": "Sitio para un consultorio odontológico privado. Presenta a la profesional a cargo y los tratamientos que ofrece —prótesis, endodoncia, periodoncia y estética dental—, y resuelve el pedido de turno en un solo llamado, sin formularios de por medio.",
@@ -90,6 +90,18 @@
     "img": "/img/projects/ServiciosNunez.webp",
     "icons": {
       "img1": "front/next.svg"
+    }
+  },
+  {
+    "_id": 7,
+    "title": "Gastos Gestionados",
+    "description": "Aplicación móvil para llevar los gastos compartidos de una casa. Cada gasto se carga con su categoría y quién lo pagó, y la app arma el resumen del mes —total, promedio y reparto por categoría— y calcula quién le debe a quién. Varios teléfonos entran al mismo hogar con un código y quedan sincronizados.",
+    "description_en": "Mobile app for tracking a household's shared expenses. Every expense is logged with its category and who paid for it, and the app builds the monthly summary —total, average and breakdown by category— and works out who owes whom. Several phones join the same household with a code and stay in sync.",
+    "github": "https://github.com/tomassale/Gastos-Gestionados",
+    "img": "/img/projects/GastosGestionados.webp",
+    "icons": {
+      "img1": "front/expo.svg",
+      "img2": "database/sql.svg"
     }
   }
 ]
