@@ -20,10 +20,7 @@ export default defineConfig({
     ],
     setupFiles: ['./src/test/setup.ts'],
     css: false,
-    // src/app/test/page.test.tsx es un scratch file viejo (ya excluido del
-    // tsc build en tsconfig.json), no una suite real: importa Swiper/CSS y
-    // rompe la carga de PostCSS si vitest lo levanta.
-    exclude: ['**/node_modules/**', 'src/app/test/**'],
+    exclude: ['**/node_modules/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],

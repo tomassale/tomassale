@@ -19,8 +19,6 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
       "coverage/**",
-      // Scratch local, fuera de git y de la compilación (ver .gitignore).
-      "src/app/test/**",
     ],
   },
 ];

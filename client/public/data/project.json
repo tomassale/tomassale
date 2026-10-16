@@ -2,12 +2,11 @@
   {
     "_id": 0,
     "title": "Electro Tecnico",
-    "description": "Sitio institucional para un electricista matriculado. Presenta los servicios para hogares y comercios, la zona de cobertura y el pedido de presupuesto sin cargo, con contacto directo por WhatsApp o llamada.",
-    "description_en": "Institutional site for a licensed electrician. It presents the services for homes and businesses, the coverage area and the free quote request, with direct contact by WhatsApp or phone call.",
+    "description": "Sitio de un electricista matriculado: servicios para hogares y comercios, zona de cobertura y presupuesto sin cargo por WhatsApp o llamada.",
+    "description_en": "Site for a licensed electrician: services for homes and businesses, coverage area and free quotes by WhatsApp or phone call.",
     "github": "https://github.com/tomassale/Electricista",
     "link": "https://electricista-three.vercel.app",
     "img": "/img/projects/Electricista.webp",
-    "class": "flip-card",
     "icons": {
       "img1": "front/next.svg",
       "img2": "back/express.svg"
@@ -16,12 +15,11 @@
   {
     "_id": 1,
     "title": "Dra. Silvia Pellegrino",
-    "description": "Sitio para un consultorio odontológico privado. Presenta a la profesional a cargo y los tratamientos que ofrece —prótesis, endodoncia, periodoncia y estética dental—, y resuelve el pedido de turno en un solo llamado, sin formularios de por medio.",
-    "description_en": "Site for a private dental practice. It introduces the professional in charge and the treatments offered —prosthetics, endodontics, periodontics and cosmetic dentistry—, and turns the appointment request into a single phone call, with no forms in between.",
+    "description": "Sitio de un consultorio odontológico: presenta a la profesional y sus tratamientos, y resuelve el pedido de turno con un solo llamado.",
+    "description_en": "Site for a dental practice: it introduces the professional and the treatments offered, and turns booking into a single phone call.",
     "github": "https://github.com/tomassale/Odontologia",
     "url": "https://odontologia-gules.vercel.app",
     "img": "/img/projects/Odontologia.webp",
-    "class": "flip-card",
     "icons": {
       "img1": "front/next.svg",
       "img2": "back/express.svg"
@@ -33,7 +31,6 @@
     "description": "Proyecto en desarrollo.",
     "description_en": "Work in progress.",
     "img": "/img/projects/coming-soon.webp",
-    "class": "flip-card",
     "icons": {
       "img1": "front/angular.svg",
       "img2": "back/express.svg",
@@ -49,7 +46,6 @@
     "github": "https://github.com/BytekTech/BytekTech",
     "url": "https://bytek-tech.vercel.app",
     "img": "/img/projects/Bytek.webp",
-    "class": "flip-card",
     "icons": {
       "img1": "front/angular.svg",
       "img2": "back/express.svg"
@@ -58,12 +54,11 @@
   {
     "_id": 4,
     "title": "SuperYa",
-    "description": "El objetivo de esta aplicación es resolver los inconvenientes habituales al hacer la compra en el supermercado: artículos olvidados, falta de control del presupuesto y recorridos ineficientes por los pasillos de la tienda. Mediante el uso de datos en tiempo real y una interfaz centrada en el usuario, SuperYa ayuda a los usuarios a ahorrar tiempo y dinero.",
-    "description_en": "The goal of this application is to solve the usual inconveniences of grocery shopping: forgotten items, lack of budget control and inefficient routes through the store aisles. By using real-time data and a user-centered interface, SuperYa helps users save time and money.",
+    "description": "App para hacer las compras del súper sin olvidos: controla el presupuesto y ordena el recorrido por los pasillos con datos en tiempo real.",
+    "description_en": "Grocery shopping app with no forgotten items: it keeps the budget in check and plans the route through the aisles with real-time data.",
     "github": "https://github.com/tomassale/SuperYa",
     "url": "https://github.com/tomassale/SuperYa",
     "img": "/img/projects/SuperYa.webp",
-    "class": "flip-card",
     "icons": {
       "img1": "front/expo.svg"
     }
@@ -71,8 +66,8 @@
   {
     "_id": 5,
     "title": "Larrañaga Muebles",
-    "description": "Sitio de una mueblería que fabrica a medida. Muestra el catálogo por categoría —placares, cocinas, escritorios, living—, los trabajos ya entregados y el contacto directo. Detrás tiene un portal de administración donde el dueño carga fotos, edita el catálogo y publica los PDF sin depender de nadie.",
-    "description_en": "Site for a furniture workshop that builds to measure. It shows the catalog by category —wardrobes, kitchens, desks, living rooms—, the work already delivered and direct contact. Behind it sits an admin portal where the owner uploads photos, edits the catalog and publishes the PDFs without depending on anyone.",
+    "description": "Sitio de una mueblería a medida con catálogo por categoría y trabajos entregados, más un portal donde el dueño administra fotos, catálogo y PDF.",
+    "description_en": "Site for a custom furniture workshop with a catalog by category and delivered work, plus a portal where the owner manages photos, catalog and PDFs.",
     "url": "https://www.larranagamuebles.com.ar",
     "img": "/img/projects/Larranaga.webp",
     "icons": {
@@ -83,8 +78,8 @@
   {
     "_id": 6,
     "title": "Servicios Nuñez",
-    "description": "Landing de un electricista, plomero y gasista matriculado que atiende CABA y GBA. Tiene una página por oficio con sus servicios y preguntas frecuentes, las zonas de cobertura y las opiniones de clientes; toda consulta termina en un WhatsApp con el mensaje ya escrito.",
-    "description_en": "Landing page for a licensed electrician, plumber and gas fitter working across Buenos Aires. It has one page per trade with its services and FAQs, the coverage areas and customer reviews; every enquiry ends in a WhatsApp chat with the message already written.",
+    "description": "Landing de un electricista, plomero y gasista en CABA y GBA: una página por oficio y cada consulta termina en un WhatsApp ya redactado.",
+    "description_en": "Landing page for an electrician, plumber and gas fitter in Buenos Aires: one page per trade, and every enquiry ends in a pre-written WhatsApp.",
     "github": "https://github.com/BytekTech/Servicios-Nunez",
     "url": "https://serviciosnuñez.com.ar",
     "img": "/img/projects/ServiciosNunez.webp",
@@ -95,8 +90,8 @@
   {
     "_id": 7,
     "title": "Gastos Gestionados",
-    "description": "Aplicación móvil para llevar los gastos compartidos de una casa. Cada gasto se carga con su categoría y quién lo pagó, y la app arma el resumen del mes —total, promedio y reparto por categoría— y calcula quién le debe a quién. Varios teléfonos entran al mismo hogar con un código y quedan sincronizados.",
-    "description_en": "Mobile app for tracking a household's shared expenses. Every expense is logged with its category and who paid for it, and the app builds the monthly summary —total, average and breakdown by category— and works out who owes whom. Several phones join the same household with a code and stay in sync.",
+    "description": "App para los gastos compartidos de una casa: arma el resumen del mes, calcula quién le debe a quién y sincroniza varios teléfonos.",
+    "description_en": "App for a household's shared expenses: it builds the monthly summary, works out who owes whom and keeps several phones in sync.",
     "github": "https://github.com/tomassale/Gastos-Gestionados",
     "img": "/img/projects/GastosGestionados.webp",
     "icons": {

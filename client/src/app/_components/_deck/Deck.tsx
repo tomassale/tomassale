@@ -2,8 +2,9 @@
 import { CSSProperties, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { DeckContext, DeckPanel, useDeck } from './DeckContext'
 
-// Por debajo de este ancho el recorrido vuelve a ser vertical.
-const HORIZONTAL_QUERY = '(min-width: 900px)'
+// Por debajo de este ancho —o de este alto, el celular acostado— el
+// recorrido vuelve a ser vertical. Es el mismo corte que globals.scss.
+const HORIZONTAL_QUERY = '(min-width: 900px) and (min-height: 500px)'
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
 // Un gesto de rueda son muchos eventos seguidos: el umbral descarta el
 // temblor del trackpad y el descanso evita que un empujón salte tres paneles.

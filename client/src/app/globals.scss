@@ -2,8 +2,9 @@
 //  Tomás Sale — portfolio
 //
 //  Paleta tomada de su propio banner: azul noche con cian eléctrico.
-//  Estructura: recorrido horizontal por paneles (abajo de 900px vuelve
-//  a ser vertical, sin cambiar el markup).
+//  Estructura: recorrido horizontal por paneles (abajo de 900px de ancho
+//  o de 500px de alto vuelve a ser vertical, sin cambiar el markup). El
+//  corte se repite en Deck.tsx: si cambia acá, cambia allá.
 //=====================================================================
 
 :root {
@@ -223,7 +224,12 @@ img { max-width: 100%; }
   // Sin scroll, la marquesina no puede empujar hacia abajo: cede alto y las
   // tarjetas se ajustan a lo que queda. min-height 0 porque un elemento
   // flexible no baja de su contenido mientras no se lo permitan.
+  // align-self: el panel alinea a flex-start, y en columna eso es el eje
+  // horizontal: sin estirarse, la marquesina tomaba el ancho de su pista
+  // (miles de px). En escritorio lo tapaba el overflow del panel; en mobile
+  // ese overflow se libera y la página entera se volvía así de ancha.
   .marquee {
+    align-self: stretch;
     min-height: 0;
   }
 }
@@ -323,10 +329,12 @@ img { max-width: 100%; }
     stroke: var(--volt);
     stroke-width: 1;
     vector-effect: non-scaling-stroke;
+  }
+
+  // Todo el campo a una misma velocidad: así las líneas no se desfasan.
+  g {
     transform-box: view-box; // el desplazamiento se mide en unidades del viewBox
     transform-origin: 0 0;
-    // Cada línea trae su propia duración desde WaveField: la deriva en
-    // parallax es lo que da profundidad al campo.
     animation: waveDrift 26s linear infinite;
   }
 }
@@ -457,6 +465,12 @@ img { max-width: 100%; }
   touch-action: pan-y;
 
   &:active { cursor: grabbing; }
+
+  // touch-action no se hereda: el navegador intersecta los valores de los
+  // ancestros sólo hasta el contenedor de scroll más cercano. La descripción
+  // lo es, así que un gesto que arranca sobre ella volvía a `auto` y se lo
+  // quedaba la página. pan-y le conserva su propio scroll vertical.
+  .card__description { touch-action: pan-y; }
 }
 
 .marquee__track {
@@ -1006,16 +1020,30 @@ html[data-theme='light'] {
 
 //=================== VERTICAL (mobile y tablet) ===================//
 
-@media (max-width: 899px) {
+// También un celular acostado: es ancho, pero con 430px de alto al panel
+// le quedan unos 320 y el contenido se corta sin forma de alcanzarlo.
+@media (max-width: 899px), (max-height: 499px) {
   // Acá los paneles se apilan y son más altos que la pantalla: el scroll de
   // la ventana vuelve a ser la forma de recorrerlos.
+  // La página sólo baja: nunca se corre hacia los costados. Lo que sí se
+  // arrastra en horizontal —la marquesina— se mueve por transform, adentro
+  // de su propia caja, así que el bloqueo no la toca. El overscroll lateral
+  // también se corta: sin él, el gesto rebota la página o dispara el "atrás".
   html {
     height: auto;
-    overflow: visible;
-    overscroll-behavior: auto;
+    overflow-x: clip;
+    overflow-y: visible;
+    overscroll-behavior-x: none;
+    overscroll-behavior-y: auto;
   }
 
-  body { height: auto; }
+  // clip y no hidden: no crea un contenedor de scroll, así que el navbar
+  // sticky sigue pegándose a la ventana. Va en los dos: Safari en iOS ignora
+  // el bloqueo si queda sólo en body.
+  body {
+    height: auto;
+    overflow-x: clip;
+  }
 
   // Con el scroll de la ventana de vuelta, las páginas sueltas no necesitan
   // su propia caja desplazable: dejan de fijar el alto y crecen con el texto.
@@ -1062,12 +1090,22 @@ html[data-theme='light'] {
     width: 100%;
     margin-left: 0;
     justify-content: space-between;
+    gap: 0.5rem;
+
+    // Los cuatro tienen que entrar en una fila aun a 320px: la letra cede
+    // con el ancho antes de que «Sobre mí» se parta en dos renglones.
+    a {
+      font-size: clamp(0.8rem, 3.6vw, 0.95rem);
+      white-space: nowrap;
+    }
   }
 
   .navActions { margin-left: auto; }
 
   // El riel guía un recorrido horizontal; en vertical no aporta nada.
-  .rail__steps, .rail__track { display: none; }
+  // Fuera entero, no solo su contenido: vacío seguía siendo un flex: 1 que
+  // le quitaba ancho al crédito.
+  .rail { display: none; }
 
   .deckBar {
     height: auto;
@@ -1075,18 +1113,31 @@ html[data-theme='light'] {
     justify-content: center;
   }
 
+  // Cada tramo en su línea; si el segundo tampoco entra, se parte en una
+  // tercera en vez de desbordar.
+  .credit {
+    flex-shrink: 1;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .credit__line { display: block; }
+  // El renglón se corta entre enlaces, nunca adentro de uno.
+  .credit a { white-space: nowrap; }
+  .credit__separator { display: none; }
+
   .contact { grid-template-columns: 1fr; }
 }
 
 // En pantallas angostas el riel conserva los números y suelta las
 // etiquetas: sigue diciendo dónde estás sin empujar al crédito.
-@media (min-width: 900px) and (max-width: 1150px) {
+@media (min-width: 900px) and (max-width: 1150px) and (min-height: 500px) {
   .rail__label { display: none; }
 }
 
 // Sin scroll, lo que no entra en el panel no se alcanza. En pantallas bajas
 // el recorrido cede aire —encabezado, riel, márgenes— antes que contenido.
-@media (min-width: 900px) and (max-height: 760px) {
+@media (min-width: 900px) and (min-height: 500px) and (max-height: 760px) {
   :root {
     --nav-h: 52px;
     --bar-h: 52px;
@@ -1103,12 +1154,25 @@ html[data-theme='light'] {
 @media (max-width: 560px) {
   .skillFlow { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
 
+  // A dos columnas de 130px, el relleno y el ícono dejaban sin lugar a los
+  // nombres largos («Photoshop», «PostgreSQL»): el chip cede aire, no texto.
+  .skillChip {
+    gap: 0.55rem;
+    padding: 0.75rem 0.7rem;
+    font-size: 0.9rem;
+
+    img {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
   // La marquesina sigue siendo horizontal en mobile; solo achica la tarjeta.
   .card { width: 270px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .waveField path { animation: none; }
+  .waveField g { animation: none; }
 
   // El panel aparece de una en vez de deslizarse: el recorrido sigue
   // funcionando igual, sin el barrido lateral que es lo que molesta.

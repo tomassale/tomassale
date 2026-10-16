@@ -32,12 +32,11 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "src/app/api/contact/route.js",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
-, "src/app/api/contact/route.js"  ],
+  ],
   "exclude": [
-    "node_modules",
-    "src/app/test/page.test.tsx",
-    "src/app/_components/_contact/FormContact.tsx"
+    "node_modules"
   ]
 }
