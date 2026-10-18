@@ -311,8 +311,25 @@ img { max-width: 100%; }
 
 //----------------------------------------------------------------- hero
 // El campo de ondas se ancla acá; el recorte ya lo pone `.panel`.
+// El texto no queda centrado: los separadores reparten el alto libre 1 a 3,
+// así el aire bajo el encabezado es la mitad del que daba el centrado.
+// Con base 0, cuando el contenido no entra los separadores valen 0.
 .panel--hero {
   position: relative;
+  flex-direction: column;
+
+  &::before,
+  &::after {
+    content: '';
+  }
+
+  &::before { flex: 1 1 0; }
+  &::after { flex: 3 1 0; }
+
+  .panel__inner {
+    margin: 0 auto;
+    padding-top: clamp(0.75rem, 2vh, 1.5rem);
+  }
 }
 
 // El campo de ondas del banner. Vive detrás del texto y solo en el
@@ -1073,7 +1090,10 @@ html[data-theme='light'] {
     scroll-margin-top: var(--nav-h);
   }
 
-  .panel--hero { min-height: 78dvh; }
+  .panel--hero {
+    min-height: 78dvh;
+    padding-top: calc(clamp(3rem, 9vw, 5rem) / 2);
+  }
 
   .navbar {
     position: sticky;

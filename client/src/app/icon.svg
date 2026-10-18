@@ -1,10 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 395 224">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <!--
-    Marca de la pestaña: el `</>` de siempre, en vector y sin fondo — el
-    degradado va sobre el trazo, así que el ícono se recorta contra
-    pestañas claras y oscuras por igual. Las coordenadas y los colores
-    salen del PNG original (395x224, #8eccff -> #dc8cfc de izquierda a
-    derecha); el trazo es de 44 con puntas redondeadas.
+    Marca de la pestaña y del resultado de Google: el `</>` de siempre sobre
+    una baldosa cuadrada. Google descarta los favicons que no son 1:1, y el
+    original (395x224, sin fondo) lo era. La baldosa es el azul noche del
+    sitio: el celeste del degradado sobre blanco casi no se ve, y Google
+    muestra el ícono sobre fondo claro u oscuro según el tema del buscador.
+    El trazo pasa de 44 a 52 para que el glifo no se deshaga a 16 px.
+    favicon.ico, icon.png y apple-icon.png se generan desde este dibujo.
   -->
   <defs>
     <linearGradient id="brand" x1="32" y1="0" x2="362" y2="0" gradientUnits="userSpaceOnUse">
@@ -12,7 +14,9 @@
       <stop offset="1" stop-color="#dc8cfc"/>
     </linearGradient>
   </defs>
-  <g fill="none" stroke="url(#brand)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round">
+  <rect width="512" height="512" rx="104" fill="#050b1e"/>
+  <g transform="translate(256 256) scale(1.12) translate(-197.5 -112.5)"
+     fill="none" stroke="url(#brand)" stroke-width="52" stroke-linecap="round" stroke-linejoin="round">
     <path d="M99 65 54 112 99 160"/>
     <path d="M165 180 229 45"/>
     <path d="M296 65 341 112 296 160"/>
