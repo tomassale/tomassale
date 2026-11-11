@@ -48,4 +48,5 @@ const DISPLAY_NAME: Record<string, string> = {
   mongodb: 'MongoDB',
   github: 'GitHub',
   'microsoft-teams': 'Microsoft Teams',
+  esp32: 'ESP32',
 }

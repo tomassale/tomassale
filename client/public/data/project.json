@@ -98,5 +98,18 @@
       "img1": "front/expo.svg",
       "img2": "database/sql.svg"
     }
+  },
+  {
+    "_id": 8,
+    "title": "Certus DM-01",
+    "description": "Blancos móviles para airsoft y tiro: electrónica propia con ESP32 que se maneja por radio, una app Flutter para configurarla y el sitio con pedido de demo.",
+    "description_en": "Moving targets for airsoft and shooting: custom ESP32 electronics driven by radio, a Flutter app to set it up and the site with a demo request form.",
+    "url": "https://diana-movil.vercel.app",
+    "img": "/img/projects/Certus.webp",
+    "icons": {
+      "img1": "front/next.svg",
+      "img2": "front/flutter.svg",
+      "img3": "hardware/esp32.svg"
+    }
   }
 ]
