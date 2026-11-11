@@ -109,7 +109,9 @@
     "icons": {
       "img1": "front/next.svg",
       "img2": "front/flutter.svg",
-      "img3": "hardware/esp32.svg"
+      "img3": "hardware/esp32.svg",
+      "img4": "back/python.svg",
+      "img5": "database/sqlite.svg"
     }
   }
 ]

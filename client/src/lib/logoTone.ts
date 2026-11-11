@@ -49,4 +49,5 @@ const DISPLAY_NAME: Record<string, string> = {
   github: 'GitHub',
   'microsoft-teams': 'Microsoft Teams',
   esp32: 'ESP32',
+  sqlite: 'SQLite',
 }
